@@ -5,13 +5,14 @@
 
 namespace Penguin2D {
 
-	template<typename T = double>
+	template<typename T = float>
 
 	struct Vector2 {
 
 		static constexpr T ORIGIN = 0.0; // The origin for all Vector2 objects -> (0, 0)
 
 		float x, y;
+
 		Vector2(T p_x, T p_y) : x(p_x), y(p_y) {}
 		Vector2() : x{ ORIGIN }, y{ ORIGIN } {}
 

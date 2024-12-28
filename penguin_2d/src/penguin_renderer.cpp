@@ -1,5 +1,4 @@
 #include "penguin_renderer.hpp"
-
 #include <iostream>
 
 using namespace Penguin2D;

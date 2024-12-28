@@ -5,7 +5,7 @@
 
 namespace Penguin2D {
 
-	template<typename T = float>
+	template<typename T = double>
 
 	struct Vector2 {
 

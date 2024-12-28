@@ -1,4 +1,5 @@
 #include "penguin_window.hpp"
+
 #include <iostream>
 
 using namespace Penguin2D;

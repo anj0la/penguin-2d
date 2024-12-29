@@ -4,7 +4,7 @@
 #include <SDL3/SDL_render.h>
 #include <memory>
 #include <string>
-#include <stdexcept>
+#include "exception.hpp"
 
 #include "penguin_window.hpp"
 #include "colour.hpp"
@@ -20,7 +20,6 @@ namespace Penguin2D {
 		void present();
 		void set_colour(Colour colour);
 		void reset_colour();
-
 
 	private:
 		std::unique_ptr<SDL_Renderer, void(*)(SDL_Renderer*)> renderer;

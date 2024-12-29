@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
 
 
     renderer.clear();
-    renderer.draw_rect(Rect2<float>(Vector2<float>(100.0, 100.0)), Colours::WHITE, Colours::RED);
+    renderer.draw_rect(Rect2<float>(Vector2<float>(100.0, 100.0), Vector2<float>(100.0, 100.0)), Colours::WHITE, Colours::RED);
     renderer.present();
 
     // But renderer 

@@ -6,7 +6,6 @@
 
 // Used as a reference for constructing the Rect2 object used in the app: https://github.com/aardhyn/sdl3-template-project/tree/main
 
-
 namespace Penguin2D {
 
 	template<typename T = float>

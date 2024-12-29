@@ -4,7 +4,7 @@
 #include <memory>
 #include <SDL3/SDL_video.h>
 #include <string>
-#include <stdexcept>
+#include "exception.hpp"
 #include "vector2.hpp"
 
 namespace Penguin2D {

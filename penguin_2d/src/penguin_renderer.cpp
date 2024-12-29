@@ -14,11 +14,6 @@ PenguinRenderer::PenguinRenderer(PenguinWindow& p_window, std::string p_name)
 
 	// Throws an exception if the renderer was not intialized
 	Exception::throw_if(!renderer, "The renderer was not initialized.", RENDERER_ERROR);
-
-	//// Throw error if renderer was not set up.
-	//if (!renderer) {
-	//	throw std::runtime_error(SDL_GetError());
-	//}
 }
 
 void PenguinRenderer::clear() {
@@ -39,17 +34,28 @@ void PenguinRenderer::present() {
 }
 
 void PenguinRenderer::set_colour(Colour colour) {
-	/*bool success = SDL_SetRenderDrawColor(renderer.get(), colour.red, colour.green, colour.blue, colour.alpha);
-	if (!success) {
-		throw std::runtime_error(SDL_GetError());
-	}*/
 	Exception::throw_if(
 		!SDL_SetRenderDrawColor(renderer.get(), colour.red, colour.green, colour.blue, colour.alpha),
 		"Failed to set renderer draw color.",
 		RENDERER_ERROR
 	);
+}
+void PenguinRenderer::draw_line(Vector2<> vect_a, Vector2<> vect_b, Colour colour = Colours::WHITE) {
+	set_colour(colour);
+	Exception::throw_if(
+		!SDL_RenderLine(renderer.get(), vect_a.x, vect_a.y, vect_b.x, vect_b.y),
+		"Failed to draw a line to the renderer",
+		RENDERER_ERROR
+	);
+}
 
-	//Exception::wrap(SDL_SetRenderDrawColor(renderer.get(), colour.red, colour.green, colour.blue, colour.alpha));
+void PenguinRenderer::draw_pixel(Vector2<> vect, Colour colour = Colours::WHITE) {
+	set_colour(colour);
+	Exception::throw_if(
+		!SDL_RenderPoint(renderer.get(), vect.x, vect.y),
+		"Failed to draw a line to the renderer",
+		RENDERER_ERROR
+	);
 }
 
 void PenguinRenderer::draw_rect(Rect2<float> rect, Colour outline, Colour fill) {
@@ -59,7 +65,7 @@ void PenguinRenderer::draw_rect(Rect2<float> rect, Colour outline, Colour fill) 
 		auto sdl_rect = (SDL_FRect)rect;
 		Exception::throw_if(
 			!SDL_RenderFillRect(renderer.get(), &sdl_rect),
-			"Failed to set draw the rect to the renderer.",
+			"Failed to set draw a rect to the renderer.",
 			RENDERER_ERROR
 		);
 	}

@@ -37,5 +37,4 @@ namespace Penguin2D {
 	};
 }
 
-
 #endif // EXCEPTION_HPP

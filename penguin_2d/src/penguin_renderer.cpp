@@ -40,7 +40,7 @@ void PenguinRenderer::set_colour(Colour colour) {
 		RENDERER_ERROR
 	);
 }
-void PenguinRenderer::draw_line(Vector2<> vect_a, Vector2<> vect_b, Colour colour = Colours::WHITE) {
+void PenguinRenderer::draw_line(Vector2<> vect_a, Vector2<> vect_b, Colour colour) {
 	set_colour(colour);
 	Exception::throw_if(
 		!SDL_RenderLine(renderer.get(), vect_a.x, vect_a.y, vect_b.x, vect_b.y),
@@ -49,7 +49,7 @@ void PenguinRenderer::draw_line(Vector2<> vect_a, Vector2<> vect_b, Colour colou
 	);
 }
 
-void PenguinRenderer::draw_pixel(Vector2<> vect, Colour colour = Colours::WHITE) {
+void PenguinRenderer::draw_pixel(Vector2<> vect, Colour colour) {
 	set_colour(colour);
 	Exception::throw_if(
 		!SDL_RenderPoint(renderer.get(), vect.x, vect.y),

@@ -6,73 +6,55 @@
 // Example program:
 // Using SDL3 to create an application window
 
-#include <SDL3/SDL.h>
-
 using namespace Penguin2D;
 
 int main(int argc, char* argv[]) {
 
-    // SDL_Window* window;                    // Declare a pointer
-
-    SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL3
-   
-    // Create an application window with the following settings:
+    Exception::throw_if(
+        !SDL_Init(SDL_INIT_VIDEO),
+        "Could not initialize SDL3.",
+        INIT_ERROR);
+    
+    // Create an application window of size 640 by 480, with OpenGL.
     PenguinWindow window("A Penguin Window", Vector2<int>(640, 480), SDL_WINDOW_OPENGL);
 
-   //  PenguinWindow window = PenguinWindow("An SDL3 Window", 640, 480, SDL_WINDOW_OPENGL);
-
-    // PenguinRenderer renderer(window.get(), NULL); -> then what's the point of PenguinWindow(?)
-
-    PenguinRenderer renderer(window, ""); // Moves the ownership of the window to Renderer
+    // Create a renderer that uses the above window.
+    PenguinRenderer renderer(window, ""); 
 
 
-    renderer.clear();
-    renderer.draw_rect(Rect2<float>(Vector2<float>(100.0, 100.0), Vector2<float>(100.0, 100.0)), Colours::WHITE, Colours::RED);
-    renderer.present();
+    // Event handler. TODO - MOVE INTO OWN CLASS (like PenguinWindow and PenguinRenderer)
+    SDL_Event e; // instance variable in class
+    bool quit = false; // instance variable in class
 
-    // But renderer 
+    while (!quit) { // would be changed to while (game_running), and quit would set the game's state to false.
 
-    // Bruh, honestly, it seems like it would be so much easier to use raw pointers
+        // Poll event loop
+        while (SDL_PollEvent(&e)) {
+            // User requests to quit game.
+            if (e.type == SDL_EVENT_QUIT) {
+                quit = true;
+            }
 
-    // Because when I move the ownership of window to renderer, when the renderer is destroyed, so should the window.
+            // User presses a key.
+            else if (e.type == SDL_EVENT_KEY_DOWN) {
+                // Choose what to do.
+                switch (e.key.key) {
+                // Quit the game by pressing ESC.
+                case SDLK_ESCAPE:
+                    quit = true;
+                    break;
+                // Render the rect onto the screen.
+                case SDLK_X:
+                    renderer.clear();
+                    renderer.draw_rect(Rect2<float>(Vector2<float>(100.0, 100.0), Vector2<float>(100.0, 100.0)), Colours::WHITE, Colours::RED);
+                    renderer.present();
+                    break;
+                }
+            }
+        }
+    }
 
-    // But when creating a window, I create a unique ptr to the Window.
-
-    // Now, Renderer needs the window to actual be able to render anything onto the screen.
-
-    // So, we transfer ownership of window from MAIN to PenguinRenderer. There, the window variable is pointed to the window inside 
-    // PenguinRenderer.
-
-    // But then to actually get the underlying pointer, we must use .get_window() to get the raw pointer.
-    // Doesn't that meean that we have a pointer connecting to window in the SDL_CreateRender, and then the other pointer that has been transferred?
-
-    // Honestly, if I was just encapsulating them in classes and using the destroy functions in the destructor, kinda like the smart pointer,
-    // it would be easier.
-
-
-
-    //window = SDL_CreateWindow(
-    //    "An SDL3 window",                  // window title
-    //    640,                               // width, in pixels
-    //    480,                               // height, in pixels
-    //    SDL_WINDOW_OPENGL                  // flags - see below
-    //);
-
-    //// Check that the window was successfully created
-    //if (window == NULL) {
-    //    // In the case that the window could not be made...
-    //    SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Could not create window: %s\n", SDL_GetError());
-    //    return 1;
-    //}
-
-    // The window is open: could enter program loop here (see SDL_PollEvent())
-
-    SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
-
-    // Close and destroy the window
-    // SDL_DestroyWindow(window);
-
-    // Clean up
+    // Clean up.
     SDL_Quit();
     return 0;
 }

@@ -15,6 +15,7 @@ namespace Penguin2D {
 		RENDERER_ERROR,
 		WINDOW_ERROR,
 		APPLICATION_ERROR,
+		INIT_ERROR
 	};
 
 	class Exception final : public std::exception {

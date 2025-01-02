@@ -7,6 +7,8 @@
 
 #include "penguin_renderer.hpp"
 #include "vector2.hpp"
+#include <SDL3/SDL.h>
+#include "exception.hpp"
 
 #endif // PENGUIN_2D_HPP
 

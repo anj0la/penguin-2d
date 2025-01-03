@@ -16,6 +16,8 @@ int main(int argc, char* argv[]) {
     // Create a renderer that uses the above window.
     PenguinRenderer renderer(window, "");
 
+    // ######## THE FOLLOWING CODE SHOULD BE ADDED INTO SOME CLASS LIKE PENGUINEVENT ########
+
     // Create an event handler and input (currently supports the UP, DOWN, LEFT, RIGHT, X and ESC keys).
     PenguinEventHandler event_handler;
     PenguinInput input;
@@ -24,6 +26,9 @@ int main(int argc, char* argv[]) {
     event_handler.add_event_listener([&input](const SDL_Event& p_event) { // Probably will abstract this away (doing it automatically).
         input.handle_input_event(p_event);
         });
+
+    // ################
+
 
     bool game_running = true;
 

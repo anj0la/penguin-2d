@@ -15,4 +15,5 @@ project ("penguin_2d" VERSION 0.0.1)
 # Include sub-projects.
 add_subdirectory ("penguin_2d")
 add_subdirectory ("vendor/SDL3")
+add_subdirectory ("vendor/SDL3_ttf")
 

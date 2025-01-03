@@ -7,10 +7,12 @@
 
 #include "penguin_renderer.hpp"
 #include "vector2.hpp"
-#include <SDL3/SDL.h>
 #include "exception.hpp"
 #include "penguin_input.hpp"
 #include "penguin_event_handler.hpp"
+
+#include <SDL3/SDL.h>
+#include <SDL3_ttf/SDL_ttf.h>
 
 #endif // PENGUIN_2D_HPP
 

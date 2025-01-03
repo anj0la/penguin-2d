@@ -9,12 +9,12 @@ int main(int argc, char* argv[]) {
         !SDL_Init(SDL_INIT_VIDEO),
         "Could not initialize SDL3.",
         INIT_ERROR);
-    
+
     // Create an application window of size 640 by 480 that is useable with OpenGL.
     PenguinWindow window("A Penguin Window", Vector2<int>(640, 480), SDL_WINDOW_OPENGL);
 
     // Create a renderer that uses the above window.
-    PenguinRenderer renderer(window, ""); 
+    PenguinRenderer renderer(window, "");
 
     // Create an event handler and input (currently supports the UP, DOWN, LEFT, RIGHT, X and ESC keys).
     PenguinEventHandler event_handler;
@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
             game_running = false;
         }
 
-        if (input.is_key_pressed(PenguinKey::X)) { // Render the rect onto the screen.
+        if (input.is_key_pressed(PenguinKey::KEY_A)) { // Render the rect onto the screen.
             renderer.clear();
             renderer.draw_rect(Rect2<float>(Vector2<float>(100.0, 100.0), Vector2<float>(100.0, 100.0)), Colours::WHITE, Colours::RED);
             renderer.present();
@@ -44,6 +44,8 @@ int main(int argc, char* argv[]) {
         if (input.is_key_pressed(PenguinKey::ESC)) {
             game_running = false; // Close the window.
         }
+
+    }
 
     // Clean up.
     SDL_Quit();

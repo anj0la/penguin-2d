@@ -9,6 +9,8 @@
 #include "vector2.hpp"
 #include <SDL3/SDL.h>
 #include "exception.hpp"
+#include "penguin_input.hpp"
+#include "penguin_event_handler.hpp"
 
 #endif // PENGUIN_2D_HPP
 

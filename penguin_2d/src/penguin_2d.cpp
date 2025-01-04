@@ -8,7 +8,15 @@ int main(int argc, char* argv[]) {
     Exception::throw_if(
         !SDL_Init(SDL_INIT_VIDEO),
         "Could not initialize SDL3.",
-        INIT_ERROR);
+        INIT_ERROR
+    );
+
+    // Initialize SDL_TTF.
+    Exception::throw_if(
+        !TTF_Init(),
+        "Could not initialize SDL_TTF.",
+        INIT_ERROR
+    );
 
     // Create an application window of size 640 by 480 that is useable with OpenGL.
     PenguinWindow window("A Penguin Window", Vector2<int>(640, 480), SDL_WINDOW_OPENGL);
@@ -28,7 +36,6 @@ int main(int argc, char* argv[]) {
         });
 
     // ################
-
 
     bool game_running = true;
 
@@ -53,6 +60,7 @@ int main(int argc, char* argv[]) {
     }
 
     // Clean up.
-    SDL_Quit();
+    SDL_Quit(); // Cleans up SDL related items.
+    TTF_Quit(); // Cleans up SDL_ttf related items.
     return 0;
 }

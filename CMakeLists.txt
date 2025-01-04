@@ -5,6 +5,7 @@ cmake_minimum_required (VERSION 3.20)
 
 # Define a variable for the include directory.
 set(PENGUIN_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/penguin_2d/include)
+set(SDL3_TTF_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/vendor/SDL3_ttf/include)
 
 # Use C++ 20 instead of C++ 23 (too new)
 set(CMAKE_CXX_STANDARD 20)

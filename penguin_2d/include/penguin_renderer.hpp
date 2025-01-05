@@ -14,7 +14,7 @@ namespace Penguin2D {
 
 	class PenguinRenderer {
 	public:
-		PenguinRenderer(PenguinWindow& p_window, std::string p_name);
+		PenguinRenderer(PenguinWindow& p_window, const std::string& p_name);
 		void clear();
 		void draw_line(Vector2<> vect_a, Vector2<> vect_b, Colour colour = Colours::WHITE);
 		void draw_pixel(Vector2<> vect, Colour colour = Colours::WHITE);

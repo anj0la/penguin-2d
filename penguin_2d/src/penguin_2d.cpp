@@ -37,6 +37,17 @@ int main(int argc, char* argv[]) {
 
     // ################
 
+    // Create the text renderer.
+    PenguinTextRenderer text_engine(renderer);
+
+    // TEST - Create the font.
+    PenguinFont font("C:\\Users\\anjol\\source\\repos\\penguin_2d\\penguin_2d\\fonts\\pixelify_sans_regular.ttf", 24.0f);
+
+    // Create the text. ERROR OCCURS
+    // PenguinText text(text_engine, "pixelify_sans_regular.ttf", "A test string!", 24.0f);
+
+    // PenguinText text(text_engine, "fonts/pixelify_sans_regular.ttf", "A test string!", Colours::WHITE, Vector2<int>(0, 0));
+
     bool game_running = true;
 
     while (game_running) { // would be changed to while (game_running), and quit would set the game's state to false.

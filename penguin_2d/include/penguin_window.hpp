@@ -13,7 +13,7 @@ namespace Penguin2D {
 	private:
 		std::unique_ptr<SDL_Window, void(*)(SDL_Window*)> window;
 	public:
-		PenguinWindow(const std::string & p_title_name, Vector2<int> size, SDL_WindowFlags p_flags);
+		PenguinWindow(const std::string& p_title_name, Vector2<int> size, SDL_WindowFlags p_flags);
 		SDL_Window* get_window();
 	};
 

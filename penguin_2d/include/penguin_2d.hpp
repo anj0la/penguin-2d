@@ -10,6 +10,8 @@
 #include "exception.hpp"
 #include "penguin_input.hpp"
 #include "penguin_event_handler.hpp"
+#include "penguin_text_renderer.hpp"
+#include "penguin_text.hpp"
 
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>

@@ -8,7 +8,6 @@
 
 #include <SDL3_ttf/SDL_ttf.h>
 
-
 namespace Penguin2D {
 
     enum class PenguinFontStyle {
@@ -21,7 +20,7 @@ namespace Penguin2D {
 
     class PenguinFont {
     public:
-        PenguinFont(std::string font_name, float font_size);
+        PenguinFont(const std::string& font_path, float font_size);
         TTF_Font* get_font();
 
         // Setter and getter for the font size. 

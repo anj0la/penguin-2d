@@ -2,8 +2,8 @@
 
 using namespace Penguin2D;
 
-PenguinFont::PenguinFont(std::string font_name, float font_size) 
-	: font(TTF_OpenFont(font_name.c_str(), font_size), &TTF_CloseFont) {
+PenguinFont::PenguinFont(const std::string& font_path, float font_size)
+	: font(TTF_OpenFont(font_path.c_str(), font_size), &TTF_CloseFont) {
 
 	Exception::throw_if(
 		!font,
@@ -27,6 +27,8 @@ float PenguinFont::get_font_size() {
 		"The font size could not be retrieved. This error might've occurred due to the font not being initialized.",
 		TEXT_ERROR
 	);
+
+	return font_size;
 }
 
 void PenguinFont::set_font_outline_size(int outline_size) {

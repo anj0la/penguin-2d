@@ -6,7 +6,7 @@
 using namespace Penguin2D;
 using namespace Penguin2D::Colours;
 
-PenguinRenderer::PenguinRenderer(PenguinWindow& p_window, std::string p_name) 
+PenguinRenderer::PenguinRenderer(PenguinWindow& p_window, const std::string& p_name) 
 : renderer(SDL_CreateRenderer(
 	p_window.get_window(), 
 	p_name.empty() ? NULL : p_name.c_str()), // If empty, allow SDL to handle getting the driver.

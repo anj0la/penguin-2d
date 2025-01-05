@@ -32,7 +32,7 @@ namespace Penguin2D {
 		[[nodiscard]] const char* what() const noexcept override { return message.c_str(); }
 
 		// Throws error based on condition
-		inline static void throw_if(bool condition, std::string message = "", PenguinError error = UNKNOWN_ERROR) {
+		inline static void throw_if(bool condition, std::string message, PenguinError error) {
 			if (condition)
 				throw Exception{ message.size() ? std::move(message) : SDL_GetError(), error };
 		}

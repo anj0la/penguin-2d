@@ -16,7 +16,8 @@ namespace Penguin2D {
 		WINDOW_ERROR,
 		APPLICATION_ERROR,
 		INIT_ERROR,
-		INPUT_ERROR
+		INPUT_ERROR,
+		TEXT_ERROR
 	};
 
 	class Exception final : public std::exception {

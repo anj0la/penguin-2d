@@ -86,3 +86,7 @@ void PenguinRenderer::draw_rect(Rect2<float> rect, Colour outline, Colour fill) 
 void PenguinRenderer::reset_colour() {
 	set_colour(Colours::BLACK); 
 }
+
+SDL_Renderer* PenguinRenderer::get_renderer() {
+	return renderer.get();
+}

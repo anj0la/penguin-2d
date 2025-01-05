@@ -22,6 +22,7 @@ namespace Penguin2D {
 		void present();
 		void set_colour(Colour colour);
 		void reset_colour();
+		SDL_Renderer* get_renderer();
 
 	private:
 		std::unique_ptr<SDL_Renderer, void(*)(SDL_Renderer*)> renderer;

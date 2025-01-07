@@ -18,7 +18,6 @@ namespace Penguin2D {
 
     private:
         std::unique_ptr<TTF_TextEngine, void(*)(TTF_TextEngine*)> text_renderer;
-  
     };
 }
 

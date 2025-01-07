@@ -45,18 +45,24 @@ int main(int argc, char* argv[]) {
     // TTF_TextEngine* text_engine = TTF_CreateRendererTextEngine(renderer.get_renderer());
 
     TTF_Font* font = TTF_OpenFont("C:\\Users\\anjol\\source\\repos\\penguin_2d\\penguin_2d\\fonts\\pixelify_sans_regular.ttf", 24.0f);
-
-    TTF_Text* text = TTF_CreateText(text_engine.get_text_renderer(), font, "Hello world!", 0);
-    bool success = TTF_SetTextColor(text, 255, 255, 255, 255);
-    if (!success) {
-        throw std::runtime_error(SDL_GetError());
-    }
+    //std::unique_ptr<TTF_Font, void(*)(TTF_Font*)> font(TTF_OpenFont("C:\\Users\\anjol\\source\\repos\\penguin_2d\\penguin_2d\\fonts\\pixelify_sans_regular.ttf", 24.0f), &TTF_CloseFont);
 
     // TEST - Create the font.
     //PenguinFont font("C:\\Users\\anjol\\source\\repos\\penguin_2d\\penguin_2d\\fonts\\pixelify_sans_regular.ttf", 24.0f);
 
+    // PenguinText text(text_engine, font, "A test string!", Colours::WHITE, Vector2<int>(0, 0));
+
+    std::unique_ptr<TTF_Text, void(*)(TTF_Text*)> text(TTF_CreateText(text_engine.get_text_renderer(), font, "Hello World!", 0), &TTF_DestroyText);
+
+    // TTF_Text* text = TTF_CreateText(text_engine.get_text_renderer(), font, "Hello world!", 0);
+    bool success = TTF_SetTextColor(text.get(), 255, 255, 255, 255);
+    if (!success) {
+        throw std::runtime_error(SDL_GetError());
+    }
+
+  
     // Create the text. ERROR OCCURS
-    // PenguinText text(text_engine, "C:\\Users\\anjol\\source\\repos\\penguin_2d\\penguin_2d\\fonts\\pixelify_sans_regular.ttf", "A test string!", 24.0f);
+    //PenguinText text(text_engine, "C:\\Users\\anjol\\source\\repos\\penguin_2d\\penguin_2d\\fonts\\pixelify_sans_regular.ttf", "A test string!", 24.0f);
 
     // PenguinText text(text_engine, "fonts/pixelify_sans_regular.ttf", "A test string!", Colours::WHITE, Vector2<int>(0, 0));
 
@@ -74,7 +80,7 @@ int main(int argc, char* argv[]) {
         if (input.is_key_pressed(PenguinKey::KEY_A)) { // Render the rect onto the screen.
             renderer.clear();
             renderer.draw_rect(Rect2<float>(Vector2<float>(100.0, 100.0), Vector2<float>(100.0, 100.0)), Colours::WHITE, Colours::RED);
-            // text.render_text(Vector2<float>(300.0, 300.0));
+            //text.render_text(Vector2<float>(300.0, 300.0));
             renderer.present();
         }
         if (input.is_key_pressed(PenguinKey::ESC)) {
@@ -82,10 +88,11 @@ int main(int argc, char* argv[]) {
         }
         if (input.is_key_pressed(PenguinKey::KEY_X)) {
             // SDL_FlushRenderer(renderer.get_renderer());
-            bool success = TTF_DrawRendererText(text, 200.0, 200.0);
+            bool success = TTF_DrawRendererText(text.get(), 200.0, 200.0);
             if (!success) {
                 throw std::runtime_error(SDL_GetError());
             }
+            // text.render_text(Vector2<float>(300.0, 300.0));
             renderer.present();
 
         }
@@ -93,8 +100,9 @@ int main(int argc, char* argv[]) {
     }
 
     // Closing the font (delete later)
-    TTF_CloseFont(font);
-    TTF_DestroyText(text);
+    // TTF_DestroyText(text);
+    // TTF_CloseFont(font);
+
     //TTF_DestroyRendererTextEngine(text_engine);
 
     // Clean up.

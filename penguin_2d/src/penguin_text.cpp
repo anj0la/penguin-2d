@@ -2,11 +2,9 @@
 
 using namespace Penguin2D;
 
-PenguinText::PenguinText(PenguinTextRenderer& text_renderer, const std::string& font_path, const std::string& text_str, float font_size, Colour colour, Vector2<int> position)
-    : font(font_path, font_size), // Initialize PenguinFont
-    text(TTF_CreateText(text_renderer.get_text_renderer(), font.get_font(), text_str.c_str(), 0), &TTF_DestroyText) {
+PenguinText::PenguinText(PenguinTextRenderer& text_renderer, PenguinFont& font, const std::string& text_str, Colour colour, Vector2<int> position)
+    : text(TTF_CreateText(text_renderer.get_text_renderer(), font.get_font(), text_str.c_str(), 0), &TTF_DestroyText) {
 
-    // Create the text.
     Exception::throw_if(
         !text,
         "The text could not be created due to one of the following objects: PenguinTextRenderer, PenguinFont.",

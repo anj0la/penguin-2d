@@ -22,7 +22,7 @@ namespace Penguin2D {
 
 	class Exception final : public std::exception {
 		PenguinError error_val;
-		std::string message;
+		std::string message; // Update message as we expect a string, but we are taking in a const char*
 
 	public:
 		Exception(std::string message, PenguinError error) : message{ std::move(message) }, error_val{ error } {}

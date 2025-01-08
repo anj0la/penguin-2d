@@ -2,12 +2,20 @@
 
 using namespace Penguin2D;
 
-PenguinText::PenguinText(PenguinTextRenderer& text_renderer, PenguinFont& font, const std::string& text_str, Colour colour, Vector2<int> position)
-    : text(TTF_CreateText(text_renderer.get_text_renderer(), font.get_font(), text_str.c_str(), 0), &TTF_DestroyText) {
+PenguinText::PenguinText(PenguinTextRenderer& text_renderer, const std::string& font_path, const std::string& text_str, float font_size, Colour colour, Vector2<int> position)
+    : font(font_path, font_size), 
+      text(nullptr, &TTF_DestroyText) {
+
+    // Initialize the text pointer
+    text.reset(TTF_CreateText(
+        text_renderer.get_text_renderer(),
+        font.get_font(),
+        text_str.c_str(),
+        0));
 
     Exception::throw_if(
         !text,
-        "The text could not be created due to one of the following objects: PenguinTextRenderer, PenguinFont.",
+        "The text could not be created due to one of the following objects: PenguinTextRenderer.",
         INIT_ERROR
     );
 
@@ -18,6 +26,12 @@ PenguinText::PenguinText(PenguinTextRenderer& text_renderer, PenguinFont& font, 
     set_text_position(position);
 
 }
+
+// TEMPORARY FUNCTION to ensure that TTF_Close is called before TTF_Quit. Won't matter once code is refactored.
+void PenguinText::release_text() {
+    text.reset(nullptr);
+}
+
 
 void PenguinText::render_text(Vector2<float> position) {
     Exception::throw_if(

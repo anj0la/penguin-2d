@@ -4,6 +4,15 @@
 
 using namespace Penguin2D;
 
+// Displays text onto the screen. Ideally PenguinTextRenderer and PenguinRenderer would be a class / struct object, so that the text size can be passed.
+// For the font, it could be passed as well.
+void display_text(PenguinTextRenderer& text_engine, PenguinRenderer& renderer, const char* text_p, float size, Vector2<>position) {
+    PenguinText text(text_engine, "C:\\Users\\anjol\\source\\repos\\penguin_2d\\penguin_2d\\fonts\\pixelify_sans_regular.ttf", text_p, size);
+    text.set_text_colour(Colours::WHITE);
+    text.render_text(position);
+    renderer.present();
+}
+
 int main(int argc, char* argv[]) {
 
     // Initialize SDL. -> Ideally will be abstracted further.
@@ -42,29 +51,11 @@ int main(int argc, char* argv[]) {
     // Create the text renderer.
     PenguinTextRenderer text_engine(renderer);
 
-    // TTF_TextEngine* text_engine = TTF_CreateRendererTextEngine(renderer.get_renderer());
+    display_text(text_engine, renderer, "Hello Penguin 2D!", 24.0f, Vector2<>(480.0 / 2, 10));
 
-    TTF_Font* font = TTF_OpenFont("C:\\Users\\anjol\\source\\repos\\penguin_2d\\penguin_2d\\fonts\\pixelify_sans_regular.ttf", 24.0f);
-    //std::unique_ptr<TTF_Font, void(*)(TTF_Font*)> font(TTF_OpenFont("C:\\Users\\anjol\\source\\repos\\penguin_2d\\penguin_2d\\fonts\\pixelify_sans_regular.ttf", 24.0f), &TTF_CloseFont);
 
-    // TEST - Create the font.
-    //PenguinFont font("C:\\Users\\anjol\\source\\repos\\penguin_2d\\penguin_2d\\fonts\\pixelify_sans_regular.ttf", 24.0f);
-
-    // PenguinText text(text_engine, font, "A test string!", Colours::WHITE, Vector2<int>(0, 0));
-
-    std::unique_ptr<TTF_Text, void(*)(TTF_Text*)> text(TTF_CreateText(text_engine.get_text_renderer(), font, "Hello World!", 0), &TTF_DestroyText);
-
-    // TTF_Text* text = TTF_CreateText(text_engine.get_text_renderer(), font, "Hello world!", 0);
-    bool success = TTF_SetTextColor(text.get(), 255, 255, 255, 255);
-    if (!success) {
-        throw std::runtime_error(SDL_GetError());
-    }
-
-  
-    // Create the text. ERROR OCCURS
-    //PenguinText text(text_engine, "C:\\Users\\anjol\\source\\repos\\penguin_2d\\penguin_2d\\fonts\\pixelify_sans_regular.ttf", "A test string!", 24.0f);
-
-    // PenguinText text(text_engine, "fonts/pixelify_sans_regular.ttf", "A test string!", Colours::WHITE, Vector2<int>(0, 0));
+    // So we should be updating text by creating a text object, then destroying it once it isn't needed anymore. It is still rendered onto the screen,
+    // but the text object itself is destroyed. Maybe once I have created our Engine / Game class, I would provide such a function.
 
     bool game_running = true;
 
@@ -87,26 +78,16 @@ int main(int argc, char* argv[]) {
             game_running = false; // Close the window.
         }
         if (input.is_key_pressed(PenguinKey::KEY_X)) {
-            // SDL_FlushRenderer(renderer.get_renderer());
-            bool success = TTF_DrawRendererText(text.get(), 200.0, 200.0);
-            if (!success) {
-                throw std::runtime_error(SDL_GetError());
-            }
-            // text.render_text(Vector2<float>(300.0, 300.0));
-            renderer.present();
+            renderer.clear();
+            display_text(text_engine, renderer, "You pressed the X button!", 24.0f, Vector2<>(480.0 / 2, 400));
 
         }
 
     }
 
-    // Closing the font (delete later)
-    // TTF_DestroyText(text);
-    // TTF_CloseFont(font);
-
-    //TTF_DestroyRendererTextEngine(text_engine);
-
     // Clean up.
     TTF_Quit(); // Cleans up SDL_ttf related items.
     SDL_Quit(); // Cleans up SDL related items.
+    // TTF_CloseFont(font);
     return 0;
 }

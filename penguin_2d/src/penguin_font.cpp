@@ -12,6 +12,16 @@ PenguinFont::PenguinFont(const std::string& font_path, float font_size)
 	);
 }
 
+TTF_Font* PenguinFont::get_font() {
+	Exception::throw_if(
+		!font,
+		"The font has not been initialized.",
+		TEXT_ERROR
+	);
+
+	return font.get();
+}
+
 void PenguinFont::set_font_size(float font_size) {
 	Exception::throw_if(
 		!TTF_SetFontSize(font.get(), font_size),
@@ -37,16 +47,6 @@ void PenguinFont::set_font_outline_size(int outline_size) {
 		"The font outline could not be changed. This error might've occurred due to the font not being initialized.",
 		TEXT_ERROR
 	);
-}
-
-TTF_Font* PenguinFont::get_font() {
-	Exception::throw_if(
-		!font,
-		"The font has not been initialized.",
-		TEXT_ERROR
-	);
-
-	return font.get();
 }
 
 int PenguinFont::get_font_outline_size() {

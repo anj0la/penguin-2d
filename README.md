@@ -25,7 +25,7 @@ Penguin2D provides the following capabilities to game developers:
 ### Fonts (Experimental)
 #### Font Rendering:
 - Integrates the SDL_ttf library for basic text rendering.
-- Fonts can be rendered to the screen, through the use of the display_text function, handling resource management.
+- Fonts can be rendered to the screen, through the use of the display_text function to handle resource management.
 
 ### Error Handling
 #### Custom Exception Class:
@@ -33,7 +33,7 @@ Penguin2D provides the following capabilities to game developers:
 
 ## Current Limitations
 - Only input events are fully implemented in the event-handling system; other event types will be added in future iterations.
-- Font management requires manual cleanup and will be refined in upcoming versions for better usability.
+- Font management requires the display_text function; it will be moved into a different class providing better functionality to use texts and fonts.
 
 ## Getting Started
 ### Prerequisites

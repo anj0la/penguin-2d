@@ -25,7 +25,7 @@ Penguin2D provides the following capabilities to game developers:
 ### Fonts (Experimental)
 #### Font Rendering:
 - Integrates the SDL_ttf library for basic text rendering.
-- Fonts can be rendered to the screen, though improvements in resource management are planned for seamless integration.
+- Fonts can be rendered to the screen, through the use of the display_text function, handling resource management.
 
 ### Error Handling
 #### Custom Exception Class:
@@ -127,13 +127,13 @@ int main() {
 ```
 
 ## Roadmap
-- Enhance font rendering with better memory management.
 - Expand rendering capabilities to include textures and sprites.
-- Add support for Dear ImGui to enable in-game development tools such as debugging overlays and real-time property editing.
-- Add scrolling background functionality for parallax and infinite scrolling effects.
 - Create a main game engine/framework class to abstract core systems, such as:
   - Initializing and shutting down SDL (e.g., wrapping SDL_Init and SDL_Quit).
   - Managing key subsystems like rendering, event handling, and timing in a single interface for ease of use.
+  - Managing framerates for rendering with delta time.
+- Add scrolling background functionality for parallax and infinite scrolling effects.
+- Add support for Dear ImGui to enable in-game development tools such as debugging overlays and real-time property editing.
 - Replace scrolling background functionality with a 2D Camera System, allowing developers to focus on specific parts of the game world.
 - Add mouse and joystick input event handling to support a wider range of input devices.
 - Add support for more event types (e.g., window events, display events).

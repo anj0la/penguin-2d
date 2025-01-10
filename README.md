@@ -104,15 +104,12 @@ public:
     void quit() override {
         // TODO: Add your own quit logic.
     }
-
-private:
-    Rect2 rect;
 };
 ```
 
 ### Run the Game
 
-An example to render a rectangle using Penguin2D:
+Don't forget to add your defined header in the penguin_2d.hpp / or penguin_2d.cpp file!
 
 ```cpp
 #include "game.hpp"

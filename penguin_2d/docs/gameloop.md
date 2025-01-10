@@ -28,14 +28,15 @@ The `run()` function establishes the game loop and is the only function that nee
 
 There are three main functions that developers can override:
 
-1. **`update()`**  
+1. **`update(delta_time)`**  
    Used for core game logic, such as:
    - Moving sprites (e.g., player, enemies).
    - Handling collisions.
    - Managing game states.  
+
    > **Note**: Delta time support is not currently available, but framerate support is planned.
 
-2. **`draw()`**  
+2. **`draw(delta_time)`**  
    Used to render game objects onto the screen. Developers must use:
    - `renderer.clear()`: Clears the current frame.
    - Drawing functions like `renderer.draw_rect()`.
@@ -51,6 +52,6 @@ There are three main functions that developers can override:
 1. **Initialization**: Setup objects and call `init()`.
 2. **Game Loop**:
    - Poll events.
-   - Update game logic (`update()`).
-   - Draw objects (`draw()`).
+   - Update game logic (`update(delta_time)`).
+   - Draw objects (`draw(delta_time)`).
 3. **Exit**: Call `quit()` to handle cleanup.

@@ -24,6 +24,6 @@ void PenguinEventHandler::add_event_listener(const std::function<void(const SDL_
 	callback_functions.push_back(callback_function);
 }
 
-bool PenguinEventHandler::should_quit() {
+bool PenguinEventHandler::should_quit() const {
 	return quit;
 }

@@ -12,7 +12,7 @@ namespace Penguin2D {
 		~PenguinEventHandler() = default;
 		void poll_events();
 		void add_event_listener(const std::function<void(const SDL_Event&)>& callback_function);
-		bool should_quit();
+		bool should_quit() const;
 	private:
 		std::vector<std::function<void(const SDL_Event&)>> callback_functions; // Stores all callback functions related to the event.
 		bool quit = false;

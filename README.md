@@ -11,8 +11,8 @@ Penguin2D provides the following capabilities to game developers:
 ### Game Loop
 - **Customizable Game Loop**:
   - `init()`: Load assets and initialize game objects.
-  - `update()`: Core game logic (e.g., movement, collisions).
-  - `draw()`: Render objects onto the screen.
+  - `update(delta_time)`: Core game logic (e.g., movement, collisions).
+  - `draw(delta_time)`: Render objects onto the screen.
   - `quit()`: Clean up resources on exit.
 
 ### Game Objects
@@ -30,7 +30,6 @@ Penguin2D provides the following capabilities to game developers:
 ### Fonts (Experimental)
 - **Font Rendering**:
   - Integrates the SDL_ttf library for basic text rendering.
-  - Fonts can be rendered to the screen through the use of the `display_text` function.
 
 ### Error Handling
 - **Custom Exception Class**:
@@ -43,7 +42,7 @@ Penguin2D provides the following capabilities to game developers:
 ## Getting Started
 ### Prerequisites
 - A C++ compiler supporting C++17 or later.
-- SDL3 and SDL_ttf libraries installed on your system. They can be found here: https://github.com/libsdl-org/SDL, https://github.com/libsdl-org/SDL_ttf
+- <a href="https://github.com/libsdl-org/SDL">SDL3</a> and <a href="https://github.com/libsdl-org/SDL_ttf">SDL_ttf</a> libraries installed on your system.
 - CMake for building the project.
 
 ### Building the Framework

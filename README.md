@@ -29,7 +29,7 @@ Penguin2D provides the following capabilities to game developers:
 
 ### Fonts (Experimental)
 - **Font Rendering**:
-  - Integrates the SDL_ttf library for basic text rendering.
+  - Integrates the SDL_ttf library for basic text rendering via `PenguinFont` and `PenguinText`.
 
 ### Error Handling
 - **Custom Exception Class**:

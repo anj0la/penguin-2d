@@ -64,7 +64,7 @@ mkdir build && cd build
 cmake ..  
 make
 ```
-Note: if using Visual Studio, the framework will be built automatically when you run the project.
+ > **Note**: if using Visual Studio, the framework will be built automatically when you run the project.
 
 ## Example Usage
 

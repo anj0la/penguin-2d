@@ -4,7 +4,7 @@ The Penguin2D framework provides a simple and effective game loop structure for 
 
 ## Flowchart
 
-- Add flowchart image here
+![penguin_game_flowchart](https://github.com/user-attachments/assets/5a0c568e-3ffe-49e1-a5b4-d6788efdc3fc)
 
 ## Initialization Phase
 

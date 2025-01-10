@@ -5,7 +5,7 @@ Penguin2D is a lightweight and modern game framework built with C++ and SDL3, de
 ## Current Features
 Penguin2D provides the following capabilities to game developers:
 
-## Rendering
+### Rendering
 - **2D Rendering**: Render basic shapes like rectangles, lines, and points using the `PenguinRenderer` and `PenguinWindow` classes. These classes manage SDL resources safely with smart pointers, ensuring automatic cleanup.
 
 ### Game Loop
@@ -81,22 +81,28 @@ using namespace Penguin2D;
 class MyGame : public PenguinGame {
 public:
     void init() override {
-        // Initialize game variables and objects
-        rect = Rect2(Vector2<>(100, 100), Vector2<>(200, 150));
+        // TODO: Add your own initialization logic.
     }
 
     void update() override {
-        // Game logic, e.g., move player, check collisions
+        // TODO: Add your own update logic.
     }
 
     void draw() override {
+        // Create a Rect2 object.
+        Rect2<float>rect(Vector2<float>(100.0, 100.0), Vector2<float>(100.0, 100.0));
+
+        // Render a red rect with a white outline onto the screen.
         renderer.clear();
         renderer.draw_rect(rect, Colours::WHITE, Colours::RED);
         renderer.present();
+
+        // TODO: Add your own draw logic.
+
     }
 
     void quit() override {
-        // Cleanup resources or save game state
+        // TODO: Add your own quit logic.
     }
 
 private:

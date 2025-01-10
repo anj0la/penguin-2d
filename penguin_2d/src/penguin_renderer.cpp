@@ -4,7 +4,6 @@
 #include <stdexcept>
 
 using namespace Penguin2D;
-using namespace Penguin2D::Colours;
 
 PenguinRenderer::PenguinRenderer(PenguinWindow& p_window, const std::string& p_name) 
 : renderer(SDL_CreateRenderer(

@@ -13,7 +13,6 @@ PenguinGame::PenguinGame()
         });
 }
 
-
 void PenguinGame::init() {}
 
 void PenguinGame::init_events(const SDL_Event& p_event) {
@@ -41,10 +40,6 @@ void PenguinGame::run() {
             running = false;
         }
 
-        // TODO: Delete after testing input
-        if (input.is_key_pressed(PenguinKey::KEY_X)) {
-            running = false;
-        }
     }
 
     // Clean up game processes (e.g., saving game objects, closing other third-party libraries
@@ -54,13 +49,6 @@ void PenguinGame::run() {
 
 void PenguinGame::update(float delta_time) {}
 
-// Placeholder variables to test out functionality of draw()
-void PenguinGame::draw(float delta_time) {
-    renderer.clear();
-    Rect2<float> rect(Vector2<float>(100.0, 100.0), Vector2<float>(100.0, 100.0));
-    renderer.draw_rect(rect, Colours::WHITE, Colours::RED);
-    renderer.present();
-
-}
+void PenguinGame::draw(float delta_time) {}
 
 void PenguinGame::quit() {}

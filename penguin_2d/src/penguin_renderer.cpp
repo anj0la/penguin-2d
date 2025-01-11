@@ -78,7 +78,71 @@ void PenguinRenderer::draw_filled_rect(Rect2<float> rect, Colour fill) {
 	);
 }
 
-void PenguinRenderer::draw_circle(Vector2<float> center, int radius, Colour outline) {
+
+void PenguinRenderer::draw_circle(Vector2<float> center, int radius, int border, Colour outline) {
+	// The vector will contain the SDL_FPoints needed to render the circle onto the screen.
+	std::vector<SDL_FPoint> points;
+
+	// Initialize outer and inner variables that will create the circle with the border size. 
+	int outer = radius;
+	int inner = radius - border;
+
+	// Handle edge case where border is too large.
+	if (inner < 0) inner = 0;
+
+	// Initialize variables needed for the modified midpoint algorithm.
+	int x_outer = outer;
+	int x_inner = inner;
+	int y = 0;
+	int err_outer = 1 - x_outer;
+	int err_inner = 1 - x_inner;
+
+	while (x_outer >= y) {
+		x_line(center.x + x_inner, center.x + x_outer, center.y + y, points);
+		y_line(center.x + y, center.y + x_inner, center.y + x_outer, points);
+		x_line(center.x - x_outer, center.x - x_inner, center.y + y, points);
+		y_line(center.x - y, center.y + x_inner, center.y + x_outer, points);
+		x_line(center.x - x_outer, center.x - x_inner, center.y - y, points);
+		y_line(center.x - y, center.y - x_outer, center.y - x_inner, points);
+		x_line(center.x + x_inner, center.x + x_outer, center.y - y, points);
+		y_line(center.x + y, center.y - x_outer, center.y - x_inner, points);
+
+		y++;
+
+		// Update outer circle error.
+		if (err_outer < 0) {
+			err_outer += 2 * y + 1;
+		}
+		else {
+			x_outer--;
+			err_outer += 2 * (y - x_outer + 1);
+		}
+
+		// Update inner circle error.
+		if (y > inner) {
+			x_inner = y;
+		}
+		else {
+			if (err_inner < 0) {
+				err_inner += 2 * y + 1;
+			}
+			else {
+				x_inner--;
+				err_inner += 2 * (y - x_inner + 1);
+			}
+		}
+	}
+
+	// Draw the circle.
+	set_colour(outline);
+	Exception::throw_if(
+		!SDL_RenderPoints(renderer.get(), points.data(), points.size()),
+		"Failed to draw a circle to the renderer.",
+		RENDERER_ERROR
+		);
+}
+
+void PenguinRenderer::draw_filled_circle(Vector2<float> center, int radius, Colour fill) {
 	// Initialize variables needed for the midpoint algorithm.
 	int x = radius - 1;
 	int y = 0;
@@ -86,19 +150,13 @@ void PenguinRenderer::draw_circle(Vector2<float> center, int radius, Colour outl
 	int dy = 1;
 	int err = dx - (radius << 1); // (radius << 1 = diameter)
 
-	// The vector will contain the SDL_FPoints needed to render the circle onto the screen.
-	std::vector<SDL_FPoint> points;
-
-	// Fill all the 8 octances.
 	while (x >= y) {
-		points.push_back({ center.x + x, center.y + y });
-		points.push_back({ center.x + x, center.y - y });
-		points.push_back({ center.x - x, center.y + y });
-		points.push_back({ center.x - x, center.y - y });
-		points.push_back({ center.x + y, center.y + x });
-		points.push_back({ center.x + y, center.y - x });
-		points.push_back({ center.x - y, center.y + x });
-		points.push_back({ center.x - y, center.y - x });
+		draw_horizontal_line(center.x - x, center.x + x, center.y + y, fill); // Top span
+		draw_horizontal_line(center.x - x, center.x + x, center.y - y, fill); // Bottom span
+
+		// Left and right spans
+		draw_horizontal_line(center.x - y, center.x + y, center.y + x, fill); // Right span
+		draw_horizontal_line(center.x - y, center.x + y, center.y - x, fill); // Left span
 
 		if (err <= 0) {
 			y++;
@@ -112,14 +170,7 @@ void PenguinRenderer::draw_circle(Vector2<float> center, int radius, Colour outl
 			err += dx - (radius << 1);
 		}
 	}
-
-	// Draw the circle.
-	set_colour(outline);
-	Exception::throw_if(
-		!SDL_RenderPoints(renderer.get(), points.data(), points.size()),
-		"Failed to draw a circle to the renderer.",
-		RENDERER_ERROR
-		);
+	
 }
 
 void PenguinRenderer::reset_colour() {
@@ -128,4 +179,22 @@ void PenguinRenderer::reset_colour() {
 
 SDL_Renderer* PenguinRenderer::get_renderer() {
 	return renderer.get();
+}
+
+
+void PenguinRenderer::x_line(int x1, int x2, int y, std::vector<SDL_FPoint>& points) {
+	while (x1 <= x2) points.push_back({ (float)x1++, (float)y });
+}
+
+void PenguinRenderer::y_line(int x, int y1, int y2, std::vector<SDL_FPoint>& points) {
+	while (y1 <= y2) points.push_back({ (float)x, (float)y1++ });
+}
+
+void PenguinRenderer::draw_horizontal_line(float x1, float x2, float y, Colour colour) {
+	set_colour(colour);
+	Exception::throw_if(
+		!SDL_RenderLine(renderer.get(), x1, y, x2, y),
+		"Failed to render a line to the screen",
+		RENDERER_ERROR
+	);
 }

@@ -22,8 +22,8 @@ namespace Penguin2D {
 		void draw_pixel(Vector2<float> vect, Colour colour = Colours::WHITE);
 		void draw_rect(Rect2<float> rect, Colour outline = Colours::WHITE);
 		void draw_filled_rect(Rect2<float> rect, Colour fill = Colours::WHITE);
-		void draw_circle(Vector2<float> center, int radius, Colour outline = Colours::WHITE);
-		void draw_filled_circle(Vector2<float> circle, int radius, Colour fill = Colours::WHITE);
+		void draw_circle(Vector2<float> center, int radius, int border, Colour outline = Colours::WHITE);
+		void draw_filled_circle(Vector2<float> center, int radius, Colour fill = Colours::WHITE);
 		void present();
 		void set_colour(Colour colour);
 		void reset_colour();
@@ -31,6 +31,10 @@ namespace Penguin2D {
 
 	private:
 		std::unique_ptr<SDL_Renderer, void(*)(SDL_Renderer*)> renderer;
+
+		void x_line(int x1, int x2, int y, std::vector<SDL_FPoint>& points);
+		void y_line(int x, int y1, int y2, std::vector<SDL_FPoint>& points);
+		void draw_horizontal_line(float x1, float x2, float y, Colour colour);
 	};
 }
 

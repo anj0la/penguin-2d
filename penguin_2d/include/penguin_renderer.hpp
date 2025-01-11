@@ -22,7 +22,7 @@ namespace Penguin2D {
 		void draw_pixel(Vector2<float> vect, Colour colour = Colours::WHITE);
 		void draw_rect(Rect2<float> rect, Colour outline = Colours::WHITE);
 		void draw_filled_rect(Rect2<float> rect, Colour fill = Colours::WHITE);
-		void draw_circle(Vector2<float> center, int radius, int border, Colour outline = Colours::WHITE);
+		void draw_circle(Vector2<float> center, int radius, Colour outline = Colours::WHITE);
 		void draw_filled_circle(Vector2<float> center, int radius, Colour fill = Colours::WHITE);
 		void present();
 		void set_colour(Colour colour);

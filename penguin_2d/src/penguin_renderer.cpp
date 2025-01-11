@@ -78,58 +78,38 @@ void PenguinRenderer::draw_filled_rect(Rect2<float> rect, Colour fill) {
 	);
 }
 
+void PenguinRenderer::draw_circle(Vector2<float> center, int radius, Colour outline) {
+	// Initialize variables needed for the midpoint algorithm.
+	int x = radius - 1;
+	int y = 0;
+	int dx = 1;
+	int dy = 1;
+	int err = dx - (radius << 1); // (radius << 1 = diameter)
 
-void PenguinRenderer::draw_circle(Vector2<float> center, int radius, int border, Colour outline) {
 	// The vector will contain the SDL_FPoints needed to render the circle onto the screen.
 	std::vector<SDL_FPoint> points;
 
-	// Initialize outer and inner variables that will create the circle with the border size. 
-	int outer = radius;
-	int inner = radius - border;
+	// Fill all the 8 octances.
+	while (x >= y) {
+		points.push_back({ center.x + x, center.y + y });
+		points.push_back({ center.x + x, center.y - y });
+		points.push_back({ center.x - x, center.y + y });
+		points.push_back({ center.x - x, center.y - y });
+		points.push_back({ center.x + y, center.y + x });
+		points.push_back({ center.x + y, center.y - x });
+		points.push_back({ center.x - y, center.y + x });
+		points.push_back({ center.x - y, center.y - x });
 
-	// Handle edge case where border is too large.
-	if (inner < 0) inner = 0;
-
-	// Initialize variables needed for the modified midpoint algorithm.
-	int x_outer = outer;
-	int x_inner = inner;
-	int y = 0;
-	int err_outer = 1 - x_outer;
-	int err_inner = 1 - x_inner;
-
-	while (x_outer >= y) {
-		x_line(center.x + x_inner, center.x + x_outer, center.y + y, points);
-		y_line(center.x + y, center.y + x_inner, center.y + x_outer, points);
-		x_line(center.x - x_outer, center.x - x_inner, center.y + y, points);
-		y_line(center.x - y, center.y + x_inner, center.y + x_outer, points);
-		x_line(center.x - x_outer, center.x - x_inner, center.y - y, points);
-		y_line(center.x - y, center.y - x_outer, center.y - x_inner, points);
-		x_line(center.x + x_inner, center.x + x_outer, center.y - y, points);
-		y_line(center.x + y, center.y - x_outer, center.y - x_inner, points);
-
-		y++;
-
-		// Update outer circle error.
-		if (err_outer < 0) {
-			err_outer += 2 * y + 1;
-		}
-		else {
-			x_outer--;
-			err_outer += 2 * (y - x_outer + 1);
+		if (err <= 0) {
+			y++;
+			err += dy;
+			dy += 2;
 		}
 
-		// Update inner circle error.
-		if (y > inner) {
-			x_inner = y;
-		}
-		else {
-			if (err_inner < 0) {
-				err_inner += 2 * y + 1;
-			}
-			else {
-				x_inner--;
-				err_inner += 2 * (y - x_inner + 1);
-			}
+		if (err > 0) {
+			x--;
+			dx += 2;
+			err += dx - (radius << 1);
 		}
 	}
 
@@ -139,7 +119,7 @@ void PenguinRenderer::draw_circle(Vector2<float> center, int radius, int border,
 		!SDL_RenderPoints(renderer.get(), points.data(), points.size()),
 		"Failed to draw a circle to the renderer.",
 		RENDERER_ERROR
-		);
+	);
 }
 
 void PenguinRenderer::draw_filled_circle(Vector2<float> center, int radius, Colour fill) {

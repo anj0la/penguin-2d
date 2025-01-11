@@ -17,8 +17,8 @@ void MyGame::draw(float delta_time) {
 
     // Render a red rect with a white outline onto the screen.
     renderer.clear();
-    renderer.draw_circle(circle1, 50, 2, Colours::BLUE);
-    renderer.draw_filled_circle(circle2, 50, Colours::GREEN);
+    renderer.draw_circle(circle1, 50, Colours::WHITE);
+    renderer.draw_filled_circle(circle2, 50, Colours::WHITE);
     renderer.draw_rect(rect, Colours::WHITE);
     renderer.present();
 

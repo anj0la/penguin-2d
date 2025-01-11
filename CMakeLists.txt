@@ -17,7 +17,6 @@ set(ASSETS_DIR "${CMAKE_CURRENT_BINARY_DIR}/penguin_2d/assets")
 file(MAKE_DIRECTORY ${FONT_DIR})
 file(MAKE_DIRECTORY ${ASSETS_DIR})
 
-
 # Define project.
 project ("penguin_2d" VERSION 0.0.1)
 

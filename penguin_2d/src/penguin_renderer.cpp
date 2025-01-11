@@ -161,15 +161,6 @@ SDL_Renderer* PenguinRenderer::get_renderer() {
 	return renderer.get();
 }
 
-
-void PenguinRenderer::x_line(int x1, int x2, int y, std::vector<SDL_FPoint>& points) {
-	while (x1 <= x2) points.push_back({ (float)x1++, (float)y });
-}
-
-void PenguinRenderer::y_line(int x, int y1, int y2, std::vector<SDL_FPoint>& points) {
-	while (y1 <= y2) points.push_back({ (float)x, (float)y1++ });
-}
-
 void PenguinRenderer::draw_horizontal_line(float x1, float x2, float y, Colour colour) {
 	set_colour(colour);
 	Exception::throw_if(

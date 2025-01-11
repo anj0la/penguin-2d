@@ -32,8 +32,6 @@ namespace Penguin2D {
 	private:
 		std::unique_ptr<SDL_Renderer, void(*)(SDL_Renderer*)> renderer;
 
-		void x_line(int x1, int x2, int y, std::vector<SDL_FPoint>& points);
-		void y_line(int x, int y1, int y2, std::vector<SDL_FPoint>& points);
 		void draw_horizontal_line(float x1, float x2, float y, Colour colour);
 	};
 }

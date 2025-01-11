@@ -57,29 +57,69 @@ void PenguinRenderer::draw_pixel(Vector2<> vect, Colour colour) {
 	);
 }
 
-void PenguinRenderer::draw_rect(Rect2<float> rect, Colour outline, Colour fill) {
-	// Draw the fill
-	if (fill.alpha) {
-		set_colour(fill);
-		auto sdl_rect = (SDL_FRect)rect;
-		Exception::throw_if(
-			!SDL_RenderFillRect(renderer.get(), &sdl_rect),
-			"Failed to set draw a rect to the renderer.",
-			RENDERER_ERROR
-		);
-	}
-	
-	// Draw the outline
-	if (outline.alpha) {
-		set_colour(outline);
-		auto sdl_rect = (SDL_FRect)rect;
-		Exception::throw_if(
-			!SDL_RenderRect(renderer.get(), &sdl_rect),
-			"Failed to set draw the rect to the renderer.",
-			RENDERER_ERROR
-		);
+void PenguinRenderer::draw_rect(Rect2<float> rect, Colour outline) {
+	set_colour(outline);
+	auto sdl_rect = (SDL_FRect)rect;
+	Exception::throw_if(
+		!SDL_RenderRect(renderer.get(), &sdl_rect),
+		"Failed to draw the rect to the renderer.",
+		RENDERER_ERROR
+	);
+
+}
+
+void PenguinRenderer::draw_filled_rect(Rect2<float> rect, Colour fill) {
+	set_colour(fill);
+	auto sdl_rect = (SDL_FRect)rect;
+	Exception::throw_if(
+		!SDL_RenderFillRect(renderer.get(), &sdl_rect),
+		"Failed to draw the filled rect to the renderer.",
+		RENDERER_ERROR
+	);
+}
+
+void PenguinRenderer::draw_circle(Vector2<float> center, int radius, Colour outline) {
+	// Initialize variables needed for the midpoint algorithm.
+	int x = radius - 1;
+	int y = 0;
+	int dx = 1;
+	int dy = 1;
+	int err = dx - (radius << 1); // (radius << 1 = diameter)
+
+	// The vector will contain the SDL_FPoints needed to render the circle onto the screen.
+	std::vector<SDL_FPoint> points;
+
+	// Fill all the 8 octances.
+	while (x >= y) {
+		points.push_back({ center.x + x, center.y + y });
+		points.push_back({ center.x + x, center.y - y });
+		points.push_back({ center.x - x, center.y + y });
+		points.push_back({ center.x - x, center.y - y });
+		points.push_back({ center.x + y, center.y + x });
+		points.push_back({ center.x + y, center.y - x });
+		points.push_back({ center.x - y, center.y + x });
+		points.push_back({ center.x - y, center.y - x });
+
+		if (err <= 0) {
+			y++;
+			err += dy;
+			dy += 2;
+		}
+
+		if (err > 0) {
+			x--;
+			dx += 2;
+			err += dx - (radius << 1);
+		}
 	}
 
+	// Draw the circle.
+	set_colour(outline);
+	Exception::throw_if(
+		!SDL_RenderPoints(renderer.get(), points.data(), points.size()),
+		"Failed to draw a circle to the renderer.",
+		RENDERER_ERROR
+		);
 }
 
 void PenguinRenderer::reset_colour() {

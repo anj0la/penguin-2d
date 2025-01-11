@@ -11,7 +11,7 @@ PenguinRenderer::PenguinRenderer(PenguinWindow& p_window, const std::string& p_n
 	p_name.empty() ? NULL : p_name.c_str()), // If empty, allow SDL to handle getting the driver.
 	&SDL_DestroyRenderer) {
 
-	// Throws an exception if the renderer was not intialized
+	// Throw an exception if the renderer was not intialized.
 	Exception::throw_if(!renderer, "The renderer was not initialized.", RENDERER_ERROR);
 }
 
@@ -79,14 +79,14 @@ void PenguinRenderer::draw_filled_rect(Rect2<float> rect, Colour fill) {
 }
 
 void PenguinRenderer::draw_circle(Vector2<float> center, int radius, Colour outline) {
-	// Initialize variables needed for the midpoint algorithm.
+	// Initial points and decision variable.
 	int x = radius - 1;
 	int y = 0;
 	int dx = 1;
 	int dy = 1;
 	int err = dx - (radius << 1); // (radius << 1 = diameter)
 
-	// The vector will contain the SDL_FPoints needed to render the circle onto the screen.
+	// Vector for points to be rendered onto screen.
 	std::vector<SDL_FPoint> points;
 
 	// Fill all the 8 octances.
@@ -123,7 +123,7 @@ void PenguinRenderer::draw_circle(Vector2<float> center, int radius, Colour outl
 }
 
 void PenguinRenderer::draw_filled_circle(Vector2<float> center, int radius, Colour fill) {
-	// Initialize variables needed for the midpoint algorithm.
+	// Initial points and decision variable.
 	int x = radius - 1;
 	int y = 0;
 	int dx = 1;
@@ -134,7 +134,7 @@ void PenguinRenderer::draw_filled_circle(Vector2<float> center, int radius, Colo
 		draw_horizontal_line(center.x - x, center.x + x, center.y + y, fill); // Top span
 		draw_horizontal_line(center.x - x, center.x + x, center.y - y, fill); // Bottom span
 
-		// Left and right spans
+		// Left and right spans.
 		draw_horizontal_line(center.x - y, center.x + y, center.y + x, fill); // Right span
 		draw_horizontal_line(center.x - y, center.x + y, center.y - x, fill); // Left span
 
@@ -150,8 +150,148 @@ void PenguinRenderer::draw_filled_circle(Vector2<float> center, int radius, Colo
 			err += dx - (radius << 1);
 		}
 	}
-	
 }
+
+void PenguinRenderer::draw_ellipse(Vector2<float> center, int radius_x, int radius_y, Colour outline) {
+	// Squares of the radii for the ellipse.
+	int rx2 = radius_x * radius_x;
+	int ry2 = radius_y * radius_y;
+
+	// Initial points and decision variable for region 1.
+	int x = 0;
+	int y = radius_y;
+	int dx = 2 * ry2 * x;
+	int dy = 2 * rx2 * y;
+	int err = ry2 - (rx2 * radius_y) + (rx2 / 4);
+
+	// Vector for points to be rendered onto the screen.
+	std::vector<SDL_FPoint> points;
+
+	// |slope| < 1 (region 1).
+	while (dx < dy) {
+		// Symmetrical points.
+		points.push_back({ center.x + x, center.y + y });
+		points.push_back({ center.x - x, center.y + y });
+		points.push_back({ center.x + x, center.y - y });
+		points.push_back({ center.x - x, center.y - y });
+
+		if (err < 0) {
+			x++;
+			dx += 2 * ry2;
+			err += dx + ry2;
+		}
+		else {
+			x++;
+			y--;
+			dx += 2 * ry2;
+			dy -= 2 * rx2;
+			err += dx - dy + ry2;
+		}
+	}
+
+	err = ry2 * (x + 0.5) * (x + 0.5) + rx2 * (y - 1) * (y - 1) - rx2 * ry2;
+
+	// |slope| >= 1 (region 2).
+	while (y >= 0) {
+		// Symmetrical points.
+		points.push_back({ center.x + x, center.y + y });
+		points.push_back({ center.x - x, center.y + y });
+		points.push_back({ center.x + x, center.y - y });
+		points.push_back({ center.x - x, center.y - y });
+
+		if (err > 0) {
+			y--;
+			dy -= 2 * rx2;
+			err += rx2 - dy;
+		}
+		else {
+			y--;
+			x++;
+			dx += 2 * ry2;
+			dy -= 2 * rx2;
+			err += dx - dy + rx2;
+		}
+	}
+
+	// Draw the ellipse.
+	set_colour(outline);
+	Exception::throw_if(
+		!SDL_RenderPoints(renderer.get(), points.data(), points.size()),
+		"Failed to draw a circle to the renderer.",
+		RENDERER_ERROR
+	);
+}
+
+void PenguinRenderer::draw_filled_ellipse(Vector2<float> center, int radius_x, int radius_y, Colour fill) {
+	// Squares of the radii for the ellipse.
+	int rx2 = radius_x * radius_x;
+	int ry2 = radius_y * radius_y;
+
+	// Initial points and decision variable for region 1.
+	int x = 0;
+	int y = radius_y;
+	int dx = 2 * ry2 * x;
+	int dy = 2 * rx2 * y;
+	int err = ry2 - (rx2 * radius_y) + (rx2 / 4);
+
+	// Vector for points to be rendered onto the screen.
+	std::vector<SDL_FPoint> points;
+
+	// |slope| < 1 (region 1).
+	while (dx < dy) {
+		// Fill horizontal lines for symmetrical points.
+		for (int i = center.x - x; i <= center.x + x; i++) {
+			points.push_back({ (float)i, center.y + y });
+			points.push_back({ (float)i, center.y - y });
+		}
+
+		if (err < 0) {
+			x++;
+			dx += 2 * ry2;
+			err += dx + ry2;
+		}
+		else {
+			x++;
+			y--;
+			dx += 2 * ry2;
+			dy -= 2 * rx2;
+			err += dx - dy + ry2;
+		}
+	}
+
+	err = ry2 * (x + 0.5) * (x + 0.5) + rx2 * (y - 1) * (y - 1) - rx2 * ry2;
+
+	// |slope| >= 1 (region 2).
+	while (y >= 0) {
+		// Fill horizontal lines for symmetrical points.
+		for (int i = center.x - x; i <= center.x + x; i++) {
+			points.push_back({ (float)i, center.y + y });
+			points.push_back({ (float)i, center.y - y });
+		}
+
+		if (err > 0) {
+			y--;
+			dy -= 2 * rx2;
+			err += rx2 - dy;
+		}
+		else {
+			y--;
+			x++;
+			dx += 2 * ry2;
+			dy -= 2 * rx2;
+			err += dx - dy + rx2;
+		}
+	}
+
+	// Draw the filled ellipse.
+	set_colour(fill);
+	Exception::throw_if(
+		!SDL_RenderPoints(renderer.get(), points.data(), points.size()),
+		"Failed to draw a filled ellipse to the renderer.",
+		RENDERER_ERROR
+	);
+}
+
 
 void PenguinRenderer::reset_colour() {
 	set_colour(Colours::BLACK); 

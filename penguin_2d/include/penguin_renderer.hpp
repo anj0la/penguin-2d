@@ -24,6 +24,8 @@ namespace Penguin2D {
 		void draw_filled_rect(Rect2<float> rect, Colour fill = Colours::WHITE);
 		void draw_circle(Vector2<float> center, int radius, Colour outline = Colours::WHITE);
 		void draw_filled_circle(Vector2<float> center, int radius, Colour fill = Colours::WHITE);
+		void draw_ellipse(Vector2<float> center, int radius_x, int radius_y, Colour outline = Colours::WHITE);
+		void draw_filled_ellipse(Vector2<float> center, int radius_x, int radius_y, Colour fill = Colours::WHITE);
 		void present();
 		void set_colour(Colour colour);
 		void reset_colour();

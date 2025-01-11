@@ -91,13 +91,12 @@ public:
         // Create a Rect2 object.
         Rect2<float>rect(Vector2<float>(100.0, 100.0), Vector2<float>(100.0, 100.0));
 
-        // Render a red rect with a white outline onto the screen.
+        // Render a rect with a white outline onto the screen.
         renderer.clear();
-        renderer.draw_rect(rect, Colours::WHITE, Colours::RED);
+        renderer.draw_rect(rect, Colours::WHITE);
         renderer.present();
 
         // TODO: Add your own draw logic.
-
     }
 
     void quit() override {

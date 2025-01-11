@@ -6,7 +6,7 @@ Penguin2D is a lightweight and modern game framework built with C++ and SDL3, de
 Penguin2D provides the following capabilities to game developers:
 
 ### Rendering
-- **2D Rendering**: Render basic shapes like rectangles, circles, lines, and points using the `PenguinRenderer` and `PenguinWindow` classes. These classes manage SDL resources safely with smart pointers, ensuring automatic cleanup.
+- **2D Rendering**: Render basic shapes like rectangles, circles, ellipses, lines, and points using the `PenguinRenderer` and `PenguinWindow` classes. These classes manage SDL resources safely with smart pointers, ensuring automatic cleanup.
 
 ### Game Loop
 - **Customizable Game Loop**:

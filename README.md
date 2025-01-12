@@ -12,8 +12,11 @@ Penguin2D provides the following capabilities to game developers:
 - **Customizable Game Loop**:
   - `init()`: Load assets and initialize game objects.
   - `update(delta_time)`: Core game logic (e.g., movement, collisions).
-  - `draw(delta_time)`: Render objects onto the screen.
+  - `draw(alpha)`: Render objects onto the screen.
   - `quit()`: Clean up resources on exit.
+  - **Experimental Framerate Support**:
+    - Implemented fixed time step for updates, ensuring consistent game logic execution.
+    - Added extrapolated state rendering for smoother visuals, with an `alpha` variable in place for potential linear interpolation in future updates.
 
 ### Game Objects
 - **Vector2**: A utility class for representing 2D positions or directions.

@@ -6,6 +6,7 @@
 #include "penguin_input.hpp"
 #include "penguin_event_handler.hpp"
 #include "penguin_sdl_manager.hpp"
+#include "penguin_timer.hpp"
 #include "vector2.hpp"
 #include "rect2.hpp"
 #include "colour.hpp"
@@ -27,6 +28,7 @@ namespace Penguin2D {
 		PenguinSDLManager sdl_manager; // ORDER MATTERS -> sdl_manager is destructed last (so SDL_quit() is called last)
 		PenguinWindow window;
 		PenguinRenderer renderer;
+		PenguinTimer timer;
 		PenguinEventHandler event_handler;
 		PenguinInput input;
 

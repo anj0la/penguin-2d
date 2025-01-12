@@ -5,7 +5,8 @@ using namespace Penguin2D;
 PenguinGame::PenguinGame()
     : sdl_manager(),                        // SDL is initialized here
     window(Vector2<int>(640.0, 480.0)),     // SDL-dependent objects follow
-    renderer(window) {
+    renderer(window),
+    timer() {
 
     // Add listener for the input to the event handler
     event_handler.add_event_listener([this](const SDL_Event& p_event) {
@@ -24,21 +25,25 @@ void PenguinGame::run() {
     // Initialize the game with your own game values.
     init();
 
-    // PenguinTimer timer();
-
     bool running = true;
 
     // Game loop
     while (running) {
 
-        // timer.
-
         event_handler.poll_events();
 
-        float delta_time = 0.0f; // Placeholder until framerate calculation (i.e., fixed / variable timestemp) is added.
+        timer.update_frame_time();
 
-        update(delta_time);
-        draw(delta_time);
+        while (timer.should_update()) {
+            auto delta_time = timer.get_delta_time();
+            update(delta_time);
+            timer.consume_time();
+
+        }
+
+        double alpha = timer.get_alpha();
+        draw(alpha);
+
 
         if (event_handler.should_quit()) {
             running = false;

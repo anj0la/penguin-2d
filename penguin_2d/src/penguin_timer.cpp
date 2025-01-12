@@ -16,6 +16,8 @@ void PenguinTimer::update_frame_time() {
 void PenguinTimer::consume_time() {
     // Consume a fixed timestep from the accumulator.
     accumulator -= delta_time;
+    // Increment running time.
+    running_time += delta_time;
 }
 
 bool PenguinTimer::should_update() const {
@@ -26,4 +28,7 @@ bool PenguinTimer::should_update() const {
 double PenguinTimer::get_alpha() const {
     // Return the interpolation factor for rendering.
     return accumulator / delta_time;
+}
+double PenguinTimer::get_delta_time() const {
+    return delta_time;
 }

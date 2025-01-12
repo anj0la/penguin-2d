@@ -24,10 +24,14 @@ void PenguinGame::run() {
     // Initialize the game with your own game values.
     init();
 
+    // PenguinTimer timer();
+
     bool running = true;
 
     // Game loop
     while (running) {
+
+        // timer.
 
         event_handler.poll_events();
 

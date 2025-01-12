@@ -125,7 +125,6 @@ int main() {
 ## Roadmap
 ### Planned Features
 - Expand rendering capabilities to include textures and sprites.
-- Add delta time support, allowing frame-independent movement and animations.
 - Eapand the event system by supporting additional SDL3 event types, such as window and display events.
 - Enhanced font management by refactoring the current PenguinText class to be used without needing the text engine.
 - Streamline loading and managing textures, sounds, and other assets.

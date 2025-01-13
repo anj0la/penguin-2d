@@ -50,6 +50,7 @@ void PenguinGame::run() {
         }
 
         timer.update_fps(); // Track the actual FPS.
+        timer.cap_frame_rate(); // If enabled, caps frame rate to target FPS
 
     }
 

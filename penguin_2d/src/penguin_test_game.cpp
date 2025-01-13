@@ -2,6 +2,7 @@
 
 void MyGame::init() {
     // TODO: Add your own initialization logic.
+    timer.set_fps_cap(true);
 }
 
 void MyGame::update(double delta_time) {

@@ -6,6 +6,7 @@ PenguinGame::PenguinGame()
     : sdl_manager(),                        // SDL is initialized here
     window(Vector2<int>(640.0, 480.0)),     // SDL-dependent objects follow
     renderer(window),
+    text_renderer(renderer),
     timer() {
 
     // Add listener for the input to the event handler
@@ -44,7 +45,6 @@ void PenguinGame::run() {
         double alpha = timer.get_alpha();
         draw(alpha);
 
-
         if (event_handler.should_quit()) {
             running = false;
         }
@@ -56,8 +56,8 @@ void PenguinGame::run() {
 
 } // The destructor will clean up the SDL_related resources.
 
-void PenguinGame::update(float delta_time) {}
+void PenguinGame::update(double delta_time) {}
 
-void PenguinGame::draw(float delta_time) {}
+void PenguinGame::draw(double delta_time) {}
 
 void PenguinGame::quit() {}

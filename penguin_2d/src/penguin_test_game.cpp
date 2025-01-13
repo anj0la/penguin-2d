@@ -1,14 +1,20 @@
 #include "penguin_test_game.hpp"
+#include <iostream>
 
 void MyGame::init() {
     // TODO: Add your own initialization logic.
 }
 
-void MyGame::update(float delta_time) {
+void MyGame::update(double delta_time) {
+    elapsed_time += delta_time;
+    if (elapsed_time > 1.0) {
+        std::cout << "One second has passed." << std::endl;
+        elapsed_time = 0.0;
+    }
     // TODO: Add your own update logic.
 }
     
-void MyGame::draw(float delta_time) {
+void MyGame::draw(double delta_time) {
     // Create a rect2 object.
     Rect2<float> rect(Vector2<float>(100.0, 100.0), Vector2<float>(100.0, 100.0));
     Vector2<float> circle1(300.0, 300.0);

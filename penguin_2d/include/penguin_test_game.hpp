@@ -11,9 +11,11 @@ public:
 
 protected:
     void init() override;
-    void update(float delta_time) override;
-    void draw(float delta_time) override;
+    void update(double delta_time) override;
+    void draw(double delta_time) override;
     void quit() override;
+private:
+    double elapsed_time = 0.0;
 };
 
 #endif // PENGUIN_TEST_GAME_HPP

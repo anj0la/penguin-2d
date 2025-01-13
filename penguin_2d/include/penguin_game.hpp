@@ -3,6 +3,7 @@
 
 #include "penguin_window.hpp"
 #include "penguin_renderer.hpp"
+#include "penguin_text_renderer.hpp"
 #include "penguin_input.hpp"
 #include "penguin_event_handler.hpp"
 #include "penguin_sdl_manager.hpp"
@@ -28,13 +29,14 @@ namespace Penguin2D {
 		PenguinSDLManager sdl_manager; // ORDER MATTERS -> sdl_manager is destructed last (so SDL_quit() is called last)
 		PenguinWindow window;
 		PenguinRenderer renderer;
+		PenguinTextRenderer text_renderer;
 		PenguinTimer timer;
 		PenguinEventHandler event_handler;
 		PenguinInput input;
 
 		virtual void init();
-		virtual void update(float delta_time);
-		virtual void draw(float delta_time);
+		virtual void update(double delta_time);
+		virtual void draw(double delta_time);
 		virtual void quit();
 
 	private:

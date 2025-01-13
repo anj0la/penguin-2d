@@ -49,6 +49,8 @@ void PenguinGame::run() {
             running = false;
         }
 
+        timer.update_fps(); // Track the actual FPS.
+
     }
 
     // Clean up game processes (e.g., saving game objects, closing other third-party libraries

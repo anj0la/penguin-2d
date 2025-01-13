@@ -13,6 +13,7 @@ namespace Penguin2D {
 		~PenguinTimer() = default;
 
 		void update_frame_time();
+		void update_fps();
 		void consume_time();
 		bool should_update() const;
 		double get_alpha() const;

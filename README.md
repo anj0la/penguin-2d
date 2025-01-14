@@ -8,7 +8,7 @@ Penguin2D provides the following capabilities to game developers:
 ### Rendering
 - **2D Rendering**: Render basic shapes like rectangles, circles, ellipses, lines, and points using the `PenguinRenderer` and `PenguinWindow` classes. These classes manage SDL resources safely with smart pointers, ensuring automatic cleanup.
 
-### Game Loop
+### Game Loop  
 - **Customizable Game Loop**:
   - `init()`: Load assets and initialize game objects.
   - `update(delta_time)`: Core game logic (e.g., movement, collisions).
@@ -17,6 +17,9 @@ Penguin2D provides the following capabilities to game developers:
   - **Experimental Framerate Support**:
     - Implemented fixed time step for updates, ensuring consistent game logic execution.
     - Added extrapolated state rendering for smoother visuals, with an `alpha` variable in place for potential linear interpolation in future updates.
+  - **FPS Management**:
+    - **Cap FPS**: Limit the maximum frames per second for more predictable performance and reduced hardware strain.
+    - **Get FPS**: Access the current FPS value for debugging, logging, or other development purposes.
 
 ### Game Objects
 - **Vector2**: A utility class for representing 2D positions or directions.

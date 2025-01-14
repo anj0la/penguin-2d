@@ -43,7 +43,14 @@ void PenguinGame::run() {
         }
 
         double alpha = timer.get_alpha();
+
+        // Clear renderer for drawing.
+        renderer.clear();
+
         draw(alpha);
+
+        // Display objects drawn onto renderer.
+        renderer.present();
 
         if (event_handler.should_quit()) {
             running = false;

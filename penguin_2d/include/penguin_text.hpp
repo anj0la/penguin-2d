@@ -18,7 +18,6 @@ namespace Penguin2D {
     public:
         PenguinText(PenguinTextRenderer& text_renderer, const std::string& font_path, const std::string& text_str, float font_size, Colour colour = Colours::WHITE, Vector2<int> position = Vector2<int>(0, 0));
         // PenguinText(PenguinTextRenderer& text_renderer, TTF_Font* font, const std::string& text_str, Colour colour = Colours::WHITE, Vector2<int> position = Vector2<int>(0, 0));
-        void release_text();
         void render_text(Vector2<float> position);
         void set_text_string(const std::string& new_text);
         void set_text_colour(Colour new_colour);

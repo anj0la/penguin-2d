@@ -34,7 +34,7 @@ namespace Penguin2D {
 		// Throws error based on condition
 		inline static void throw_if(bool condition, std::string message, PenguinError error) {
 			if (condition)
-				throw Exception{ message.size() ? std::move(message) : SDL_GetError(), error };
+				throw Exception{ message.size() ? message : SDL_GetError(), error };
 		}
 
 	};

@@ -27,12 +27,6 @@ PenguinText::PenguinText(PenguinTextRenderer& text_renderer, const std::string& 
 
 }
 
-// TEMPORARY FUNCTION to ensure that TTF_Close is called before TTF_Quit. Won't matter once code is refactored.
-void PenguinText::release_text() {
-    text.reset(nullptr);
-}
-
-
 void PenguinText::render_text(Vector2<float> position) {
     Exception::throw_if(
         !TTF_DrawRendererText(text.get(), position.x, position.y),
@@ -56,7 +50,6 @@ void PenguinText::set_text_colour(Colour new_colour) {
         TEXT_ERROR
     );
 }
-
 
 void PenguinText::set_text_position(Vector2<int> position) {
     Exception::throw_if(

@@ -30,7 +30,7 @@ void PenguinTimer::update_fps() {
         frame_count = 0;
         fps_start_time = curr_time;
 
-        std::cout << "FPS: " << fps << std::endl; // FOR DEBUGGING PURPOSES
+        // std::cout << "FPS: " << fps << std::endl; // FOR DEBUGGING PURPOSES
     }
 }
 

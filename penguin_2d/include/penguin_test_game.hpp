@@ -2,9 +2,12 @@
 #define PENGUIN_TEST_GAME_HPP
 
 #include "penguin_game.hpp"
+#include "penguin_text.hpp"
 #include "rect2.hpp"
 
-class MyGame : public Penguin2D::PenguinGame {
+using namespace Penguin2D;
+
+class MyGame : public PenguinGame {
 public:
     MyGame() = default;
     ~MyGame() = default;

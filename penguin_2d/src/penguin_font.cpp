@@ -7,7 +7,7 @@ PenguinFont::PenguinFont(const std::string& font_path, float font_size)
 
 	Exception::throw_if(
 		!font,
-		"The font could not be initialized. Please ensure that the file path exists in the project.",
+		"The font could not be initialized. Please ensure that the file path exists in the project.", // Change to SDL for more info
 		TEXT_ERROR
 	);
 }

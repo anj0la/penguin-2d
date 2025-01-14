@@ -3,7 +3,6 @@
 
 // Used as a reference to build the exception class: https://github.com/aardhyn/sdl3-template-project/blob/main/include/exception.h
 
-#include <SDL3/SDL_error.h>
 #include <exception>
 #include <string>
 #include <utility>
@@ -25,8 +24,8 @@ namespace Penguin2D {
 		std::string message; // Update message as we expect a string, but we are taking in a const char*
 
 	public:
-		Exception(std::string message, PenguinError error) : message{ std::move(message) }, error_val{ error } {}
-		explicit Exception(std::string message) : message{ std::move(message) }, error_val{ UNKNOWN_ERROR } {}
+		Exception(std::string message, PenguinError error) : message{ message }, error_val{ error } {}
+		explicit Exception(std::string message) : message{ message }, error_val{ UNKNOWN_ERROR } {}
 
 		// Return value of the function should not be ignored
 		[[nodiscard]] const char* what() const noexcept override { return message.c_str(); }
@@ -34,7 +33,7 @@ namespace Penguin2D {
 		// Throws error based on condition
 		inline static void throw_if(bool condition, std::string message, PenguinError error) {
 			if (condition)
-				throw Exception{ message.size() ? message : SDL_GetError(), error };
+				throw Exception{ message, error };
 		}
 
 	};

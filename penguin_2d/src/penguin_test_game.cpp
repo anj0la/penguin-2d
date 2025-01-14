@@ -1,4 +1,5 @@
 #include "penguin_test_game.hpp"
+#include <filesystem>
 
 void MyGame::init() {
     // TODO: Add your own initialization logic.
@@ -20,7 +21,10 @@ void MyGame::draw(double delta_time) {
     Vector2<float> circle1(300.0, 300.0);
     Vector2<float> circle2(450.0, 400.0);
 
-    // PenguinText text(text_renderer, "C:/Users/anjol/source/repos/penguin_2d/penguin_2d/src/pixelify_sans_regular.ttf", "Hello World!", 24.0f);
+    if (std::filesystem::exists("C:/Users/anjol/source/repos/penguin_2d/penguin_2d/pixelify_sans_regular.ttf")) {
+        std::cout << "It exists." << std::endl;
+    }
+    PenguinText text(text_renderer, "C:/Users/anjol/source/repos/penguin_2d/penguin_2d/pixelify_sans_regular.ttf.ttf", "Hello World!", 24.0f);
 
     //text.render_text(Vector2<float>(300.0, 20.0));
 

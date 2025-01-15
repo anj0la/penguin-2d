@@ -18,8 +18,8 @@ Penguin2D provides the following capabilities to game developers:
     - Implemented fixed time step for updates, ensuring consistent game logic execution.
     - Added extrapolated state rendering for smoother visuals, with an `alpha` variable in place for potential linear interpolation in future updates.
   - **FPS Management**:
-    - **Cap FPS**: Limit the maximum frames per second for more predictable performance and reduced hardware strain.
-    - **Get FPS**: Access the current FPS value for debugging, logging, or other development purposes.
+    - `set_fps_cap`: Limit the maximum frames per second for more predictable performance and reduced hardware strain.
+    - `get_fps`: Access the current FPS value for debugging, logging, or other development purposes.
 
 ### Game Objects
 - **Vector2**: A utility class for representing 2D positions or directions.
@@ -33,9 +33,9 @@ Penguin2D provides the following capabilities to game developers:
 - **Event System**:
   - Built with callback functions, allowing modular handling of different types of events. Currently supports input events, with the framework designed to support other event types (e.g., window events, display events) in future updates.
 
-### Fonts (Experimental)
+### Fonts
 - **Font Rendering**:
-  - Integrates the SDL_ttf library for basic text rendering via `PenguinFont` and `PenguinText`.
+  - Integrates the SDL_ttf library for basic text rendering via `PenguinText`.
 
 ### Error Handling
 - **Custom Exception Class**:
@@ -43,7 +43,6 @@ Penguin2D provides the following capabilities to game developers:
 
 ## Current Limitations
 - Only input events are fully implemented in the event-handling system; other event types will be added in future iterations.
-- Font / text management needs reworking to fit within the game loop; this may require having some kind of system for managing game content.
 
 ## Getting Started
 ### Prerequisites
@@ -65,7 +64,8 @@ cd penguin2d
 
 3. Build the framework using CMake:
 ```
-mkdir build && cd build  
+mkdir build
+cd build  
 cmake ..  
 make
 ```
@@ -98,9 +98,7 @@ public:
         Rect2<float>rect(Vector2<float>(100.0, 100.0), Vector2<float>(100.0, 100.0));
 
         // Render a rect with a white outline onto the screen.
-        renderer.clear();
         renderer.draw_rect(rect, Colours::WHITE);
-        renderer.present();
 
         // TODO: Add your own draw logic.
     }
@@ -129,9 +127,7 @@ int main() {
 ### Planned Features
 - Expand rendering capabilities to include textures and sprites.
 - Eapand the event system by supporting additional SDL3 event types, such as window and display events.
-- Enhanced font management by refactoring the current PenguinText class to be used without needing the text engine.
 - Streamline loading and managing textures, sounds, and other assets.
 - Simplify game development by eliminating the need to modify the main function when deriving from PenguinGame, streamlining the setup process
-- Add support for Dear ImGui to enable in-game development tools such as debugging overlays and real-time property editing.
 - Add mouse and joystick input event handling to support a wider range of input devices.
-- Provide more utility classes and tools to streamline 2D game development.
+- Potential support for Dear ImGui to enable in-game development tools such as debugging overlays and real-time property editing.

@@ -11,12 +11,19 @@ namespace Penguin2D {
 
             Exception::throw_if(
                     !SDL_Init(SDL_INIT_VIDEO),
-                    "Could not initialize SDL3.",
+                    "Failed to initialize SDL3.",
                     INIT_ERROR
+            );
+
+            Exception::throw_if(
+                !TTF_Init(),
+                "Failed to initialize SDL_TTF.",
+                INIT_ERROR
             );
         }
 
         ~PenguinSDLManager() {
+            TTF_Quit();
             SDL_Quit();
         }
 

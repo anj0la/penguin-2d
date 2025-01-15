@@ -9,7 +9,7 @@ using namespace Penguin2D;
 
 class MyGame : public PenguinGame {
 public:
-    MyGame() = default;
+    MyGame() : text(text_renderer, "C:/Users/anjol/source/repos/penguin_2d/penguin_2d/fonts/pixelify_sans_regular.ttf") {}
     ~MyGame() = default;
 
 protected:
@@ -19,6 +19,7 @@ protected:
     void quit() override;
 private:
     double elapsed_time = 0.0;
+    PenguinText text;
 };
 
 #endif // PENGUIN_TEST_GAME_HPP

@@ -23,9 +23,9 @@ namespace Penguin2D {
         void set_text_colour(Colour new_colour);
         void set_text_position(Vector2<int> position);
 
+        PenguinFont font;
     private:
         std::unique_ptr<TTF_Text, void(*)(TTF_Text*)> text;
-        PenguinFont font;
     };
 
 }

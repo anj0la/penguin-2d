@@ -8,23 +8,14 @@ void MyGame::init() {
 }
 
 void MyGame::update(double delta_time) {
-    elapsed_time += delta_time;
-    if (elapsed_time > 1.0) {
-        //std::cout << "One second has passed." << std::endl;
-        elapsed_time = 0.0;
-    }
     // TODO: Add your own update logic.
 }
     
-void MyGame::draw(double delta_time) {
-    // Create a rect2 object.
+void MyGame::draw(double alpha) {
     Rect2<float> rect(Vector2<float>(100.0, 100.0), Vector2<float>(100.0, 100.0));
     Vector2<float> circle1(300.0, 300.0);
     Vector2<float> circle2(450.0, 400.0);
 
-    // Creating and deleting a text object everytime you draw isn't really a good idea.
-    // PenguinText text(text_renderer, "C:/Users/anjol/source/repos/penguin_2d/penguin_2d/fonts/pixelify_sans_regular.ttf", "Hello World!", 24.0f);
-    // text.set_text_string("Anjola");
     text.render_text(Vector2<float>(300.0, 20.0));
 
     // Render a red rect with a white outline onto the screen.

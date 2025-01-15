@@ -15,7 +15,7 @@ public:
 protected:
     void init() override;
     void update(double delta_time) override;
-    void draw(double delta_time) override;
+    void draw(double alpha) override;
     void quit() override;
 private:
     double elapsed_time = 0.0;

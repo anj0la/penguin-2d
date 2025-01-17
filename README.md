@@ -130,11 +130,13 @@ int main() {
 
 ## Roadmap
 ### Planned Features
+- Transition SDL acquisition from local files to a GitHub-based approach.
 - Reorganize the project structure into the following folders:
   - **core**: Essential structures and systems (e.g., `PenguinWindow`, `PenguinRenderer`, `PenguinTimer`, `PenguinGame`, `PenguinTextRenderer`, `PenguinEventHandler`, `PenguinInput`, and `PenguinAudio` (planned)).
-  - **rendering**: Structures related to rendering or game objects (e.g., `PenguinSprite`, `PenguinText`, `PenguinFont`, `PenguinEntity`).
+  - **rendering**: Structures related to rendering (e.g., `PenguinSprite`, `PenguinText`, `PenguinFont`).
+  - **entities**: Strcutures related to game objects (e.g., `PenguinEntity`, `PenguinTransformable`, `PenguinDrawable`).
   - **common**: General utility functions and helpers.
-- Transition SDL acquisition from local files to a GitHub-based approach.
+
 - Add and test `PenguinSprite` functionality before implementing audio/sounds.
 - Develop a simple game, "Flappy Penguin," as a proof of concept for the framework, including support for game objects such as `PenguinTransformable` and `PenguinDrawable`.
 - Expand rendering capabilities to include tiling for sprites.
@@ -143,7 +145,6 @@ int main() {
 - Simplify game development by eliminating the need to modify the main function when deriving from PenguinGame, streamlining the setup process.
 - Add mouse and joystick input event handling to support a wider range of input devices.
 - Potential support for Dear ImGui to enable in-game development tools such as debugging overlays and real-time property editing.
-- 
 
 ## License
 

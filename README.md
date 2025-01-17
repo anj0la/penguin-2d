@@ -7,8 +7,14 @@ Penguin2D provides the following capabilities to game developers:
 
 ### Rendering
 - **2D Rendering**: Render basic shapes like rectangles, circles, ellipses, lines, and points using the `PenguinRenderer` and `PenguinWindow` classes. These classes manage SDL resources safely with smart pointers, ensuring automatic cleanup.
+- **Sprite Rendering**:
+  - `PenguinSprite` stores an SDL texture as a `std::unique_ptr`. It allows developers to retrieve the sprite's width and height.
+  - **Experimental Functions** in `PenguinRenderer`:
+    - `draw_sprite(sprite, position)`: Draws the full sprite at a specific position on the screen.
+    - `draw_sprite_region(sprite, clip_region, position)`: Draws a region of the sprite onto the target.
+    > **Note**: These functions are currently untested and considered experimental.
 
-### Game Loop  
+### Game Loop
 - **Customizable Game Loop**:
   - `init()`: Load assets and initialize game objects.
   - `update(delta_time)`: Core game logic (e.g., movement, collisions).
@@ -43,8 +49,9 @@ Penguin2D provides the following capabilities to game developers:
 
 ## Current Limitations
 - Only input events are fully implemented in the event-handling system; other event types will be added in future iterations.
+- Sprite rendering functions are untested and experimental.
 
-## Getting Started
+## Getting Started (Outdated)
 ### Prerequisites
 - A C++ compiler supporting C++17 or later.
 - <a href="https://github.com/libsdl-org/SDL">SDL3</a> and <a href="https://github.com/libsdl-org/SDL_ttf">SDL_ttf</a> libraries installed on your system.
@@ -53,23 +60,23 @@ Penguin2D provides the following capabilities to game developers:
 ### Building the Framework
 1. Clone the repository:
 
-```
+```bash
 git clone https://github.com/yourusername/penguin2d.git
 ```
 
 2. Navigate to the project directory:
-```
+```bash
 cd penguin2d
 ```
 
 3. Build the framework using CMake:
-```
+```bash
 mkdir build
 cd build  
 cmake ..  
 make
 ```
- > **Note**: if using Visual Studio, the framework will be built automatically when you run the project.
+ > **Note**: If using Visual Studio, the framework will be built automatically when you run the project.
 
 ## Example Usage
 
@@ -95,7 +102,7 @@ public:
 
     void draw() override {
         // Create a Rect2 object.
-        Rect2<float>rect(Vector2<float>(100.0, 100.0), Vector2<float>(100.0, 100.0));
+        Rect2<float> rect(Vector2<float>(100.0, 100.0), Vector2<float>(100.0, 100.0));
 
         // Render a rect with a white outline onto the screen.
         renderer.draw_rect(rect, Colours::WHITE);
@@ -111,8 +118,6 @@ public:
 
 ### Run the Game
 
-Don't forget to add your defined header in the penguin_2d.hpp / or penguin_2d.cpp file!
-
 ```cpp
 #include "game.hpp"
 
@@ -125,9 +130,21 @@ int main() {
 
 ## Roadmap
 ### Planned Features
-- Expand rendering capabilities to include textures and sprites.
-- Eapand the event system by supporting additional SDL3 event types, such as window and display events.
+- Reorganize the project structure into the following folders:
+  - **core**: Essential structures and systems (e.g., `PenguinWindow`, `PenguinRenderer`, `PenguinTimer`, `PenguinGame`, `PenguinTextRenderer`, `PenguinEventHandler`, `PenguinInput`, and `PenguinAudio` (planned)).
+  - **rendering**: Structures related to rendering or game objects (e.g., `PenguinSprite`, `PenguinText`, `PenguinFont`, `PenguinEntity`).
+  - **common**: General utility functions and helpers.
+- Transition SDL acquisition from local files to a GitHub-based approach.
+- Add and test `PenguinSprite` functionality before implementing audio/sounds.
+- Develop a simple game, "Flappy Penguin," as a proof of concept for the framework, including support for game objects such as `PenguinTransformable` and `PenguinDrawable`.
+- Expand rendering capabilities to include tiling for sprites.
+- Expand the event system by supporting additional SDL3 event types, such as window and display events.
 - Streamline loading and managing textures, sounds, and other assets.
-- Simplify game development by eliminating the need to modify the main function when deriving from PenguinGame, streamlining the setup process
+- Simplify game development by eliminating the need to modify the main function when deriving from PenguinGame, streamlining the setup process.
 - Add mouse and joystick input event handling to support a wider range of input devices.
 - Potential support for Dear ImGui to enable in-game development tools such as debugging overlays and real-time property editing.
+- 
+
+## License
+
+Currently, Penguin2D is a personal project in active development and is not yet open source. All rights to the source code are retained by me. This means that while you're welcome to explore the project and use it as inspiration, you are not permitted to reproduce, distribute, or create derivative works based on the code.

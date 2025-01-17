@@ -15,11 +15,12 @@ namespace Penguin2D {
 		PenguinSprite(PenguinRenderer& renderer, const std::string& path);
 		~PenguinSprite() = default;
 
-		void get_sprite_width();
-		void get_sprite_height();
+		int get_sprite_width();
+		int get_sprite_height();
+		SDL_Texture* get_sprite_ptr();
 
 	private:
-		std::unique_ptr < SDL_Texture, void(*)(SDL_Texture*) sprite;
+		std::unique_ptr < SDL_Texture, void(*)(SDL_Texture*)> sprite;
 	};
 }
 

@@ -289,6 +289,24 @@ void PenguinRenderer::draw_filled_ellipse(Vector2<float> center, int radius_x, i
 	);
 }
 
+void PenguinRenderer::draw_sprite(PenguinSprite sprite, Rect2<float>position) {
+	auto sdl_position = (SDL_FRect)position;
+	Exception::throw_if(
+		!SDL_RenderTexture(renderer.get(), sprite.get_sprite_ptr(), NULL, &sdl_position),
+		"Failed to render the sprite to the screen.",
+		RENDERER_ERROR
+	);
+}
+
+void PenguinRenderer::draw_sprite_region(PenguinSprite sprite, Rect2<float> clip_region, Rect2<float>position) {
+	auto sdl_clip_region = (SDL_FRect)clip_region;
+	auto sdl_position = (SDL_FRect)position;
+	Exception::throw_if(
+		!SDL_RenderTexture(renderer.get(), sprite.get_sprite_ptr(), &sdl_clip_region, &sdl_position),
+		"Failed to render the sprite region to the screen.",
+		RENDERER_ERROR
+	);
+}
 
 void PenguinRenderer::reset_colour() {
 	set_colour(Colours::BLACK); 
@@ -302,7 +320,7 @@ void PenguinRenderer::draw_horizontal_line(float x1, float x2, float y, Colour c
 	set_colour(colour);
 	Exception::throw_if(
 		!SDL_RenderLine(renderer.get(), x1, y, x2, y),
-		"Failed to render a line to the screen",
+		"Failed to render a line to the screen.",
 		RENDERER_ERROR
 	);
 }

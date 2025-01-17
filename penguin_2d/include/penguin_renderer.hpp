@@ -2,6 +2,7 @@
 #define PENGUIN_RENDERER_HPP
 
 #include "penguin_window.hpp"
+#include "penguin_sprite.hpp"
 #include "colour.hpp"
 #include "rect2.hpp"
 #include "exception.hpp"
@@ -26,6 +27,8 @@ namespace Penguin2D {
 		void draw_filled_circle(Vector2<float> center, int radius, Colour fill = Colours::WHITE);
 		void draw_ellipse(Vector2<float> center, int radius_x, int radius_y, Colour outline = Colours::WHITE);
 		void draw_filled_ellipse(Vector2<float> center, int radius_x, int radius_y, Colour fill = Colours::WHITE);
+		void draw_sprite(PenguinSprite sprite, Rect2<float>position);
+		void draw_sprite_region(PenguinSprite sprite, Rect2<float> clip_region, Rect2<float>position);
 		void present();
 		void set_colour(Colour colour);
 		void reset_colour();

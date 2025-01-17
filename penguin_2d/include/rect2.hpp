@@ -48,6 +48,7 @@ struct Rect2 final {
 	inline operator SDL_FRect() const {
 		return SDL_FRect{ (float)position.x, (float)position.y, (float)size.x, (float)size.y };
 	}
+
 };
 
 #endif // RECT2_HPP

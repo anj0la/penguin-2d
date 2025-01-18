@@ -16,7 +16,7 @@ void PenguinInput::handle_input_event(const SDL_Event& p_event) {
             INPUT_ERROR
         );
     }
-    else if (p_event.type == SDL_EVENT_KEY_DOWN) {
+    else if (p_event.type == SDL_EVENT_KEY_UP) {
         auto it = key_map.find(p_event.key.key); // Maps SDL key to PenguinKey
         if (it != key_map.end()) {
             key_pressed_states[it->second] = false; // The key was released

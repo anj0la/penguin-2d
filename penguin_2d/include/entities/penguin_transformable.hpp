@@ -10,8 +10,8 @@ namespace Penguin2D {
 		virtual PenguinTransformable(float x = 0.0f, float y = 0.0f, float rot = 0.0f) 
         : position(Vector2<float>(x, y)), rotation(rot) {}
 
-        virtual void init() override {};
-        virtual void update(float delta_time) override {};
+        virtual void init() override {}
+        virtual void update(float delta_time) override {}
     protected:
         Vector2<float> position;
         float rotation; 

@@ -427,8 +427,12 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-# Vendor (Third-Party Libraries)
-vendor/
+# External (Third-Party Libraries)
+external/
 
-# Out Files
+# Out
 out/
+
+# vcpkg 
+vcpkg.json
+vcpkg-configuration.json

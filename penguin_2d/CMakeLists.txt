@@ -4,16 +4,28 @@
 cmake_minimum_required (VERSION 3.20)
 
 # Add the executable first.
-add_executable (penguin_2d "src/penguin_2d.cpp" "src/penguin_2d.cpp" "src/penguin_window.cpp" "src/penguin_renderer.cpp" "src/penguin_event_handler.cpp" "src/penguin_input.cpp" "src/penguin_text_renderer.cpp" "src/penguin_font.cpp" "src/penguin_text.cpp" "include/penguin_game.hpp" "src/penguin_game.cpp" "src/penguin_test_game.cpp" "src/penguin_timer.cpp" "src/penguin_sprite.cpp")
+add_executable (penguin_2d "src/penguin_2d.cpp" "src/core/penguin_renderer.cpp")
 
-# TODO: Add tests and install targets if needed.
-target_include_directories(penguin_2d PRIVATE ${PENGUIN_INCLUDE_DIR})
+# Target all include files
+target_include_directories(penguin_2d PRIVATE "${PENGUIN_INCLUDE_DIR}")
+target_include_directories(penguin_2d PRIVATE "${PENGUIN_INCLUDE_DIR}/common")
+target_include_directories(penguin_2d PRIVATE "${PENGUIN_INCLUDE_DIR}/core")
+target_include_directories(penguin_2d PRIVATE "${PENGUIN_INCLUDE_DIR}/entities")
+target_include_directories(penguin_2d PRIVATE "${PENGUIN_INCLUDE_DIR}/rendering")
+
 target_include_directories(penguin_2d PRIVATE ${SDL3_TTF_INCLUDE_DIR})
+
+# Link to dependices for SDL_image
+# target_link_libraries(penguin_2d PRIVATE zlib::zlib)
+#target_link_libraries(penguin_2d PRIVATE libpng::libpng)
+#target_link_libraries(penguin_2d PRIVATE libjpeg::libjpeg)
+
 
 # Link to the actual SDL3 library.
 target_link_libraries(penguin_2d PRIVATE SDL3::SDL3)
 target_link_libraries(penguin_2d PRIVATE SDL3_ttf::SDL3_ttf)
 target_link_libraries(penguin_2d PRIVATE SDL3_image::SDL3_image)
+
 # Verify SDL3_ttf include path
 #get_target_property(SDL3_TTF_INCLUDE SDL3_ttf::SDL3_ttf INTERFACE_INCLUDE_DIRECTORIES)
 #message(STATUS "SDL3_ttf Include: ${SDL3_TTF_INCLUDE}")

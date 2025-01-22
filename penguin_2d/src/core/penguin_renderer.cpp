@@ -289,25 +289,6 @@ void PenguinRenderer::draw_filled_ellipse(Vector2<float> center, int radius_x, i
 	);
 }
 
-void PenguinRenderer::draw_sprite(PenguinSprite sprite, Rect2<float>position) {
-	auto sdl_position = (SDL_FRect)position;
-	Exception::throw_if(
-		!SDL_RenderTexture(renderer.get(), sprite.get_sprite_ptr(), NULL, &sdl_position),
-		"Failed to render the sprite to the screen.",
-		RENDERER_ERROR
-	);
-}
-
-void PenguinRenderer::draw_sprite_region(PenguinSprite sprite, Rect2<float> clip_region, Rect2<float>position) {
-	auto sdl_clip_region = (SDL_FRect)clip_region;
-	auto sdl_position = (SDL_FRect)position;
-	Exception::throw_if(
-		!SDL_RenderTexture(renderer.get(), sprite.get_sprite_ptr(), &sdl_clip_region, &sdl_position),
-		"Failed to render the sprite region to the screen.",
-		RENDERER_ERROR
-	);
-}
-
 void PenguinRenderer::reset_colour() {
 	set_colour(Colours::BLACK); 
 }

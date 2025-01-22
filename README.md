@@ -9,10 +9,9 @@ Penguin2D provides the following capabilities to game developers:
 - **2D Rendering**: Render basic shapes like rectangles, circles, ellipses, lines, and points using the `PenguinRenderer` and `PenguinWindow` classes. These classes manage SDL resources safely with smart pointers, ensuring automatic cleanup.
 - **Sprite Rendering**:
   - `PenguinSprite` stores an SDL texture as a `std::unique_ptr`. It allows developers to retrieve the sprite's width and height.
-  - **Experimental Functions** in `PenguinRenderer`:
-    - `draw_sprite(sprite, position)`: Draws the full sprite at a specific position on the screen.
-    - `draw_sprite_region(sprite, clip_region, position)`: Draws a region of the sprite onto the target.
-    > **Note**: These functions are currently untested and considered experimental.
+  - `draw_sprite(position)`: Draws the full sprite at a specific position on the screen.
+  - `draw_sprite_region(clip_region, position)`: Draws a region of the sprite onto the target.
+  > **Note**: These functions are currently untested and considered experimental.
 
 ### Game Loop
 - **Customizable Game Loop**:
@@ -51,10 +50,9 @@ Penguin2D provides the following capabilities to game developers:
 - Only input events are fully implemented in the event-handling system; other event types will be added in future iterations.
 - Sprite rendering functions are untested and experimental.
 
-## Getting Started (Outdated)
+## Getting Started
 ### Prerequisites
-- A C++ compiler supporting C++17 or later.
-- <a href="https://github.com/libsdl-org/SDL">SDL3</a> and <a href="https://github.com/libsdl-org/SDL_ttf">SDL_ttf</a> libraries installed on your system.
+- A C++ compiler supporting C++20 or later.
 - CMake for building the project.
 
 ### Building the Framework
@@ -96,11 +94,11 @@ public:
         // TODO: Add your own initialization logic.
     }
 
-    void update() override {
+    void update(float delta_time) override {
         // TODO: Add your own update logic.
     }
 
-    void draw() override {
+    void draw(float alpha) override {
         // Create a Rect2 object.
         Rect2<float> rect(Vector2<float>(100.0, 100.0), Vector2<float>(100.0, 100.0));
 
@@ -120,8 +118,9 @@ public:
 
 ```cpp
 #include "game.hpp"
+#include "penguin_main.hpp"
 
-int main() {
+int PenguinMain(int argc, char* argv[]) {
     MyGame game;
     game.run();
     return 0;
@@ -130,15 +129,9 @@ int main() {
 
 ## Roadmap
 ### Planned Features
-- Transition SDL acquisition from local files to a GitHub-based approach.
-- Reorganize the project structure into the following folders:
-  - **core**: Essential structures and systems (e.g., `PenguinWindow`, `PenguinRenderer`, `PenguinTimer`, `PenguinGame`, `PenguinTextRenderer`, `PenguinEventHandler`, `PenguinInput`, and `PenguinAudio` (planned)).
-  - **rendering**: Structures related to rendering (e.g., `PenguinSprite`, `PenguinText`, `PenguinFont`).
-  - **entities**: Strcutures related to game objects (e.g., `PenguinEntity`, `PenguinTransformable`, `PenguinDrawable`).
-  - **common**: General utility functions and helpers.
-
-- Add and test `PenguinSprite` functionality before implementing audio/sounds.
+- Implement the folllowing examples on using the framework: rendering shapes, text and sprites.
 - Develop a simple game, "Flappy Penguin," as a proof of concept for the framework, including support for game objects such as `PenguinTransformable` and `PenguinDrawable`.
+- Implement audio/sounds.
 - Expand rendering capabilities to include tiling for sprites.
 - Expand the event system by supporting additional SDL3 event types, such as window and display events.
 - Streamline loading and managing textures, sounds, and other assets.

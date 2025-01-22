@@ -3,17 +3,17 @@
 #
 cmake_minimum_required (VERSION 3.20)
 
-# Use C++ 20 instead of C++ 23 (too new)
+# Define the project, version and languages support
+project(Penguin2D VERSION 0.1.0 LANGUAGES CXX)
+
+# Use C++ 20
 set(CMAKE_CXX_STANDARD 20)
 
-# Define a variable for the include directory.
+# Define variables for ease to access include directorie
 set(PENGUIN_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/penguin_2d/include")
 set(SDL3_TTF_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/external/SDL3_ttf/include")
 
-# Define project.
-project ("penguin_2d" VERSION 0.0.1)
-
-# Include sub-projects.
+# Include sub-directories needed for Penguin2D to work
 add_subdirectory ("penguin_2d")
 add_subdirectory ("external/SDL3")
 add_subdirectory ("external/SDL3_ttf")

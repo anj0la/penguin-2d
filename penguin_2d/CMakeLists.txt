@@ -3,31 +3,35 @@
 #
 cmake_minimum_required (VERSION 3.20)
 
+# Define the Penguin2D library
+add_library(Penguin2D STATIC
+    src/core/penguin_window.cpp
+    src/core/penguin_renderer.cpp
+    src/core/penguin_text_renderer.cpp
+    src/core/penguin_game.cpp
+    src/core/penguin_timer.cpp
+    src/core/penguin_event_handler.cpp
+    src/core/penguin_input.cpp
+    src/rendering/penguin_font.cpp
+    src/rendering/penguin_text.cpp
+    src/rendering/penguin_sprite.cpp
+)
 
+# Include directories for the library 
+target_include_directories(Penguin2D PUBLIC
+    "${PENGUIN_INCLUDE_DIR}/include"
+    "${PENGUIN_INCLUDE_DIR}/include/common"
+    "${PENGUIN_INCLUDE_DIR}/include/core"
+    "${PENGUIN_INCLUDE_DIR}/include/entities"
+    "${PENGUIN_INCLUDE_DIR}/include/rendering"
+)
 
-# Add the executable first.
-add_executable (penguin_2d "src/penguin_2d.cpp" "include/core/penguin_main.hpp" "include/core/penguin_game.hpp" "src/penguin_test_game.cpp" "src/core/penguin_window.cpp" "src/core/penguin_renderer.cpp" "src/core/penguin_text_renderer.cpp" "src/core/penguin_game.cpp" "src/core/penguin_timer.cpp" "src/core/penguin_event_handler.cpp" "src/core/penguin_input.cpp" "src/rendering/penguin_font.cpp" "src/rendering/penguin_text.cpp" "src/rendering/penguin_sprite.cpp")
+# Include private directories for the library
+target_include_directories(Penguin2D PRIVATE ${SDL3_TTF_INCLUDE_DIR})
 
-# Target all include files
-target_include_directories(penguin_2d PRIVATE "${PENGUIN_INCLUDE_DIR}")
-target_include_directories(penguin_2d PRIVATE "${PENGUIN_INCLUDE_DIR}/common")
-target_include_directories(penguin_2d PRIVATE "${PENGUIN_INCLUDE_DIR}/core")
-target_include_directories(penguin_2d PRIVATE "${PENGUIN_INCLUDE_DIR}/entities")
-target_include_directories(penguin_2d PRIVATE "${PENGUIN_INCLUDE_DIR}/rendering")
-
-target_include_directories(penguin_2d PRIVATE ${SDL3_TTF_INCLUDE_DIR})
-
-# Link to dependices for SDL_image
-# target_link_libraries(penguin_2d PRIVATE zlib::zlib)
-#target_link_libraries(penguin_2d PRIVATE libpng::libpng)
-#target_link_libraries(penguin_2d PRIVATE libjpeg::libjpeg)
-
-
-# Link to the actual SDL3 library.
-target_link_libraries(penguin_2d PRIVATE SDL3::SDL3)
-target_link_libraries(penguin_2d PRIVATE SDL3_ttf::SDL3_ttf)
-target_link_libraries(penguin_2d PRIVATE SDL3_image::SDL3_image)
-
-# Verify SDL3_ttf include path
-#get_target_property(SDL3_TTF_INCLUDE SDL3_ttf::SDL3_ttf INTERFACE_INCLUDE_DIRECTORIES)
-#message(STATUS "SDL3_ttf Include: ${SDL3_TTF_INCLUDE}")
+# Link dependencies for the library
+target_link_libraries(Penguin2D PRIVATE
+    SDL3::SDL3
+    SDL3_ttf::SDL3_ttf
+    SDL3_image::SDL3_image
+)

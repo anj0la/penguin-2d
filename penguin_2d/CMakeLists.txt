@@ -3,8 +3,10 @@
 #
 cmake_minimum_required (VERSION 3.20)
 
+
+
 # Add the executable first.
-add_executable (penguin_2d "src/penguin_2d.cpp" "src/core/penguin_renderer.cpp")
+add_executable (penguin_2d "src/penguin_2d.cpp" "include/core/penguin_main.hpp" "include/core/penguin_game.hpp" "src/penguin_test_game.cpp" "src/core/penguin_window.cpp" "src/core/penguin_renderer.cpp" "src/core/penguin_text_renderer.cpp" "src/core/penguin_game.cpp" "src/core/penguin_timer.cpp" "src/core/penguin_event_handler.cpp" "src/core/penguin_input.cpp" "src/rendering/penguin_font.cpp" "src/rendering/penguin_text.cpp" "src/rendering/penguin_sprite.cpp")
 
 # Target all include files
 target_include_directories(penguin_2d PRIVATE "${PENGUIN_INCLUDE_DIR}")

@@ -20,19 +20,28 @@ namespace Penguin2D {
 
 	class PenguinGame {
 	public:
-		PenguinGame();
+		PenguinGame(); // No default constructor
+		// We need the window title, we need the window size, and a default param for the window
+		// PenguinGame(const std::string& game_title, Vector2<int> window_size);
+		// PenguinGame(const std::string& game_title, int width, int height) : PenguinGame(game_title, Vector2<int>(width, height)) {}
+		// PenguinGame(int width, int height) : PenguinGame("", Vector2<int>(width, height)) {}
+		// explicit PenguinGame(Vector2<int> window_size) : PenguinGame("", window_size) {}
+		// 
 		~PenguinGame() = default;
 
 		void run();
 
 	protected:
-		PenguinSDLManager sdl_manager; // ORDER MATTERS -> sdl_manager is destructed last (so SDL_quit() is called last)
+		PenguinSDLManager sdl_manager; // ORDER MATTERS -> sdl_manager is destructed last (so SDL_Quit() is called last)
 		PenguinWindow window;
 		PenguinRenderer renderer;
 		PenguinTextRenderer text_renderer;
 		PenguinTimer timer;
 		PenguinEventHandler event_handler;
 		PenguinInput input;
+
+		// int width;
+		// int height;
 
 		virtual void init();
 		virtual void update(double delta_time);

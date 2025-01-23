@@ -1,15 +1,14 @@
-#ifndef PENGUIN_TEST_GAME_HPP
-#define PENGUIN_TEST_GAME_HPP
+#ifndef RENDER_SHAPES_HPP
+#define RENDER_SHAPES_HPP
 
 #include "penguin_game.hpp"
-#include "penguin_text.hpp"
 #include "rect2.hpp"
 
 using namespace Penguin2D;
 
 class MyGame : public PenguinGame {
 public:
-    MyGame() : text(text_renderer, "C:/Users/anjol/source/repos/penguin_2d/penguin_2d/fonts/pixelify_sans_regular.ttf") {}
+    MyGame() : rect(Vector2<float>(100.0, 100.0)) {}
     ~MyGame() = default;
 
 protected:
@@ -18,8 +17,7 @@ protected:
     void draw(double alpha) override;
     void quit() override;
 private:
-    double elapsed_time = 0.0;
-    PenguinText text;
+    Rect2<float> rect;
 };
 
-#endif // PENGUIN_TEST_GAME_HPP
+#endif // RENDER_SHAPES_HPP

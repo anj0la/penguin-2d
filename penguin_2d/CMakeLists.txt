@@ -19,15 +19,14 @@ add_library(Penguin2D STATIC
 
 # Include directories for the library 
 target_include_directories(Penguin2D PUBLIC
-    "${PENGUIN_INCLUDE_DIR}/include"
-    "${PENGUIN_INCLUDE_DIR}/include/common"
-    "${PENGUIN_INCLUDE_DIR}/include/core"
-    "${PENGUIN_INCLUDE_DIR}/include/entities"
-    "${PENGUIN_INCLUDE_DIR}/include/rendering"
+    "${PENGUIN_INCLUDE_DIR}/common"
+    "${PENGUIN_INCLUDE_DIR}/core"
+    "${PENGUIN_INCLUDE_DIR}/entities"
+    "${PENGUIN_INCLUDE_DIR}/rendering"
+    "${SDL3_INCLUDE_DIRS}"  # Add SDL3 include directories to PUBLIC
+    "${SDL3_TTF_INCLUDE_DIR}" # Add SDL3_ttf include directories to PUBLIC
+    "${SDL3_IMAGE_INCLUDE_DIR}" # Add SDL3_image include directories to PUBLIC
 )
-
-# Include private directories for the library
-target_include_directories(Penguin2D PRIVATE ${SDL3_TTF_INCLUDE_DIR})
 
 # Link dependencies for the library
 target_link_libraries(Penguin2D PRIVATE
@@ -35,3 +34,6 @@ target_link_libraries(Penguin2D PRIVATE
     SDL3_ttf::SDL3_ttf
     SDL3_image::SDL3_image
 )
+
+# Include subdirectories to compile examples of using Penguin2D
+add_subdirectory(examples/render_shapes)

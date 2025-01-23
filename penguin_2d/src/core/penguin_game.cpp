@@ -13,6 +13,9 @@ PenguinGame::PenguinGame()
     event_handler.add_event_listener([this](const SDL_Event& p_event) {
         init_events(p_event);
         });
+
+    // width = window_size.x;
+    // height = window_size.y;
 }
 
 void PenguinGame::init() {}

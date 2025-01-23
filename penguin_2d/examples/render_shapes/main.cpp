@@ -1,4 +1,4 @@
-﻿#include "penguin_2d.hpp"
+﻿#include "main.hpp"
 
 int PenguinMain(int argc, char* argv[]) {
     MyGame game;

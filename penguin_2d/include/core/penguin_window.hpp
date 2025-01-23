@@ -11,7 +11,7 @@ namespace Penguin2D {
 	
 	class PenguinWindow {
 	public:
-		PenguinWindow(const std::string& p_title_name, Vector2<int> size, SDL_WindowFlags p_flags = 0);
+		PenguinWindow(const std::string& p_title_name, Vector2<int> size, SDL_WindowFlags p_flags = 0); // TODO: Update SDL_WindowFlags with relevant PenguinWindowFlags
 		explicit PenguinWindow(Vector2<int> size, SDL_WindowFlags p_flags = 0);
 
 		SDL_Window* get_window();

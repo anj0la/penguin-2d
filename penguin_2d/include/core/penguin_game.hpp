@@ -20,13 +20,13 @@ namespace Penguin2D {
 
 	class PenguinGame {
 	public:
-		PenguinGame(); // No default constructor
 		// We need the window title, we need the window size, and a default param for the window
-		// PenguinGame(const std::string& game_title, Vector2<int> window_size);
-		// PenguinGame(const std::string& game_title, int width, int height) : PenguinGame(game_title, Vector2<int>(width, height)) {}
-		// PenguinGame(int width, int height) : PenguinGame("", Vector2<int>(width, height)) {}
-		// explicit PenguinGame(Vector2<int> window_size) : PenguinGame("", window_size) {}
-		// 
+		PenguinGame(const std::string& game_title, Vector2<int> window_size);
+		PenguinGame(const std::string& game_title, int width, int height) : PenguinGame(game_title, Vector2<int>(width, height)) {}
+		PenguinGame(int width, int height) : PenguinGame("", Vector2<int>(width, height)) {}
+		explicit PenguinGame(Vector2<int> window_size) : PenguinGame("", window_size) {}
+		PenguinGame(); // default constructor (initializes window size to 640 x 480)
+
 		~PenguinGame() = default;
 
 		void run();
@@ -40,8 +40,8 @@ namespace Penguin2D {
 		PenguinEventHandler event_handler;
 		PenguinInput input;
 
-		// int width;
-		// int height;
+		int width;
+		int height;
 
 		virtual void init();
 		virtual void update(double delta_time);

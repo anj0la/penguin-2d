@@ -8,6 +8,7 @@ using namespace Penguin2D;
 
 class MyGame : public PenguinGame {
 public:
+    using PenguinGame::PenguinGame; // Inherit constructors
     MyGame() : rect(Vector2<float>(100.0, 100.0)) {}
     ~MyGame() = default;
 

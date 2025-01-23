@@ -6,7 +6,7 @@ void MyGame::init() {
 
 void MyGame::update(double delta_time) {
     // TODO: Add your own update logic.
-    Vector2<float> velocity(10.0, 0.0); // Velocity in pixels per second (movement ONLY on the x-axis)
+    Vector2<float> velocity(100.0, 0.0); // Velocity in pixels per second (movement ONLY on the x-axis)
 
     // Move the rect to the left
     if (input.is_key_pressed(PenguinKey::KEY_A)) {
@@ -32,7 +32,7 @@ void MyGame::update(double delta_time) {
     
 void MyGame::draw(double alpha) {
     // Render the rect onto the screen.
-    renderer.draw_rect(rect, Colours::WHITE);
+    renderer.draw_filled_rect(rect, Colours::WHITE);
     // TODO: Add your own draw logic.
 }
 

@@ -2,9 +2,9 @@
 
 using namespace Penguin2D;
 
-PenguinGame::PenguinGame()
-    : sdl_manager(),                        // SDL is initialized here
-    window(Vector2<int>(640.0, 480.0)),     // SDL-dependent objects follow
+PenguinGame::PenguinGame(const std::string& game_title, Vector2<int> window_size)
+    : sdl_manager(),                     // SDL is initialized here
+    window(game_title, window_size),     // SDL-dependent objects follow
     renderer(window),
     text_renderer(renderer),
     timer() {
@@ -14,8 +14,25 @@ PenguinGame::PenguinGame()
         init_events(p_event);
         });
 
-    // width = window_size.x;
-    // height = window_size.y;
+    width = window_size.x;
+    height = window_size.y;
+}
+
+// Default constructor. Sets window size to 640 x 480.
+PenguinGame::PenguinGame()
+    : sdl_manager(),                                        // SDL is initialized here
+    window("A Penguin Window", Vector2<int>(640, 480)),     // SDL-dependent objects follow
+    renderer(window),
+    text_renderer(renderer),
+    timer() {
+
+    // Add listener for the input to the event handler
+    event_handler.add_event_listener([this](const SDL_Event& p_event) {
+        init_events(p_event);
+        });
+
+    width = 640;
+    height = 480;
 }
 
 void PenguinGame::init() {}

@@ -1,15 +1,14 @@
 #ifndef RENDER_SHAPES_HPP
 #define RENDER_SHAPES_HPP
 
-#include "penguin_game.hpp"
+#include "penguin_game_window.hpp"
 #include "rect2.hpp"
 
 using namespace Penguin2D;
 
 class MyGame : public PenguinGame {
 public:
-    using PenguinGame::PenguinGame; // Inherit constructors
-    MyGame() : rect(Vector2<float>(100.0, 100.0)) {}
+    MyGame(PenguinGameWindow& window) : game_window(window), rect(Vector2<float>(100.0, 100.0)) {}
     ~MyGame() = default;
 
 protected:
@@ -18,6 +17,7 @@ protected:
     void draw(double alpha) override;
     void quit() override;
 private:
+    PenguinGameWindow& game_window;
     Rect2<float> rect;
 };
 

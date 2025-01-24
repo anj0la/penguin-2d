@@ -8,7 +8,7 @@ add_library(Penguin2D STATIC
     src/core/penguin_window.cpp
     src/core/penguin_renderer.cpp
     src/core/penguin_text_renderer.cpp
-    src/core/penguin_game.cpp
+    src/core/penguin_game_window.cpp
     src/core/penguin_timer.cpp
     src/core/penguin_event_handler.cpp
     src/core/penguin_input.cpp

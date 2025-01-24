@@ -9,7 +9,7 @@ void MyGame::update(double delta_time) {
     Vector2<float> velocity(100.0, 0.0); // Velocity in pixels per second (movement ONLY on the x-axis)
 
     // Move the rect to the left
-    if (input.is_key_pressed(PenguinKey::KEY_A)) {
+    if (game_window.input.is_key_pressed(PenguinKey::KEY_A)) {
         rect -= velocity * delta_time;
 
         // Clipping rect's position to start of the screen
@@ -19,7 +19,7 @@ void MyGame::update(double delta_time) {
     }
 
     // Move the rect to the right
-    if (input.is_key_pressed(PenguinKey::KEY_D)) {
+    if (game_window.input.is_key_pressed(PenguinKey::KEY_D)) {
         rect += velocity * delta_time;
 
         // Clipping rect's position to end of the screen
@@ -32,7 +32,7 @@ void MyGame::update(double delta_time) {
     
 void MyGame::draw(double alpha) {
     // Render the rect onto the screen.
-    renderer.draw_filled_rect(rect, Colours::WHITE);
+    game_window.renderer.draw_filled_rect(rect, Colours::WHITE);
     // TODO: Add your own draw logic.
 }
 

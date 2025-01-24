@@ -1,8 +1,8 @@
-#include "penguin_game.hpp"
+#include "penguin_game_window.hpp"
 
 using namespace Penguin2D;
 
-PenguinGame::PenguinGame(const std::string& game_title, Vector2<int> window_size)
+PenguinGameWindow::PenguinGameWindow(const std::string& game_title, Vector2<int> window_size)
     : sdl_manager(),                     // SDL is initialized here
     window(game_title, window_size),     // SDL-dependent objects follow
     renderer(window),
@@ -19,7 +19,7 @@ PenguinGame::PenguinGame(const std::string& game_title, Vector2<int> window_size
 }
 
 // Default constructor. Sets window size to 640 x 480.
-PenguinGame::PenguinGame()
+PenguinGameWindow::PenguinGameWindow()
     : sdl_manager(),                                        // SDL is initialized here
     window("A Penguin Window", Vector2<int>(640, 480)),     // SDL-dependent objects follow
     renderer(window),
@@ -35,20 +35,29 @@ PenguinGame::PenguinGame()
     height = 480;
 }
 
-void PenguinGame::init() {}
-
-void PenguinGame::init_events(const SDL_Event& p_event) {
+void PenguinGameWindow::init_events(const SDL_Event& p_event) {
     input.handle_input_event(p_event);
 }
 
-void PenguinGame::run() {
+void PenguinGameWindow::connect_game(std::unique_ptr<PenguinGame> game) {
+    game_instance = std::move(game);
+}
 
-    // Initialize the game with your own game values.
-    init();
+void PenguinGameWindow::run() {
+
+    // Throw error if a game has NOT been connected to the window.
+    Exception::throw_if(
+        !game_instance,
+        "A game has not been connected to the game window. Make sure to connect a game with connect_game(game) before calling this function",
+        RUNTIME_ERROR
+    );
+
+    // Initalize the game with user defined values.
+    game_instance->init();
 
     bool running = true;
 
-    // Game loop
+    // Game loop.
     while (running) {
 
         event_handler.poll_events();
@@ -57,9 +66,8 @@ void PenguinGame::run() {
 
         while (timer.should_update()) {
             auto delta_time = timer.get_delta_time();
-            update(delta_time);
+            game_instance->update(delta_time);
             timer.consume_time();
-
         }
 
         double alpha = timer.get_alpha();
@@ -67,27 +75,21 @@ void PenguinGame::run() {
         // Clear renderer for drawing.
         renderer.clear();
 
-        draw(alpha);
+        game_instance->draw(alpha);
 
         // Display objects drawn onto renderer.
         renderer.present();
 
+        // Close the window if the user specifies it.
         if (event_handler.should_quit()) {
             running = false;
         }
 
-        timer.update_fps(); // Track the actual FPS.
+        timer.update_fps(); // Track the actual FPS
         timer.cap_frame_rate(); // If enabled, caps frame rate to target FPS
-
     }
 
-    // Clean up game processes (e.g., saving game objects, closing other third-party libraries
-    quit();
+    // Clean up game processes (e.g., saving game objects, closing other third-party libraries.
+    game_instance->quit();
 
 } // The destructor will clean up the SDL_related resources.
-
-void PenguinGame::update(double delta_time) {}
-
-void PenguinGame::draw(double delta_time) {}
-
-void PenguinGame::quit() {}

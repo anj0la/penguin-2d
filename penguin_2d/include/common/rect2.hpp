@@ -38,7 +38,7 @@ struct Rect2 final {
 	}
 
 	// Checking if a point exists in the Rect2
-	inline bool contains(Vector2<T> point) const { return point < position + size && point > position; }
+	inline bool contains_point(Vector2<T> point) const { return point < position + size && point > position; }
 
 	// SDL representations of Rect2
 	inline operator SDL_Rect() const {

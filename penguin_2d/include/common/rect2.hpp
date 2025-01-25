@@ -4,6 +4,8 @@
 #include "vector2.hpp"
 #include <SDL3/SDL_rect.h>
 
+#include <type_traits>
+
 // Used as a reference for constructing the Rect2 object used in the app: https://github.com/aardhyn/sdl3-template-project/tree/main
 
 template<typename T = float>
@@ -48,6 +50,26 @@ struct Rect2 final {
 	inline operator SDL_FRect() const {
 		return SDL_FRect{ (float)position.x, (float)position.y, (float)size.x, (float)size.y };
 	}
+
+	// Checking if two rectangles intersect
+	inline bool has_intersection(const Rect2<T>& other_rect) const {
+		if constexpr (std::is_same_v<T, float> || std::is_same_v<T, double>) {
+
+			auto sdl_this_rect = (SDL_FRect)this;
+			auto sdl_other_rect = (SDL_FRect)other_rect;
+
+			return SDL_HasRectIntersectionFloat(&sdl_this_rect, &sdl_other_rect);
+		}
+		else {
+
+			auto sdl_this_rect = (SDL_Rect)this;
+			auto sdl_other_rect = (SDL_Rect)other_rect;
+
+			// Use SDL_HasIntersection for integer rects
+			return SDL_HasRectIntersection(&sdl_this_rect, &sdl_other_rect);
+		}
+	}
+
 
 };
 

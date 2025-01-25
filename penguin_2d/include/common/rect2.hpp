@@ -54,22 +54,19 @@ struct Rect2 final {
 	// Checking if two rectangles intersect
 	inline bool has_intersection(const Rect2<T>& other_rect) const {
 		if constexpr (std::is_same_v<T, float> || std::is_same_v<T, double>) {
-
-			auto sdl_this_rect = (SDL_FRect)this;
-			auto sdl_other_rect = (SDL_FRect)other_rect;
+			SDL_FRect sdl_this_rect = { static_cast<float>(this->position.x), static_cast<float>(this->position.y), static_cast<float>(this->size.x), static_cast<float>(this->size.y) };
+			SDL_FRect sdl_other_rect = { static_cast<float>(other_rect.position.x), static_cast<float>(other_rect.position.y), static_cast<float>(other_rect.size.x), static_cast<float>(other_rect.size.y) };
 
 			return SDL_HasRectIntersectionFloat(&sdl_this_rect, &sdl_other_rect);
 		}
 		else {
-
-			auto sdl_this_rect = (SDL_Rect)this;
-			auto sdl_other_rect = (SDL_Rect)other_rect;
+			SDL_Rect sdl_this_rect = { static_cast<int>(this->position.x), static_cast<int>(this->position.y), static_cast<int>(this->size.x), static_cast<int>(this->size.y) };
+			SDL_Rect sdl_other_rect = { static_cast<int>(other_rect.position.x), static_cast<int>(other_rect.position.y), static_cast<int>(other_rect.size.x), static_cast<int>(other_rect.size.y) };
 
 			// Use SDL_HasIntersection for integer rects
 			return SDL_HasRectIntersection(&sdl_this_rect, &sdl_other_rect);
 		}
 	}
-
 
 };
 

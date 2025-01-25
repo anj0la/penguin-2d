@@ -32,10 +32,11 @@ private:
     Rect2<float> game_floor;
     Rect2<float> game_ceiling;
 
-
     void move_first_player(float delta_time);
     void move_second_player(float delta_time);
     void move_pong_ball(float delta_time);
+    void handle_collision(float delta_time);
+    void handle_out_of_bounds();
 };
 
 #endif // PONG_HPP

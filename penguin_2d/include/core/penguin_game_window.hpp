@@ -7,7 +7,6 @@
 #include "penguin_text_renderer.hpp"
 #include "penguin_input.hpp"
 #include "penguin_event_handler.hpp"
-#include "penguin_sdl_manager.hpp"
 #include "penguin_timer.hpp"
 #include "penguin_game.hpp"
 #include "vector2.hpp"
@@ -33,7 +32,6 @@ namespace Penguin2D {
 
 		~PenguinGameWindow() = default;
 
-		PenguinSDLManager sdl_manager; // ORDER MATTERS -> sdl_manager is destructed last (so SDL_Quit() is called last)
 		PenguinWindow window;
 		PenguinRenderer renderer;
 		PenguinTextRenderer text_renderer;
@@ -45,10 +43,14 @@ namespace Penguin2D {
 
 		void connect_game(std::unique_ptr<PenguinGame> game);
 		void run();
+		bool is_open() const;
+		void close_window();
 		
 	private:
 		void init_events(const SDL_Event& p_event);
 		std::unique_ptr<PenguinGame> game_instance; // Stores instance of the created game
+		bool running;
+		bool window_open;
 	};
 }
 

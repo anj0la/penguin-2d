@@ -3,8 +3,7 @@
 using namespace Penguin2D;
 
 PenguinGameWindow::PenguinGameWindow(const std::string& game_title, Vector2<int> window_size)
-    : sdl_manager(),                     // SDL is initialized here
-    window(game_title, window_size),     // SDL-dependent objects follow
+    : window(game_title, window_size),    
     renderer(window),
     text_renderer(renderer),
     timer() {
@@ -16,12 +15,14 @@ PenguinGameWindow::PenguinGameWindow(const std::string& game_title, Vector2<int>
 
     width = window_size.x;
     height = window_size.y;
+
+    running = false;
+    window_open = true;
 }
 
 // Default constructor. Sets window size to 640 x 480.
 PenguinGameWindow::PenguinGameWindow()
-    : sdl_manager(),                                        // SDL is initialized here
-    window("A Penguin Window", Vector2<int>(640, 480)),     // SDL-dependent objects follow
+    : window("A Penguin Window", Vector2<int>(640, 480)),
     renderer(window),
     text_renderer(renderer),
     timer() {
@@ -33,6 +34,9 @@ PenguinGameWindow::PenguinGameWindow()
 
     width = 640;
     height = 480;
+
+    running = false;
+    window_open = true;
 }
 
 void PenguinGameWindow::init_events(const SDL_Event& p_event) {
@@ -55,7 +59,7 @@ void PenguinGameWindow::run() {
     // Initalize the game with user defined values.
     game_instance->init();
 
-    bool running = true;
+    running = true;
 
     // Game loop.
     while (running) {
@@ -93,3 +97,11 @@ void PenguinGameWindow::run() {
     game_instance->quit();
 
 } // The destructor will clean up the SDL_related resources.
+
+bool PenguinGameWindow::is_open() const {
+    return window_open;
+}
+
+void PenguinGameWindow::close_window() {
+    window_open = false;
+}

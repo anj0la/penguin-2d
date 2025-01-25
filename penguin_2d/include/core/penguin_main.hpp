@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
         std::cerr << "Error: " << e.what() << std::endl;
 
         // Ensure cleanup in case of exceptions
-        Penguin2D::PenguinQuit();
+        PenguinQuit();
         return -1;
     }
 }

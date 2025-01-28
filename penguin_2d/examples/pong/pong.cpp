@@ -21,10 +21,12 @@ void PongGame::init() {
 
     score_second_player.set_text_string(std::to_string(0));
     score_second_player.font.set_font_size(64.0f);
+
+    // Randomize the pong ball's direction and velocity
+    reset_ball_velocity(true);
 }
 
 void PongGame::update(double delta_time) {
-
     if (first_player.score < 11 && second_player.score < 11) {
         // Move the ball.
         move_pong_ball(delta_time);
@@ -178,7 +180,7 @@ void PongGame::handle_out_of_bounds() {
 
         // Reset ball back to the middle of ths screen
         pong_ball.ball_rect.position = Vector2<float>((float)game_window.width / 2, (float)game_window.height / 2); 
-        reset_ball_velocity(false); // ball moves towards player 1
+        reset_ball_velocity(false); // Ball moves towards player 1
     }
     // Pong ball goes out of the screen on the right-hand side
     else if (pong_ball.ball_rect.position.x > game_window.width) {
@@ -188,14 +190,14 @@ void PongGame::handle_out_of_bounds() {
 
         // Reset ball back to the middle of ths screen
         pong_ball.ball_rect.position = Vector2<float>((float)game_window.width / 2, (float)game_window.height / 2); 
-        reset_ball_velocity(true); // ball moves towards player 2
+        reset_ball_velocity(true); // Ball moves towards player 2
     }
 }
 
 void PongGame::reset_ball_velocity(bool to_second_player) {
     // Set a default angle and speed
-    float angle = (float)rand() / RAND_MAX * std::numbers::pi / 3 - std::numbers::pi / 6; // random angle between -30 and +30 degrees
-    float speed = pong_ball.BALL_SPEED;
+    float angle = (float)rand() / RAND_MAX * std::numbers::pi / 3 - std::numbers::pi / 6; // Random angle between -30 and +30 degrees
+    float speed = pong_ball.BALL_SPEED / 1.5; // To slow down the game
 
     // Determine direction based on scoring side
     pong_ball.velocity.x = to_second_player ? speed * cos(angle) : -speed * cos(angle);

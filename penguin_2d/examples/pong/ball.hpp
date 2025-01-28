@@ -9,12 +9,7 @@ struct Ball {
 
     Rect2<float> ball_rect; 
     Vector2<float> velocity;
-    const float BALL_SPEED = 200.0f;
-
-    //inline void move_pong_ball(float delta_time) {
-    //    ball_rect.position.x += velocity.x * delta_time;
-    //    ball_rect.position.y += velocity.y * delta_time;
-    //}
+    const float BALL_SPEED = 400.0f;
 };
 
 #endif // BALL_HPP

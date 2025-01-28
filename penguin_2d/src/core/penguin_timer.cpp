@@ -1,5 +1,4 @@
 #include "penguin_timer.hpp"
-#include <iostream>
 
 using namespace Penguin2D;
 
@@ -29,8 +28,6 @@ void PenguinTimer::update_fps() {
         fps = frame_count / elapsed_time;
         frame_count = 0;
         fps_start_time = curr_time;
-
-        // std::cout << "FPS: " << fps << std::endl; // FOR DEBUGGING PURPOSES
     }
 }
 
@@ -77,4 +74,8 @@ double PenguinTimer::get_delta_time() const {
 
 double PenguinTimer::get_fps() const {
     return fps;
+}
+
+void PenguinTimer::delay(double ms) {
+    SDL_Delay(ms);
 }

@@ -98,6 +98,14 @@ void PenguinGameWindow::run() {
 
 } // The destructor will clean up the SDL_related resources.
 
+void PenguinGameWindow::stop_game() {
+    running = false;
+}
+
+bool PenguinGameWindow::is_running() const {
+    return running;
+}
+
 bool PenguinGameWindow::is_open() const {
     return window_open;
 }

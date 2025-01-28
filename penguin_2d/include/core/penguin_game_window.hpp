@@ -43,6 +43,8 @@ namespace Penguin2D {
 
 		void connect_game(std::unique_ptr<PenguinGame> game);
 		void run();
+		void stop_game();
+		bool is_running() const;
 		bool is_open() const;
 		void close_window();
 		

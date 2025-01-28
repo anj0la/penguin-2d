@@ -4,6 +4,8 @@
 #include <chrono>
 #include <thread>
 
+#include <SDL3/SDL_timer.h>
+
 namespace Penguin2D {
 
 	class PenguinTimer {
@@ -21,6 +23,7 @@ namespace Penguin2D {
 		double get_alpha() const;
 		double get_delta_time() const;
 		double get_fps() const;
+		void delay(double ms);
 	private:
 		using penguin_clock = std::chrono::steady_clock;
 		double delta_time;

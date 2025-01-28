@@ -35,3 +35,12 @@ bool PenguinInput::is_key_pressed(PenguinKey key) {
     auto it = key_pressed_states.find(key);
     return it != key_pressed_states.end() && it->second; // true and false == false, true and true == true
 }
+
+bool PenguinInput::is_any_key_pressed() {
+    for (const auto& key_pair : key_pressed_states) {
+        if (key_pair.second) { // Check if any value (key state) is true
+            return true;
+        }
+    }
+    return false;
+}

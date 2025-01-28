@@ -10,7 +10,7 @@ namespace Penguin2D {
 
     enum class PenguinKey {
         UNKNOWN,            // 0 
-        RETURN,             // '\r'
+        ENTER,             // '\r'
         ESC,                // '\x1B'
         BACKSPACE,          // '\b'
         TAB,                // '\t'
@@ -155,11 +155,12 @@ namespace Penguin2D {
         ~PenguinInput() = default;
         void handle_input_event(const SDL_Event& p_event);
         bool is_key_pressed(PenguinKey key);
+        bool is_any_key_pressed();
 
     private:
         std::unordered_map<SDL_Keycode, PenguinKey> key_map = {
             { SDLK_UNKNOWN, PenguinKey::UNKNOWN },
-            { SDLK_RETURN, PenguinKey::RETURN },
+            { SDLK_RETURN, PenguinKey::ENTER },
             { SDLK_ESCAPE, PenguinKey::ESC },
             { SDLK_BACKSPACE, PenguinKey::BACKSPACE },
             { SDLK_TAB, PenguinKey::TAB },

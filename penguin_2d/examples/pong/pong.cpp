@@ -1,5 +1,4 @@
 #include "pong.hpp"
-#include <iostream>
 
 //////////////////////////////////////////////////////////////
 // Required function implementations from PenguinGame ////////

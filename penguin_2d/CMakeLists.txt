@@ -14,7 +14,7 @@ add_library(Penguin2D STATIC
     src/core/penguin_input.cpp
     src/rendering/penguin_font.cpp
     src/rendering/penguin_text.cpp
-    src/rendering/penguin_sprite.cpp)
+    src/rendering/penguin_sprite.cpp "examples/snake/snake.cpp" "examples/snake/main.cpp")
 
 # Include directories for the library 
 target_include_directories(Penguin2D PUBLIC
@@ -35,5 +35,5 @@ target_link_libraries(Penguin2D PRIVATE
 )
 
 # Include subdirectories to compile examples of using Penguin2D
-add_subdirectory(examples/render_shapes)
 add_subdirectory(examples/pong)
+add_subdirectory(examples/snake)

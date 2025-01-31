@@ -17,6 +17,8 @@ struct Rect2 final {
 
 	Rect2(Vector2<T> position, Vector2<T> size) : position{ position }, size{ size } {}
 	Rect2(Vector2<T> size) : position{ Vector2<T>(0, 0) }, size{ size } {}
+	Rect2(T x_pos, T y_pos, T x_size, T y_size) : position{ Vector2<T>(x_pos, y_pos) }, size{ Vector2<T>(x_size, y_size) } {}
+	Rect2(T x_size, T y_size) : position{ Vector2<T>(0, 0) }, size{ Vector2<T>(x_size, y_size) } {}
 
 	// Equality operators
 	inline bool operator==(const Rect2<T>& other_rect) const { return position == other_rect.position && size == other_rect.size; }

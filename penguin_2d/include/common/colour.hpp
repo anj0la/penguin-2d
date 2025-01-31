@@ -19,9 +19,6 @@ struct Colour {
     }
 };
 
-/// <summary>
-///  Contains predefined colours.
-/// </summary>
 namespace Colours {
 
     // Shades

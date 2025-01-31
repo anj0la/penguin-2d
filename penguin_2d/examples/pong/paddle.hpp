@@ -1,7 +1,6 @@
 #ifndef PADDLE_HPP
 #define PADDLE_HPP
 
-#include "penguin_input.hpp"
 #include "rect2.hpp"
 
 struct Paddle {
@@ -11,7 +10,6 @@ struct Paddle {
     Rect2<float> paddle;
     Vector2<float> velocity;
     int score = 0;
-
 };
 
 #endif // PADDLE_HPP

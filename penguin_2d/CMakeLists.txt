@@ -36,4 +36,3 @@ target_link_libraries(Penguin2D PRIVATE
 
 # Include subdirectories to compile examples of using Penguin2D
 add_subdirectory(examples/pong)
-add_subdirectory(examples/snake)

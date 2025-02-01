@@ -165,7 +165,6 @@ void PongGame::handle_paddle_collision(Rect2<float>& paddle_rect, bool is_first_
     }
 }
 
-
 void PongGame::handle_wall_collision() {
     pong_ball.velocity.y *= -1.0f;
 }

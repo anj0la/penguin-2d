@@ -48,6 +48,9 @@ void PongGame::update(double delta_time) {
 }
 
 void PongGame::draw(double alpha) {
+    // Clear renderer for drawing.
+    game_window.renderer.clear();
+
     // Draw pong ball onto the screen
     game_window.renderer.draw_filled_rect(pong_ball.ball_rect, Colours::WHITE);
 
@@ -70,6 +73,9 @@ void PongGame::draw(double alpha) {
     if (first_player.score == 11 || second_player.score == 11) {
         game_over_text.render_text(Vector2<float>(game_window.width / 9, game_window.height / 2.75));
     }
+
+    // Display objects drawn onto renderer.
+    game_window.renderer.present();
 }
 
 void PongGame::quit() {}

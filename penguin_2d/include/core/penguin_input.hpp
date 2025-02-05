@@ -1,16 +1,36 @@
+///////////////////////////////////////////////////////////////////////////////////
+/// File name: penguin_input.hpp                                                ///
+///                                                                             ///
+/// Defines the PenguinInput class, which manages keyboard input handling.      ///
+///                                                                             ///
+/// It provides a callback function, handle_input_event, to process key presses.///
+/// This function must be connected to PenguinEventHandler via its              ///
+/// add_event_listener() function, which is done in PenguinGameWindow.          ///
+///                                                                             ///
+/// The file also defines an enum, PenguinKey, representing all supported keys. ///
+/// A key map is used to translate SDL keys to PenguinKeys, allowing key state  ///
+/// tracking through key_pressed_states.                                        ///
+///                                                                             ///
+/// Future versions will expand support for mouse and joystick input.           ///
+///////////////////////////////////////////////////////////////////////////////////
+
 #ifndef INPUT_HPP
 #define INPUT_HPP
 
-#include <SDL3/SDL_events.h>
-#include <unordered_map>
+// Penguin2D related include files
 #include "exception.hpp"
 
+// SDL related include files
+#include <SDL3/SDL_events.h>
+
+// C++ library files
+#include <unordered_map>
 
 namespace Penguin2D {
 
     enum class PenguinKey {
         UNKNOWN,            // 0 
-        ENTER,             // '\r'
+        ENTER,              // '\r'
         ESC,                // '\x1B'
         BACKSPACE,          // '\b'
         TAB,                // '\t'
@@ -57,7 +77,7 @@ namespace Penguin2D {
         SQUOTE,             // '\''
         GRAVE,              // '`'
         TIDLE,              // '~'
-        KEY_A,              // 'A'
+        KEY_A,             
         KEY_B,
         KEY_C,
         KEY_D,
@@ -149,15 +169,31 @@ namespace Penguin2D {
         RGUI
     };
 
+    /// @brief Handles keyboard input for the application.
+    ///
+    /// The `PenguinInput` class is responsible for processing keyboard events 
+    /// and tracking the state of key presses. It provides methods to check 
+    /// whether specific keys or any keys are currently pressed.
     class PenguinInput {
     public:
         PenguinInput() = default;
         ~PenguinInput() = default;
+
+        /// @brief Handles an SDL input event.
+        /// @param p_event: The SDL event to process.
         void handle_input_event(const SDL_Event& p_event);
+
+        /// @brief Checks if a specific key is currently pressed.
+        /// @param key: The key to check.
+        /// @return True if the key is pressed, false otherwise.
         bool is_key_pressed(PenguinKey key);
+
+        /// @brief Checks if any key is currently pressed.
+        /// @return True if at least one key is pressed, false otherwise.
         bool is_any_key_pressed();
 
     private:
+        /// Maps SDL keycodes to PenguinKey values.
         std::unordered_map<SDL_Keycode, PenguinKey> key_map = {
             { SDLK_UNKNOWN, PenguinKey::UNKNOWN },
             { SDLK_RETURN, PenguinKey::ENTER },
@@ -298,6 +334,8 @@ namespace Penguin2D {
             { SDLK_RALT, PenguinKey::RALT },
             { SDLK_RGUI, PenguinKey::RGUI },
         };
+
+        /// Stores the pressed state of each key.
         std::unordered_map<PenguinKey, bool> key_pressed_states;
     };
 }

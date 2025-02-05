@@ -14,7 +14,7 @@ add_library(Penguin2D STATIC
     src/core/penguin_input.cpp
     src/rendering/penguin_font.cpp
     src/rendering/penguin_text.cpp
-    src/rendering/penguin_sprite.cpp "examples/snake/snake.cpp" "examples/snake/main.cpp")
+    src/rendering/penguin_sprite.cpp)
 
 # Include directories for the library 
 target_include_directories(Penguin2D PUBLIC

@@ -1,17 +1,26 @@
+
 #include "penguin_renderer.hpp"
 
 using namespace Penguin2D;
 
-PenguinRenderer::PenguinRenderer(PenguinWindow& p_window, const std::string& p_name) 
+/// <summary>
+/// Creates a rendering context from a window.
+/// </summary>
+/// <param name="window"> - the window to create a rendering context.</param>
+/// <param name="driver_name"> - the driver name of the rendererer, defaults to "" to allow for the driver to be chosen interally.</param>
+PenguinRenderer::PenguinRenderer(PenguinWindow& window, const std::string& driver_name) 
 : renderer(SDL_CreateRenderer(
-	p_window.get_window(), 
-	p_name.empty() ? NULL : p_name.c_str()), // If empty, allow SDL to handle getting the driver.
+	window.get_window(),
+	driver_name.empty() ? NULL : driver_name.c_str()), // If empty, allow SDL to handle getting the driver.
 	&SDL_DestroyRenderer) {
 
 	// Throw an exception if the renderer was not intialized.
 	Exception::throw_if(!renderer, "The renderer was not initialized.", RENDERER_ERROR);
 }
 
+/// <summary>
+/// Clears the renderer.
+/// </summary>
 void PenguinRenderer::clear() {
 	reset_colour();
 	Exception::throw_if(
@@ -21,6 +30,9 @@ void PenguinRenderer::clear() {
 	);
 }
 
+/// <summary>
+/// Updates the window with any rendering preformed since the previous call.
+/// </summary>
 void PenguinRenderer::present() {
 	Exception::throw_if(
 		!SDL_RenderPresent(renderer.get()),
@@ -29,6 +41,10 @@ void PenguinRenderer::present() {
 	);
 }
 
+/// <summary>
+/// Sets the colour using for drawing objects onto the renderer.
+/// </summary>
+/// <param name="colour"> - the colour of the object to be drawn to the renderer.</param>
 void PenguinRenderer::set_colour(Colour colour) {
 	Exception::throw_if(
 		!SDL_SetRenderDrawColor(renderer.get(), colour.red, colour.green, colour.blue, colour.alpha),
@@ -36,6 +52,13 @@ void PenguinRenderer::set_colour(Colour colour) {
 		RENDERER_ERROR
 	);
 }
+
+/// <summary>
+/// Draws a line to the renderer.
+/// </summary>
+/// <param name="vect_a"> - the start point.</param>
+/// <param name="vect_b"> - the end point.</param>
+/// <param name="colour"> - the colour of the line, defaults to white.</param>
 void PenguinRenderer::draw_line(Vector2<> vect_a, Vector2<> vect_b, Colour colour) {
 	set_colour(colour);
 	Exception::throw_if(
@@ -45,6 +68,11 @@ void PenguinRenderer::draw_line(Vector2<> vect_a, Vector2<> vect_b, Colour colou
 	);
 }
 
+/// <summary>
+/// Draws a pixel to the renderer.
+/// </summary>
+/// <param name="vect"> - the point.</param>
+/// <param name="colour"> - the colour of the point, defaults to white.</param>
 void PenguinRenderer::draw_pixel(Vector2<> vect, Colour colour) {
 	set_colour(colour);
 	Exception::throw_if(
@@ -54,6 +82,11 @@ void PenguinRenderer::draw_pixel(Vector2<> vect, Colour colour) {
 	);
 }
 
+/// <summary>
+/// Draws a rect to the renderer.
+/// </summary>
+/// <param name="rect"> - the rectangle object.</param>
+/// <param name="outline"> - the colour of the outline, defaults to white. </param>
 void PenguinRenderer::draw_rect(Rect2<float> rect, Colour outline) {
 	set_colour(outline);
 	auto sdl_rect = (SDL_FRect)rect;
@@ -65,6 +98,11 @@ void PenguinRenderer::draw_rect(Rect2<float> rect, Colour outline) {
 
 }
 
+/// <summary>
+/// Draws a filled rect to the renderer.
+/// </summary>
+/// <param name="rect"> - the rectangle object.</param>
+/// <param name="fill"> - the fill colour.</param>
 void PenguinRenderer::draw_filled_rect(Rect2<float> rect, Colour fill) {
 	set_colour(fill);
 	auto sdl_rect = (SDL_FRect)rect;
@@ -75,6 +113,12 @@ void PenguinRenderer::draw_filled_rect(Rect2<float> rect, Colour fill) {
 	);
 }
 
+/// <summary>
+/// Draws a circle to the renderer.
+/// </summary>
+/// <param name="center"> - the position of the circle.</param>
+/// <param name="radius"> - the radius of the circle.</param>
+/// <param name="outline"> - the colour of the outline, defaults to white.</param>
 void PenguinRenderer::draw_circle(Vector2<float> center, int radius, Colour outline) {
 	// Initial points and decision variable.
 	int x = radius - 1;
@@ -119,6 +163,12 @@ void PenguinRenderer::draw_circle(Vector2<float> center, int radius, Colour outl
 	);
 }
 
+/// <summary>
+/// Draws a filled circle to the renderer.
+/// </summary>
+/// <param name="center"> - the position of the circle.</param>
+/// <param name="radius"> - the radius of the circle.</param>
+/// <param name="fill"> - the fill colour.</param>
 void PenguinRenderer::draw_filled_circle(Vector2<float> center, int radius, Colour fill) {
 	// Initial points and decision variable.
 	int x = radius - 1;
@@ -149,6 +199,13 @@ void PenguinRenderer::draw_filled_circle(Vector2<float> center, int radius, Colo
 	}
 }
 
+/// <summary>
+/// Draws an ellipse to the renderer.
+/// </summary>
+/// <param name="center"> - the position of the ellipse.</param>
+/// <param name="radius_x"> - the x radius of the ellipse.</param>
+/// <param name="radius_y"> - the y radius of the ellipse.</param>
+/// <param name="outline"> - the colour of the outline, defaults to white.</param>
 void PenguinRenderer::draw_ellipse(Vector2<float> center, int radius_x, int radius_y, Colour outline) {
 	// Squares of the radii for the ellipse.
 	int rx2 = radius_x * radius_x;
@@ -219,6 +276,13 @@ void PenguinRenderer::draw_ellipse(Vector2<float> center, int radius_x, int radi
 	);
 }
 
+/// <summary>
+/// Draws a filled ellipse to the renderer.
+/// </summary>
+/// <param name="center"> - the position of the ellipse.</param>
+/// <param name="radius_x"> - the x radius of the ellipse.</param>
+/// <param name="radius_y"> - the y radius of the ellipse.</param>
+/// <param name="fill"> - the colour of the fill, defaults to white.</param>
 void PenguinRenderer::draw_filled_ellipse(Vector2<float> center, int radius_x, int radius_y, Colour fill) {
 	// Squares of the radii for the ellipse.
 	int rx2 = radius_x * radius_x;
@@ -289,14 +353,28 @@ void PenguinRenderer::draw_filled_ellipse(Vector2<float> center, int radius_x, i
 	);
 }
 
+/// <summary>
+/// Resets the colour of the rendering context.
+/// </summary>
 void PenguinRenderer::reset_colour() {
 	set_colour(Colours::BLACK); 
 }
 
+/// <summary>
+/// Gets the underlying renderer pointer.
+/// </summary>
+/// <returns>SDL_Renderer* - a reference to the underlying SDL_Renderer.</returns>
 SDL_Renderer* PenguinRenderer::get_renderer() {
 	return renderer.get();
 }
 
+/// <summary>
+/// Draws a horizontial line to the renderer.
+/// </summary>
+/// <param name="x1"> - x coordinate of the start position.</param>
+/// <param name="x2"> - x coordinate of the end position.</param>
+/// <param name="y"> - y coordinate of the line.</param>
+/// <param name="colour"> - the colour of the line.</param>
 void PenguinRenderer::draw_horizontal_line(float x1, float x2, float y, Colour colour) {
 	set_colour(colour);
 	Exception::throw_if(

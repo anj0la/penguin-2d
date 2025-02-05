@@ -75,14 +75,7 @@ void PenguinGameWindow::run() {
         }
 
         double alpha = timer.get_alpha();
-
-        // Clear renderer for drawing.
-        renderer.clear();
-
         game_instance->draw(alpha);
-
-        // Display objects drawn onto renderer.
-        renderer.present();
 
         // Close the window if the user specifies it.
         if (event_handler.should_quit()) {

@@ -1,12 +1,28 @@
+/// File name: penguin_font.hpp
+/// 
+/// Author: Anjola Aina
+/// 
+/// PenguinFont represents a font, with functions for manipulating the font, such as the font size and style.
+/// 
+/// This class is used internally in PenguinText to create a text. Currently the font size can be changed, along with the outline size and font styles.
+/// Changing a font once it has been set is currently not supported.
+/// 
+/// The structure PenguinFontStyle is used to apply styles to the font. They map to the corresponding SDL_TTF font styles.
+///
+
 #ifndef PENGUIN_FONT_HPP
 #define PENGUIN_FONT_HPP
 
+// Penguin2D related include files
+#include "exception.hpp"
+
+// SDL related include files
+#include <SDL3_ttf/SDL_ttf.h>
+
+// C++ library files
 #include <iostream>
 #include <memory>
 #include <string>
-#include "exception.hpp"
-
-#include <SDL3_ttf/SDL_ttf.h>
 
 namespace Penguin2D {
 
@@ -23,11 +39,9 @@ namespace Penguin2D {
         PenguinFont(const std::string& font_path, float font_size);
         TTF_Font* get_font();
 
-        // Setter and getter for the font size. 
-        void set_font_size(float font_size); // -> extern SDL_DECLSPEC bool SDLCALL TTF_SetFontSize(TTF_Font *font, float ptsize);
-        float get_font_size(); // -> TTF_GetFontSize
+        void set_font_size(float font_size);
+        float get_font_size();
 
-        // Setter and getter for the font outline.
         void set_font_outline_size(int outline_size);
         int get_font_outline_size();
 

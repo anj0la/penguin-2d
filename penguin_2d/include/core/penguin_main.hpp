@@ -1,13 +1,11 @@
-/// File name: penguin_main.hpp
-/// 
-/// Author: Anjola Aina
-/// 
-/// PenguinMain defines the entry point of the Penguin2D.
-/// 
-/// The file implements a main function required by SDL, calling the required main function PenguinMain to execute game logic. It handles exceptions 
-/// in case any SDL library has not been initialized correctly. It also handles at a very high level, exceptions that may occur in PenguinMain. Note that
-/// this may not be the case in the future, and that exception handling may be removed in a future update.
-/// 
+///////////////////////////////////////////////////////////////////////////////////
+/// File name: penguin_main.hpp                                                 ///
+///                                                                             ///
+/// Defines the entry point of Penguin2D. Implements the main function required ///
+/// by SDL and handles initialization and cleanup of SDL libraries. It calls    ///
+/// PenguinMain to execute game logic and handles exceptions during the process.///
+/// Exception handling may be removed in future updates.                        ///
+///////////////////////////////////////////////////////////////////////////////////
 
 #ifndef PENGUIN_MAIN_HPP
 #define PENGUIN_MAIN_HPP
@@ -23,8 +21,8 @@
 
 using namespace Penguin2D;
 
-// The game's entry point
-extern int PenguinMain();
+/// The game's entry point.
+extern int PenguinMain(); 
 
 // SDL requires a main function
 int main(int argc, char* argv[]) {

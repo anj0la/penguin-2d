@@ -38,7 +38,7 @@ namespace Penguin2D {
 	public:
 		/// @brief Constructs a PenguinRenderer for the given window.
 		/// @param window The PenguinWindow instance to render onto.
-		/// @param driver_name The name of the rendering driver (optional).
+		/// @param driver_name The name of the rendering driver (optional, defaults to "").
 		explicit PenguinRenderer(PenguinWindow& window, const std::string& driver_name = "");
 
         /// @brief Clears the renderer, preparing it for new drawing operations.

@@ -33,9 +33,9 @@ namespace Penguin2D {
 	class PenguinTimer {
 	public:
         /// @brief Constructs a PenguinTimer with the given delta time, fps cap and target fps.
-        /// @param dt: The delta time value (default is 1.0 / 60.0).
-        /// @param should_cap_fps: Enables or disables FPS capping (default is false).
-        /// @param fps_target: Target FPS value (default is 60.0).
+        /// @param dt: The delta time value (optional, defaults to 1.0 / 60.0).
+        /// @param should_cap_fps: Enables or disables FPS capping (optional, defaults to false).
+        /// @param fps_target: Target FPS value (optional, defaults to 60.0).
 		PenguinTimer(double dt = 1.0 / 60.0, bool should_cap_fps = false, double fps_target = 60.0)
 			: delta_time(dt), cap_fps(should_cap_fps), target_fps(fps_target) {}
 		~PenguinTimer() = default;

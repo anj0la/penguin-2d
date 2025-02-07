@@ -24,16 +24,37 @@
 // C++ library files
 #include <type_traits>
 
+/// @brief Represents a 2D rectangle with a position and size, defined by Vector2 objects.
+///
+/// This struct is used to represent a rectangle in 2D space. It stores
+/// the rectangle's position (top-left corner) and its size (width and height),
+/// both as Vector2 objects. This can be used for handling bounding boxes,
+/// collision detection, and layout positioning.
 template<typename T = float>
-
 struct Rect2 final {
 
-	Vector2<T> position;
-	Vector2<T> size;
+	Vector2<T> position; /// The position of the top-left corner of the rectangle.
+	Vector2<T> size; /// The size (width and height) of the rectangle.
 
+	/// @brief Constructs a Rect2 with specified position and size.
+	/// @param position The position of the top-left corner.
+	/// @param size The size of the rectangle.
 	Rect2(Vector2<T> position, Vector2<T> size) : position{ position }, size{ size } {}
+
+	/// @brief Constructs a Rect2 with a size and position set to the origin (0, 0).
+	/// @param size The size of the rectangle.
 	Rect2(Vector2<T> size) : position{ Vector2<T>(0, 0) }, size{ size } {}
+
+	/// @brief Constructs a Rect2 with specified x, y position and x, y size.
+	/// @param x_pos: The x position of the top-left corner.
+	/// @param y_pos: The y position of the top-left corner.
+	/// @param x_size: The width (x size) of the rectangle.
+	/// @param y_size: The height (y size) of the rectangle.
 	Rect2(T x_pos, T y_pos, T x_size, T y_size) : position{ Vector2<T>(x_pos, y_pos) }, size{ Vector2<T>(x_size, y_size) } {}
+
+	/// @brief Constructs a `Rect2` with specified width and height, position set to the origin.
+	/// @param x_size: The width (x size) of the rectangle.
+	/// @param y_size: The height (y size) of the rectangle.
 	Rect2(T x_size, T y_size) : position{ Vector2<T>(0, 0) }, size{ Vector2<T>(x_size, y_size) } {}
 
 	// Equality operators
@@ -56,10 +77,6 @@ struct Rect2 final {
 		position -= other_vect;
 		return *this;
 	}
-
-	// Checking if a point exists in the Rect2
-
-	inline bool contains_point(Vector2<T> point) const { return point < position + size && point > position; }
 
 	// SDL representations of Rect2
 
@@ -88,6 +105,9 @@ struct Rect2 final {
 		}
 	}
 
+	/// @brief Checks if a point exists in the rectangle.
+	/// @return True if the point is within the rectangle, false otherwise.
+	inline bool contains_point(Vector2<T> point) const { return point < position + size && point > position; }
 };
 
 #endif // RECT2_HPP

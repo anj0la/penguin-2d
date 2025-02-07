@@ -1,25 +1,28 @@
-/// File name: penguin_text.cpp
-/// 
-/// Author: Anjola Aina
-/// 
-/// PenguinText represents a text, with functions for manipulating the text, such as the text colour, position, string, font size and style.
-/// 
-/// This is the implementation file of the PenguinText class, which handles all text operations.
-///
+///////////////////////////////////////////////////////////////////////////////////
+/// File name: penguin_text.cpp                                                 ///
+///                                                                             ///
+/// PenguinText represents a text, with functions for manipulating the text,    ///
+/// such as the text colour, position, string, font size, and style.            ///
+///                                                                             ///
+/// This is the implementation file of the PenguinText class, which handles all ///
+/// text operations.                                                            ///
+///////////////////////////////////////////////////////////////////////////////////
 
 #include "penguin_text.hpp"
 
 using namespace Penguin2D;
 
-/// <summary>
-/// Creates a text from the text renderer. Once created, it can be renderered onto the window with the draw_text() function.
-/// </summary>
-/// <param name="text_renderer"> - the text renderer.</param>
-/// <param name="font_path"> - the path to the font.</param>
-/// <param name="text_str"> - the initial text.</param>
-/// <param name="font_size"> - the size of the text.</param>
-/// <param name="colour"> - the colour of the text.</param>
-/// <param name="position"> - the position of the text.</param>
+/// @brief Creates a PenguinText object from the text renderer.
+/// 
+/// This constructor initializes a text object that can be rendered onto the game window.
+/// It loads the specified font and sets the text string, color, and position.
+/// 
+/// @param text_renderer: The text renderer responsible for managing text rendering.
+/// @param font_path: The file path to the font to be used.
+/// @param text_str: The initial string of text (optional, defaults to an empty string).
+/// @param font_size: The size of the font in pixels (optional, defaults to 12.0f).
+/// @param colour: The color of the text (optional, defaults to white).
+/// @param position: The position of the text in the window (optional, defaults to (0,0)).
 PenguinText::PenguinText(PenguinTextRenderer& text_renderer, const std::string& font_path, const std::string& text_str, float font_size, Colour colour, Vector2<int> position)
     : font(font_path, font_size), 
       text(nullptr, &TTF_DestroyText) {
@@ -42,13 +45,12 @@ PenguinText::PenguinText(PenguinTextRenderer& text_renderer, const std::string& 
 
     // Set the text position
     set_text_position(position);
-
 }
 
-/// <summary>
-/// Draws the texet onto the renderer.
-/// </summary>
-/// <param name="position"> - the position to draw the text to.</param>
+/// @brief Draws the text onto the renderer.
+/// 
+/// This function renders the text onto the game window at the specified position.
+/// @param position: The position to draw the text.
 void PenguinText::draw_text(Vector2<float> position) {
     Exception::throw_if(
         !TTF_DrawRendererText(text.get(), position.x, position.y),
@@ -57,10 +59,10 @@ void PenguinText::draw_text(Vector2<float> position) {
     );
 }
 
-/// <summary>
-/// Sets the text string.
-/// </summary>
-/// <param name="new_text"></param>
+/// @brief Sets the text content.
+/// 
+/// Updates the displayed text to a new string.
+/// @param new_text: The new string to be displayed.
 void PenguinText::set_text_string(const std::string& new_text) {
     Exception::throw_if(
         !TTF_SetTextString(text.get(), new_text.c_str(), 0),
@@ -69,6 +71,10 @@ void PenguinText::set_text_string(const std::string& new_text) {
     );
 }
 
+/// @brief Sets the text color.
+/// 
+/// Changes the color of the displayed text.
+/// @param new_colour: The new color of the text.
 void PenguinText::set_text_colour(Colour new_colour) {
     Exception::throw_if(
         !TTF_SetTextColor(text.get(), new_colour.red, new_colour.green, new_colour.blue, new_colour.alpha),
@@ -77,6 +83,10 @@ void PenguinText::set_text_colour(Colour new_colour) {
     );
 }
 
+/// @brief Sets the text position.
+/// 
+/// Updates the position of the text on the screen.
+/// @param position: The new position of the text.
 void PenguinText::set_text_position(Vector2<int> position) {
     Exception::throw_if(
         !TTF_SetTextPosition(text.get(), position.x, position.y),

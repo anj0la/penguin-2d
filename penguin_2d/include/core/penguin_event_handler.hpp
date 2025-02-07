@@ -40,10 +40,12 @@ namespace Penguin2D {
 		void poll_events();
 
 		/// @brief Adds an event listener to be triggered during event polling.
+		/// 
 		/// @param callback_function: Function to be called when an event occurs.
 		void add_event_listener(const std::function<void(const SDL_Event&)>& callback_function);
 
 		/// @brief Checks if the user has requested to close the application.
+		/// 
 		/// @return True if a quit event has been detected, otherwise false.
 		bool should_quit() const;
 	private:

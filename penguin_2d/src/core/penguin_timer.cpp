@@ -1,19 +1,22 @@
-/// File name: penguin_timer.cpp
-/// 
-/// Author: Anjola Aina
-/// 
-/// PenguinTimer manages frame rate for the game, and allows for capping the fps at a specific framerate (e.g., 60 FPS or 30 FPS).
-/// 
-/// This class is used internally in PenguinGameWindow to update and render the game by using functions such as consume_time() and update_frame_time().
-///
+///////////////////////////////////////////////////////////////////////////////////
+/// File: penguin_timer.cpp                                                     ///
+///                                                                             ///
+/// PenguinTimer manages frame rate for the game and allows for capping the     ///
+/// FPS at a specific framerate (e.g., 60 FPS or 30 FPS).                       ///
+///                                                                             ///
+/// This class is used internally in PenguinGameWindow to update and render     ///
+/// the game by using functions such as consume_time() and update_frame_time(). ///
+///////////////////////////////////////////////////////////////////////////////////
 
 #include "penguin_timer.hpp"
 
 using namespace Penguin2D;
 
-/// <summary>
-/// Calculates the frame time and updates the accumulator.
-/// </summary>
+/// @brief Calculates the frame time and updates the accumulator.
+///
+/// This function determines the time elapsed since the last frame and updates
+/// the accumulator accordingly. It also ensures that the frame time does not
+/// exceed a threshold to prevent excessive updates due to lag.
 void PenguinTimer::update_frame_time() {
     auto curr_time = penguin_clock::now();
     double frame_time = std::chrono::duration<double>(curr_time - prev_time).count();
@@ -24,9 +27,11 @@ void PenguinTimer::update_frame_time() {
     accumulator += frame_time;
 
 }
-/// <summary>
-/// Updates the FPS by incrementing the frame count, measuring the elasped time since the last update and calculating the FPS.
-/// </summary>
+
+/// @brief Updates the FPS counter.
+///
+/// This function tracks the number of frames rendered within a second and calculates
+/// the frames per second (FPS) accordingly. It resets the counter after each interval.
 void PenguinTimer::update_fps() {
     // Increment frame count.
     frame_count++;
@@ -43,19 +48,21 @@ void PenguinTimer::update_fps() {
     }
 }
 
-/// <summary>
-/// Consumes a fixed timestep from the accumulator and increments the running time.
-/// </summary>
+/// @brief Consumes a fixed timestep from the accumulator and updates running time.
+///
+/// This function removes a fixed delta time from the accumulator to keep time
+/// progression consistent with the game loop's update rate.
 void PenguinTimer::consume_time() {
     accumulator -= delta_time;
     running_time += delta_time;
 }
 
-/// <summary>
-/// Caps the FPS to the specified value.
-/// </summary>
-/// <param name="enable"> - whether to cap fps or not.</param>
-/// <param name="fps"> - the value to cap the fps to.</param>
+/// @brief Enables or disables FPS capping and sets the target frame rate.
+/// 
+/// /// If FPS capping is enabled, the function sets the target frame duration
+/// based on the desired FPS value.
+/// @param enable: Whether to cap the FPS.
+/// @param fps: The target FPS value.
 void PenguinTimer::set_fps_cap(bool enable, double fps) {
     // Cap FPS to the fps parameter (if enabled == true).
     cap_fps = enable;
@@ -65,9 +72,10 @@ void PenguinTimer::set_fps_cap(bool enable, double fps) {
     }
 }
 
-/// <summary>
-/// Caps the frame rate until the target fps has been reached.
-/// </summary>
+/// @brief Delays execution to maintain a consistent frame rate.
+///
+/// This function ensures that the frame rate does not exceed the specified cap
+/// by pausing execution for the required duration.
 void PenguinTimer::cap_frame_rate() const {
     if (!cap_fps) return; // No capping needed if disabled.
 
@@ -81,42 +89,38 @@ void PenguinTimer::cap_frame_rate() const {
     }
 }
 
-/// <summary>
-/// Checks if enough time has accumulated for an update.
-/// </summary>
-/// <returns>bool - true if enough time has been accumulated, false otherwise.</returns>
+/// @brief Determines if enough time has accumulated for an update.
+/// @return True if an update should occur, otherwise false.
 bool PenguinTimer::should_update() const {
     return accumulator >= delta_time;
 }
 
-/// <summary>
-/// Returns the interpolation factor for rendering.
-/// </summary>
-/// <returns>double - the interpolation factor.</returns>
+/// @brief Returns the interpolation factor for rendering.
+/// 
+/// This function calculates the alpha value used for rendering interpolation,
+/// helping smooth motion between fixed timestep updates.
+/// @return The interpolation factor as a double.
 double PenguinTimer::get_alpha() const {
     return accumulator / delta_time;
 }
 
-/// <summary>
-/// Returns the delta time.
-/// </summary>
-/// <returns>double - delta time.</returns>
+/// @brief Retrieves the delta time value.
+/// @return The delta time as a double.
 double PenguinTimer::get_delta_time() const {
     return delta_time;
 }
 
-/// <summary>
-/// Returns the fps.
-/// </summary>
-/// <returns>double - fps.</returns>
+/// @brief Retrieves the current FPS value.
+/// @return The current FPS as a double.
 double PenguinTimer::get_fps() const {
     return fps;
 }
 
-/// <summary>
-/// Delays execution for the specified amount of milliseconds.
-/// </summary>
-/// <param name="ms"> - the amount of time to delay execution for.</param>
+/// @brief Delays execution for a specified amount of milliseconds.
+/// 
+/// This function pauses execution for the specified duration.
+/// It can be used to introduce artificial delays in certain situations.
+/// @param ms: The amount of time to delay execution for, in milliseconds.
 void PenguinTimer::delay(double ms) {
     SDL_Delay(ms);
 }

@@ -66,12 +66,12 @@ void PongGame::draw(double alpha) {
     game_window.renderer.draw_filled_rect(second_player.paddle, Colours::WHITE);
 
     // Draw player scores
-    score_first_player.render_text(Vector2<float>(game_window.width / 4 - 10.0f, 20.0f));
-    score_second_player.render_text(Vector2<float>(game_window.width / 1.5 + 40.0f, 20.0f));
+    score_first_player.draw_text(Vector2<float>(game_window.width / 4 - 10.0f, 20.0f));
+    score_second_player.draw_text(Vector2<float>(game_window.width / 1.5 + 40.0f, 20.0f));
 
     // Draw the game over text if the game is over
     if (first_player.score == 11 || second_player.score == 11) {
-        game_over_text.render_text(Vector2<float>(game_window.width / 9, game_window.height / 2.75));
+        game_over_text.draw_text(Vector2<float>(game_window.width / 9, game_window.height / 2.75));
     }
 
     // Display objects drawn onto renderer.

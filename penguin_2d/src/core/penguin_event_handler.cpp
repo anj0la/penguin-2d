@@ -1,8 +1,10 @@
-/// File: penguin_event_handler.cpp
-/// 
-/// Description:
-/// This file implements the PenguinEventHandler class, which is responsible for handling SDL events.
-/// It processes event polling, manages callback functions, and detects quit requests.
+///////////////////////////////////////////////////////////////////////////////////
+/// File: penguin_event_handler.cpp												///
+///																				///
+/// This file implements the PenguinEventHandler class, which is responsible	///
+/// for handling SDL events. It processes event polling, manages callback		///
+/// functions, and detects quit requests.										///
+///////////////////////////////////////////////////////////////////////////////////
 
 #include "penguin_event_handler.hpp"
 
@@ -10,8 +12,9 @@ using namespace Penguin2D;
 
 /// @brief Polls SDL events and executes all registered callback functions.
 ///
-/// This function retrieves SDL events from the event queue and calls any registered event listeners.
-/// If a quit event (SDL_EVENT_QUIT) is detected, the event handler marks the application for termination.
+/// This function retrieves SDL events from the event queue and calls any registered
+/// event listeners. If a quit event (SDL_EVENT_QUIT) is detected, the event handler
+/// marks the application for termination.
 void PenguinEventHandler::poll_events() {
 	SDL_Event sdl_event;
 	while (SDL_PollEvent(&sdl_event)) {
@@ -28,12 +31,20 @@ void PenguinEventHandler::poll_events() {
 }
 
 /// @brief Registers a new event listener callback.
+/// 
+/// This function stores the provided callback function in a list of event listeners.
+/// The function will be called whenever an event is polled.
+/// 
 /// @param callback_function: Function to be executed when an event occurs.
 void PenguinEventHandler::add_event_listener(const std::function<void(const SDL_Event&)>& callback_function) {
 	callback_functions.push_back(callback_function);
 }
 
 /// @brief Checks whether the application should terminate due to a quit event.
+///
+/// This function allows external components to query if a quit event has been received,
+/// enabling a clean shutdown process.
+/// 
 /// @return True if a quit event has been detected, otherwise false.
 bool PenguinEventHandler::should_quit() const {
 	return quit;

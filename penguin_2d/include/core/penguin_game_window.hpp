@@ -34,6 +34,7 @@
 
 // C++ library files
 #include <memory>
+#include <algorithm>
 
 namespace Penguin2D {
 

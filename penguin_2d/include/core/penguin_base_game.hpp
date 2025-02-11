@@ -1,19 +1,26 @@
 ///////////////////////////////////////////////////////////////////////////////////
-/// File name: penguin_game.hpp                                                 ///
+/// File name: penguin_base_game.hpp                                            ///
 ///                                                                             ///
-/// Defines the PenguinGame class, an abstract class for creating a game with	///
-/// Penguin2D. This class provides virtual functions for game initialization,	///
-/// updating game logic, rendering, and quitting.								///
+/// Defines the PenguinBaseGame class, which serves as the base class for		///
+/// creating a game with Penguin2D.												///
 ///																				///
-/// Derived classes must override these functions:	                            ///
+/// This class provides virtual functions for game initialization, updating		///
+/// game logic, rendering, and quitting.										///
+///																				///
+/// Derived classes should override these functions:                            ///
 ///  - init() -> Initialize game variables (e.g., player starting position).    ///
 ///  - update(delta_time) -> Game logic goes here.                              ///
 ///  - draw(alpha) -> Render game objects to the screen.                        ///
 ///  - quit() -> Cleanup and free resources.                                    ///
+///																				///
+/// However, these functions have default empty implementations, so they can be ///
+/// left unimplemented in derived classes if not needed.						///
 ///////////////////////////////////////////////////////////////////////////////////
 
-#ifndef PENGUIN_GAME_HPP
-#define PENGUIN_GAME_HPP
+#ifndef PENGUIN_BASE_GAME_HPP
+#define PENGUIN_BASE_GAME_HPP
+
+#include "penguin_game_window.hpp"
 
 namespace Penguin2D {
 
@@ -22,24 +29,27 @@ namespace Penguin2D {
 	/// This class provides a set of virtual methods that define the basic structure of a game.
 	/// Concrete game classes will inherit from this and implement the necessary behavior for initialization,
 	/// updating game states, rendering, and quitting.
-	class PenguinGame {
+	class PenguinBaseGame : public PenguinGame {
 	public:
-		virtual ~PenguinGame() = default;
+		PenguinBaseGame(PenguinGameWindow& window) : game_window(window) {}
+		~PenguinBaseGame() = default;
+	protected:
+		PenguinGameWindow& game_window;
 
 		/// @brief Initializes the game, setting up necessary resources.
-		virtual void init() = 0;
+		void init() override {}
 
 		/// @brief Updates the game state for the current frame.
 		/// @param delta_time: The time elapsed since the last frame.
-		virtual void update(double delta_time) = 0;
+		void update(double delta_time) override {}
 
 		/// @brief Draws the current state of the game to the screen.
 		/// @param alpha: The interpolation factor used for rendering.
-		virtual void draw(double alpha) = 0;
+		void draw(double alpha) override {};
 
 		/// @brief Quits the game and cleans up any resources.
-		virtual void quit() = 0;
+		void quit() override {};
 	};
 }
 
-#endif // PENGUIN_GAME_HPP
+#endif // PENGUIN_BASE_GAME_HPP

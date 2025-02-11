@@ -85,39 +85,40 @@ void PenguinGameWindow::run() {
         RUNTIME_ERROR
     );
 
-    // Initalize the game with user defined values.
-    game_instance->init();
+    while (window_open) {
+        // Initalize the game with user defined values.
+        game_instance->init();
 
-    running = true;
+        running = true;
 
-    // Game loop.
-    while (running) {
+        // Game loop.
+        while (running) {
 
-        event_handler.poll_events();
+            event_handler.poll_events();
 
-        timer.update_frame_time();
+            timer.update_frame_time();
 
-        while (timer.should_update()) {
-            auto delta_time = timer.get_delta_time();
-            game_instance->update(delta_time);
-            timer.consume_time();
+            while (timer.should_update()) {
+                auto delta_time = timer.get_delta_time();
+                game_instance->update(delta_time);
+                timer.consume_time();
+            }
+
+            double alpha = timer.get_alpha();
+            game_instance->draw(alpha);
+
+            // Close the window if the user specifies it.
+            if (event_handler.should_quit()) {
+                close_window();
+            }
+
+            timer.update_fps(); // Track the actual FPS
+            timer.cap_frame_rate(); // If enabled, caps frame rate to target FPS
         }
 
-        double alpha = timer.get_alpha();
-        game_instance->draw(alpha);
-
-        // Close the window if the user specifies it.
-        if (event_handler.should_quit()) {
-            running = false;
-        }
-
-        timer.update_fps(); // Track the actual FPS
-        timer.cap_frame_rate(); // If enabled, caps frame rate to target FPS
+        // Clean up game processes (e.g., saving game objects, closing other third-party libraries.
+        game_instance->quit();
     }
-
-    // Clean up game processes (e.g., saving game objects, closing other third-party libraries.
-    game_instance->quit();
-
 } // The destructor will clean up the SDL_related resources.
 
 /// @brief Stops the game loop.
@@ -140,4 +141,5 @@ bool PenguinGameWindow::is_open() const {
 /// @brief Closes the game window.
 void PenguinGameWindow::close_window() {
     window_open = false;
+    running = false;
 }

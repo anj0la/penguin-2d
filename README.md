@@ -15,6 +15,7 @@ Penguin2D provides the following capabilities to game developers:
   - `update(float delta_time)`: Core game logic (e.g., movement, collisions).
   - `draw(float alpha)`: Render objects onto the screen.
   - `quit()`: Clean up resources on exit.
+- **PenguinBaseGame**: Extends `PenguinGame` and serves as a simplified starting point for game development. It provides default empty implementations for all virtual functions (`init()`, `update()`, `draw()`, `quit()`), so derived classes can override only the functions they need, reducing boilerplate code.
 
 ### Example Games
 - **Render Shapes**: Demonstrates rendering basic shapes.

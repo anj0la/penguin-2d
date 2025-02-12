@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////////
+/// File name: pong.hpp                                                         ///
+///                                                                             ///
+/// Header file for PongGame class, defining the structure and functionality    ///
+/// of Pong, including player paddles, ball physics, collision handling,        ///
+/// scoring, and game states. Supports single-player (AI) and two-player modes. ///
+///////////////////////////////////////////////////////////////////////////////////
+
 #ifndef PONG_HPP
 #define PONG_HPP
 
@@ -11,6 +19,7 @@
 
 using namespace Penguin2D;
 
+/// @brief Structure representing a player's paddle and associated game logic.
 struct Player {
     Player() : paddle(Vector2<float>(10.0, 100.0)), velocity(Vector2<float>(0.0, 200.0)) {}
     ~Player() = default;
@@ -20,6 +29,7 @@ struct Player {
     int points = 0;
 };
 
+/// @brief Structure representing the ball and its movement logic.
 struct Ball {
     Ball() : ball_rect(Vector2<float>(10.0f, 10.0f)), velocity(200.0f, 150.0f) {}
     ~Ball() = default;
@@ -29,6 +39,7 @@ struct Ball {
     const float BALL_SPEED = 400.0f;
 };
 
+/// @brief Main class for handling the Pong game logic, including game state, physics, rendering, and input handling.
 class PongGame : public PenguinBaseGame {
 public:
     PongGame(PenguinGameWindow& window) : 
@@ -53,6 +64,7 @@ private:
     Ball pong_ball;
     Rect2<float> game_floor;
     Rect2<float> game_ceiling;
+
     PenguinText points_first_player;
     PenguinText points_second_player;
     PenguinText game_over_text;
@@ -60,15 +72,15 @@ private:
     PenguinText one_player_text;
     PenguinText two_player_text;
     PenguinText enter_text;
+
     bool is_two_player = false;
     bool is_playing = false;
+
     const int GOAL_POINTS = 11;
     const float MIN_DIFF = 10.0f;
 
     void update_title_screen();
     void display_title_screen();
-    void run_two_player_logic(float delta_time);
-    void run_one_player_logic(float delta_time);
     void move_left_paddle(float delta_time);
     void move_right_paddle_ai(float delta_time);
     void move_right_paddle(float delta_time);

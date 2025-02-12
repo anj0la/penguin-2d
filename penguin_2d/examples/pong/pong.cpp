@@ -144,7 +144,7 @@ void PongGame::display_title_screen() {
 
 /// @brief Moves the left paddle based on player input, ensuring it stays within game bounds.
 /// @param delta_time: Time elapsed since the last update.
-void PongGame::move_left_paddle(float delta_time) {
+void PongGame::move_left_paddle(double delta_time) {
     if (game_window.input.is_key_pressed(PenguinKey::KEY_W)) {
         first_player.paddle.position -= first_player.velocity * delta_time;
     }
@@ -166,7 +166,7 @@ void PongGame::move_left_paddle(float delta_time) {
 
 /// @brief Moves the AI-controlled right paddle to track the ball's position.
 /// @param delta_time: Time elapsed since the last update.
-void PongGame::move_right_paddle_ai(float delta_time) {
+void PongGame::move_right_paddle_ai(double delta_time) {
     // Ball is moving towards the AI paddle (right paddle)
     if (pong_ball.velocity.x > 0) {
 
@@ -190,7 +190,7 @@ void PongGame::move_right_paddle_ai(float delta_time) {
 }
 /// @brief Moves the right paddle based on player input in two-player mode.
 /// @param delta_time: Time elapsed since the last update.
-void PongGame::move_right_paddle(float delta_time) {
+void PongGame::move_right_paddle(double delta_time) {
     if (game_window.input.is_key_pressed(PenguinKey::UP)) {
         second_player.paddle.position -= second_player.velocity * delta_time;
     }
@@ -203,7 +203,8 @@ void PongGame::move_right_paddle(float delta_time) {
 
 /// @brief Moves the Pong ball according to its velocity.
 /// @param delta_time: Time elapsed since the last update.
-void PongGame::move_pong_ball(float delta_time) {
+void PongGame::move_pong_ball(doubld
+ delta_time) {
     pong_ball.ball_rect.position += pong_ball.velocity * delta_time;
 }
 

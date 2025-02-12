@@ -81,10 +81,10 @@ private:
 
     void update_title_screen();
     void display_title_screen();
-    void move_left_paddle(float delta_time);
-    void move_right_paddle_ai(float delta_time);
-    void move_right_paddle(float delta_time);
-    void move_pong_ball(float delta_time);
+    void move_left_paddle(doubld delta_time);
+    void move_right_paddle_ai(double delta_time);
+    void move_right_paddle(double delta_time);
+    void move_pong_ball(double delta_time);
     void handle_collision();
     void handle_paddle_collision(Rect2<float>& paddle_rect, bool is_first_player);
     void handle_wall_collision();

@@ -52,10 +52,10 @@ void PongGame::update(double delta_time) {
             move_pong_ball(delta_time);
             handle_collision();
             handle_out_of_bounds();
-            move_left_paddle(delta_time); // moves with W & S keys
+            move_left_paddle(delta_time); // Moves with W & S keys
             // Two player mode
             if (is_two_player) {
-                move_right_paddle(delta_time); // moves with UP & DOWN keys
+                move_right_paddle(delta_time); // Moves with up & down keys
             }
             else {
                 move_right_paddle_ai(delta_time);

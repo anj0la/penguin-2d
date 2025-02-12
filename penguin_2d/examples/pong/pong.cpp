@@ -203,8 +203,7 @@ void PongGame::move_right_paddle(double delta_time) {
 
 /// @brief Moves the Pong ball according to its velocity.
 /// @param delta_time: Time elapsed since the last update.
-void PongGame::move_pong_ball(doubld
- delta_time) {
+void PongGame::move_pong_ball(double delta_time) {
     pong_ball.ball_rect.position += pong_ball.velocity * delta_time;
 }
 

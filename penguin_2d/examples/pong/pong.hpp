@@ -81,7 +81,7 @@ private:
 
     void update_title_screen();
     void display_title_screen();
-    void move_left_paddle(doubld delta_time);
+    void move_left_paddle(double delta_time);
     void move_right_paddle_ai(double delta_time);
     void move_right_paddle(double delta_time);
     void move_pong_ball(double delta_time);

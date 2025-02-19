@@ -16,7 +16,7 @@
 #define PENGUIN_TIMER_HPP
 
 // SDL related include files
-#include <SDL3/SDL_timer.h>
+#include <SDL_timer.h>
 
 // C++ library files
 #include <chrono>

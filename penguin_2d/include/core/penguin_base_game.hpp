@@ -20,6 +20,7 @@
 #ifndef PENGUIN_BASE_GAME_HPP
 #define PENGUIN_BASE_GAME_HPP
 
+// Penguin2D related include files
 #include "penguin_game_window.hpp"
 
 namespace Penguin2D {

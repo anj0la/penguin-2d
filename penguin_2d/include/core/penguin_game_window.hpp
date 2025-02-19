@@ -30,7 +30,7 @@
 #include "exception.hpp"
 
 // SDL related include files
-#include <SDL3/SDL.h>
+#include <SDL.h>
 
 // C++ library files
 #include <memory>

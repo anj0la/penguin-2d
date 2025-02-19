@@ -15,7 +15,7 @@
 #include "exception.hpp"
 
 // SDL related include files
-#include <SDL3_ttf/SDL_ttf.h>
+#include <SDL_ttf.h>
 
 // C++ library files
 #include <iostream>

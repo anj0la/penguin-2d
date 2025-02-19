@@ -12,6 +12,7 @@
 #ifndef EXCEPTION_HPP
 #define EXCEPTION_HPP
 
+// C++ library files
 #include <exception>
 #include <string>
 #include <utility>

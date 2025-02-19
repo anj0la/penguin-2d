@@ -14,7 +14,7 @@
 #include "penguin_init.hpp"
 
 // SDL related include files
-#include <SDL3/SDL_main.h>
+#include <SDL_main.h>
 
 // C++ library files
 #include <iostream>

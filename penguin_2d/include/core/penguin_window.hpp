@@ -19,7 +19,7 @@
 #include "vector2.hpp"
 
 // SDL related include files
-#include <SDL3/SDL_video.h>
+#include <SDL_video.h>
 
 // C++ library files
 #include <memory>

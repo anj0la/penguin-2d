@@ -18,7 +18,7 @@
 #define PENGUIN_EVENT_HPP
 
 // SDL related include files
-#include <SDL3/SDL_events.h>
+#include <SDL_events.h>
 
 // C++ standard library files
 #include <vector>

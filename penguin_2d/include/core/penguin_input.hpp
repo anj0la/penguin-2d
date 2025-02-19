@@ -21,7 +21,7 @@
 #include "exception.hpp"
 
 // SDL related include files
-#include <SDL3/SDL_events.h>
+#include <SDL_events.h>
 
 // C++ library files
 #include <unordered_map>

@@ -19,7 +19,7 @@
 #include "vector2.hpp"
 
 // SDL related include files
-#include <SDL3/SDL_rect.h>
+#include <SDL_rect.h>
 
 // C++ library files
 #include <type_traits>

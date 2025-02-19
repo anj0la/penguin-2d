@@ -20,7 +20,7 @@
 #include "exception.hpp"
 
 // SDL related include files
-#include <SDL3/SDL_render.h>
+#include <SDL_render.h>
 
 // C++ library files
 #include <memory>

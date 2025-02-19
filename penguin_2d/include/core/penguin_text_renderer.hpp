@@ -16,7 +16,7 @@
 #include "exception.hpp"
 
 // SDL related include files
-#include <SDL3_ttf/SDL_textengine.h>
+#include <SDL_textengine.h>
 
 // C++ library files
 #include <memory>

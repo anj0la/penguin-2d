@@ -33,8 +33,8 @@ target_include_directories(Penguin2D PUBLIC
     "${PENGUIN_INCLUDE_DIR}/common"
     "${PENGUIN_INCLUDE_DIR}/core"
     "${PENGUIN_INCLUDE_DIR}/rendering"
-    "${SDL3_INCLUDE_DIRS}"  # Add SDL3 include directories to PUBLIC
-    "${SDL3_TTF_INCLUDE_DIR}" # Add SDL3_ttf include directories to PUBLIC
+    "${SDL3_INCLUDE_DIR}"
+    "${SDL3_TTF_INCLUDE_DIR}"
 )
 
 # Copy SDL3 DLLs to bin/ after build
@@ -44,7 +44,7 @@ add_custom_command(TARGET Penguin2D POST_BUILD
     "$<TARGET_FILE:SDL3_ttf::SDL3_ttf>" "${OUTPUT_DIR}/bin/"
 )
 
-# Copy all header files into the include directory without subdirectories
+# Copy Penguin2D header files into the include directory without subdirectories
 file(GLOB_RECURSE HEADER_FILES "${PENGUIN_INCLUDE_DIR}/*.hpp")
 add_custom_command(TARGET Penguin2D POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E make_directory "${OUTPUT_DIR}/include"  # Ensure the include directory exists
@@ -52,8 +52,15 @@ add_custom_command(TARGET Penguin2D POST_BUILD
     ${HEADER_FILES} "${OUTPUT_DIR}/include/"
 )
 
+# Copy SDL3 header files
+add_custom_command(TARGET Penguin2D POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    "${SDL3_INCLUDE_DIR}" "${OUTPUT_DIR}/include/"
+    "${SDL3_TTF_INCLUDE_DIR}" "${OUTPUT_DIR}/include/"
+)
+
 # Link dependencies for the library
-target_link_libraries(Penguin2D PRIVATE
+target_link_libraries(Penguin2D PUBLIC
     SDL3::SDL3
     SDL3_ttf::SDL3_ttf
 )

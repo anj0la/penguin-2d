@@ -30,11 +30,12 @@
 #include "exception.hpp"
 
 // SDL related include files
-#include <SDL.h>
+#include <SDL3/SDL.h>
 
 // C++ library files
 #include <memory>
 #include <algorithm>
+#include <iostream>
 
 namespace Penguin2D {
 
@@ -44,13 +45,13 @@ namespace Penguin2D {
 		/// @brief Constructs a game window with the specified title and size.
 		/// @param game_title: The title of the game window.
 		/// @param window_size: The dimensions of the game window.
-		PenguinGameWindow(const std::string& game_title, Vector2<int> window_size);
+		PenguinGameWindow(const char* game_title, Vector2<int> window_size);
 
 		/// @brief Constructs a game window with the specified title and dimensions.
 		/// @param game_title: The title of the game window.
 		/// @param width: The width of the game window.
 		/// @param height: The height of the game window.
-		PenguinGameWindow(const std::string& game_title, int width, int height) : PenguinGameWindow(game_title, Vector2<int>(width, height)) {}
+		PenguinGameWindow(const char* game_title, int width, int height) : PenguinGameWindow(game_title, Vector2<int>(width, height)) {}
 
 		/// @brief Constructs a game window with the specified dimensions and no title.
 		/// @param width: The width of the game window.
@@ -64,7 +65,7 @@ namespace Penguin2D {
 		/// @brief Default constructor, initializes a 640x480 game window.
 		PenguinGameWindow();
 
-		~PenguinGameWindow() = default;
+		~PenguinGameWindow();
 
 		PenguinWindow window; /// The main game window.
 		PenguinRenderer renderer; /// The renderer used for rendering graphics.
@@ -77,7 +78,7 @@ namespace Penguin2D {
 
 		/// @brief Connects a game instance to the game window.
 		/// @param game: The unique pointer to the PenguinGame instance.
-		void connect_game(std::unique_ptr<PenguinGame> game);
+		void connect_game(PenguinGame* game);
 
 		/// @brief Runs the game loop.
 		void run();
@@ -101,7 +102,7 @@ namespace Penguin2D {
 		/// @param p_event: The SDL event to be processed.
 		void init_events(const SDL_Event& p_event);
 
-		std::unique_ptr<PenguinGame> game_instance; /// Stores the instance of the created game.
+		PenguinGame* game_instance; /// Stores the instance of the created game.
 		bool running; /// Tracks whether the game is currently running.
 		bool window_open; /// Tracks whether the window is open.
 	};

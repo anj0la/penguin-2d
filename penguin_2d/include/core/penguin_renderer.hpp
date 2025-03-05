@@ -20,11 +20,10 @@
 #include "exception.hpp"
 
 // SDL related include files
-#include <SDL_render.h>
+#include <SDL3/SDL_render.h>
 
 // C++ library files
 #include <memory>
-#include <string>
 #include <vector>
 
 namespace Penguin2D {
@@ -38,8 +37,8 @@ namespace Penguin2D {
 	public:
 		/// @brief Constructs a PenguinRenderer for the given window.
 		/// @param window The PenguinWindow instance to render onto.
-		/// @param driver_name The name of the rendering driver (optional, defaults to "").
-		explicit PenguinRenderer(PenguinWindow& window, const std::string& driver_name = "");
+		/// @param driver_name The name of the rendering driver (optional, defaults to NULL).
+		explicit PenguinRenderer(PenguinWindow& window, const char* driver_name = NULL);
 
         /// @brief Clears the renderer, preparing it for new drawing operations.
         void clear();

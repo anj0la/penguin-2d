@@ -15,11 +15,11 @@ using namespace Penguin2D;
 /// If the PenguinRenderer cannot be created, an exception is thrown.
 /// 
 /// @param window: The PenguinWindow to create a rendering context.
-/// @param driver_name: The driver name for the renderer, defaults to an empty string for automatic selection.
-PenguinRenderer::PenguinRenderer(PenguinWindow& window, const std::string& driver_name) 
+/// @param driver_name: The driver name for the renderer, defaults to NULL for automatic selection.
+PenguinRenderer::PenguinRenderer(PenguinWindow& window, const char* driver_name) 
 : renderer(SDL_CreateRenderer(
 	window.get_window(),
-	driver_name.empty() ? NULL : driver_name.c_str()), // If empty, allow SDL to handle getting the driver.
+	driver_name), // If NULL, allow SDL to handle getting the driver.
 	&SDL_DestroyRenderer) {
 
 	// Throw an exception if the renderer was not intialized.

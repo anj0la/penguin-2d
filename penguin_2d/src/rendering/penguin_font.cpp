@@ -19,8 +19,8 @@ using namespace Penguin2D;
 /// 
 /// @param font_path: The file path to the font.
 /// @param font_size: The desired font size.
-PenguinFont::PenguinFont(const std::string& font_path, float font_size)
-	: font(TTF_OpenFont(font_path.c_str(), font_size), &TTF_CloseFont) {
+PenguinFont::PenguinFont(const char* font_path, float font_size)
+	: font(TTF_OpenFont(font_path, font_size), &TTF_CloseFont) {
 
 	Exception::throw_if(
 		!font,

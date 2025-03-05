@@ -7,6 +7,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include "penguin_window.hpp"
+#include <iostream>
 
 using namespace Penguin2D;
 
@@ -18,8 +19,8 @@ using namespace Penguin2D;
 /// @param title: The name of the window, displayed in the top-left corner.
 /// @param size: The size of the window.
 /// @param flags: The flags associated with the window (e.g., RESIZABLE).
-PenguinWindow::PenguinWindow(const std::string & title, Vector2<int> size, SDL_WindowFlags p_flags)
-	: window(SDL_CreateWindow(title.c_str(), size.x, size.y, p_flags), &SDL_DestroyWindow) {
+PenguinWindow::PenguinWindow(const char* title, Vector2<int> size, SDL_WindowFlags p_flags)
+	: window(SDL_CreateWindow(title, size.x, size.y, p_flags), &SDL_DestroyWindow) {
 
 	Exception::throw_if(!window, "The window could not be initalized.", WINDOW_ERROR);
 }
@@ -58,14 +59,14 @@ SDL_Window* PenguinWindow::get_window() {
 /// If there is an error while setting the title, an exception is thrown.
 /// 
 /// @param title: The title of the window to set.
-void PenguinWindow::set_title(std::string& title) {
-
+void PenguinWindow::set_title(const char* new_title) {
 	Exception::throw_if(
-		!SDL_SetWindowTitle(window.get(), title.c_str()),
+		!SDL_SetWindowTitle(window.get(), new_title),
 		"There was an error setting the window title.",
 		WINDOW_ERROR
 	);
 }
+
 
 /// @brief Sets the maximum size of the window.
 /// 

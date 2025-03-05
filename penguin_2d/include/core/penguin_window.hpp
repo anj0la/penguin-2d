@@ -19,7 +19,7 @@
 #include "vector2.hpp"
 
 // SDL related include files
-#include <SDL_video.h>
+#include <SDL3/SDL_video.h>
 
 // C++ library files
 #include <memory>
@@ -38,8 +38,8 @@ namespace Penguin2D {
 		/// @param title: The title of the window.
 		/// @param size: The dimensions of the window.
 		/// @param p_flags: The SDL window flags.
-		PenguinWindow(const std::string& title, Vector2<int> size, SDL_WindowFlags p_flags = 0); // TODO: Update SDL_WindowFlags with relevant PenguinWindowFlags
-		
+		PenguinWindow(const char* title, Vector2<int> size, SDL_WindowFlags p_flags = 0); // TODO: Update SDL_WindowFlags with relevant PenguinWindowFlags
+
 		/// @brief Constructs a PenguinWindow with a given size and flags, without a title.
 		/// @param size: The dimensions of the window.
 		/// @param p_flags: The SDL window flags.
@@ -51,7 +51,7 @@ namespace Penguin2D {
 
 		/// @brief Sets the window title.
 		/// @param title: The new title for the window.
-		void set_title(std::string& title);
+		void set_title(const char* new_title);
 
 		/// @brief Sets the maximum allowed size of the window.
 		/// @param max_size: The maximum dimensions of the window.

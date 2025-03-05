@@ -14,7 +14,8 @@
 #include "exception.hpp"
 
 // SDL related include files
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_init.h>
+#include <SDL3/SDL_error.h>
 #include <SDL3_ttf/SDL_ttf.h>
 
 namespace Penguin2D {

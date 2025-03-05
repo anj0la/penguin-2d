@@ -19,14 +19,15 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include "penguin_game_window.hpp"
+#include <iostream>
 
 using namespace Penguin2D;
 
 /// @brief Constructs a PenguinGameWindow with a given title and window size.
 /// @param game_title: The title of the game window.
 /// @param window_size: The size of the window as a Vector2 (int).
-PenguinGameWindow::PenguinGameWindow(const std::string& game_title, Vector2<int> window_size)
-    : window(game_title, window_size),    
+PenguinGameWindow::PenguinGameWindow(const char* game_title, Vector2<int> window_size)
+    : window(game_title, window_size),
     renderer(window),
     text_renderer(renderer),
     timer() {
@@ -39,8 +40,11 @@ PenguinGameWindow::PenguinGameWindow(const std::string& game_title, Vector2<int>
     width = window_size.x;
     height = window_size.y;
 
+    game_instance = nullptr;
     running = false;
     window_open = true;
+    
+	std::cout << "Built game window." << std::endl;
 }
 
 /// @brief Default constructor. Initializes the window with a default size of 640x480.
@@ -58,8 +62,13 @@ PenguinGameWindow::PenguinGameWindow()
     width = 640;
     height = 480;
 
+    game_instance = nullptr;
     running = false;
     window_open = true;
+}
+
+PenguinGameWindow::~PenguinGameWindow() {
+    std::cout << "Calling destructor" << std::endl;
 }
 
 /// @brief Initializes event handling for the game window.
@@ -70,8 +79,9 @@ void PenguinGameWindow::init_events(const SDL_Event& p_event) {
 
 /// @brief Connects a game instance to the game window.
 /// @param game: A unique pointer to a PenguinGame instance.
-void PenguinGameWindow::connect_game(std::unique_ptr<PenguinGame> game) {
-    game_instance = std::move(game);
+void PenguinGameWindow::connect_game(PenguinGame* game) {
+    game_instance = game;
+    std::cout << "DOES THIS EVEN RUN?" << std::endl;
 }
 
 /// @brief Runs the game loop.

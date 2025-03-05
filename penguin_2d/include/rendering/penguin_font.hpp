@@ -15,12 +15,11 @@
 #include "exception.hpp"
 
 // SDL related include files
-#include <SDL_ttf.h>
+#include <SDL3_ttf/SDL_ttf.h>
 
 // C++ library files
 #include <iostream>
 #include <memory>
-#include <string>
 
 namespace Penguin2D {
 
@@ -44,7 +43,7 @@ namespace Penguin2D {
         /// @brief Constructs a PenguinFont object.
         /// @param font_path: The file path to the font.
         /// @param font_size: The size of the font in pixels.
-        PenguinFont(const std::string& font_path, float font_size);
+        PenguinFont(const char* font_path, float font_size);
 
         /// @brief Retrieves the underlying font object.
         /// @return A pointer to the TTF_Font used for rendering.

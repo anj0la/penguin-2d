@@ -23,7 +23,7 @@ using namespace Penguin2D;
 /// @param font_size: The size of the font in pixels (optional, defaults to 12.0f).
 /// @param colour: The color of the text (optional, defaults to white).
 /// @param position: The position of the text in the window (optional, defaults to (0,0)).
-PenguinText::PenguinText(PenguinTextRenderer& text_renderer, const std::string& font_path, const std::string& text_str, float font_size, Colour colour, Vector2<int> position)
+PenguinText::PenguinText(PenguinTextRenderer& text_renderer, const char* font_path, const char* text_str, float font_size, Colour colour, Vector2<int> position)
     : font(font_path, font_size), 
       text(nullptr, &TTF_DestroyText) {
 
@@ -31,7 +31,7 @@ PenguinText::PenguinText(PenguinTextRenderer& text_renderer, const std::string& 
     text.reset(TTF_CreateText(
         text_renderer.get_text_renderer(),
         font.get_font(),
-        text_str.c_str(),
+        text_str,
         0));
 
     Exception::throw_if(
@@ -63,9 +63,9 @@ void PenguinText::draw_text(Vector2<float> position) {
 /// 
 /// Updates the displayed text to a new string.
 /// @param new_text: The new string to be displayed.
-void PenguinText::set_text_string(const std::string& new_text) {
+void PenguinText::set_text_string(const char* new_text) {
     Exception::throw_if(
-        !TTF_SetTextString(text.get(), new_text.c_str(), 0),
+        !TTF_SetTextString(text.get(), new_text, 0),
         "The contents of the text could not be changed.",
         TEXT_ERROR
     );

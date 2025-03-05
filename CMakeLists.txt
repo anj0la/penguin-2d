@@ -17,8 +17,8 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${OUTPUT_DIR}/lib")  # For static libraries
 
 # Define variables for ease to access include directories
 set(PENGUIN_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/penguin_2d/include")
-set(SDL3_INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/external/SDL3/include/SDL3")
-set(SDL3_TTF_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/external/SDL3_ttf/include/SDL3_ttf")
+set(SDL3_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/external/SDL3/include")
+set(SDL3_TTF_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/external/SDL3_ttf/include")
 
 # Include sub-directories needed for Penguin2D to work
 add_subdirectory ("penguin_2d")

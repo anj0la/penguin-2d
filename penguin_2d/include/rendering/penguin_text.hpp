@@ -19,12 +19,11 @@
 #include "vector2.hpp"
 
 // SDL related include files
-#include <SDL_ttf.h>
+#include <SDL3_ttf/SDL_ttf.h>
 
 // C++ library files
 #include <iostream>
 #include <memory>
-#include <string>
 
 namespace Penguin2D {
 
@@ -41,7 +40,7 @@ namespace Penguin2D {
         /// @param font_size: The size of the font in pixels (optional, defaults to 12.0f).
         /// @param colour: The color of the text (optional, defaults to white).
         /// @param position: The position of the text in the window (optional, defaults to (0,0)).
-        PenguinText(PenguinTextRenderer& text_renderer, const std::string& font_path, const std::string& text_str = "", float font_size = 12.0f, Colour colour = Colours::WHITE, Vector2<int> position = Vector2<int>(0, 0));
+        PenguinText(PenguinTextRenderer& text_renderer, const char* font_path, const char* text_str = "", float font_size = 12.0f, Colour colour = Colours::WHITE, Vector2<int> position = Vector2<int>(0, 0));
 
         /// @brief Draws the text at a specified position.
         /// @param position: The position to render the text at.
@@ -49,7 +48,7 @@ namespace Penguin2D {
 
         /// @brief Sets the text string to be displayed.
         /// @param new_text: The new text content.
-        void set_text_string(const std::string& new_text);
+        void set_text_string(const char* new_text);
 
         /// @brief Sets the color of the text.
         /// @param new_colour: The new color of the text.
